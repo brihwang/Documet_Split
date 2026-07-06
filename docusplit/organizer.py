@@ -24,8 +24,10 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
 
     reader = PdfReader(str(path))
     outputs: list[OutputDocument] = []
+    mixed_source_pdf = has_multiple_local_categories(candidates, settings)
     for candidate in candidates:
-        classification = classify_document(candidate, settings)
+        classification = classify_document(candidate, settings, allow_ai=mixed_source_pdf)
+        classification.metadata["mixed_source_pdf"] = mixed_source_pdf
         output_file = write_split_pdf(path, reader, candidate.start_page, candidate.end_page, classification, output_root, errors_root, settings)
         sidecar = write_sidecar(output_file, path, candidate.start_page, candidate.end_page, classification)
         outputs.append(
@@ -40,6 +42,12 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
             )
         )
     return outputs
+
+
+def has_multiple_local_categories(candidates, settings: Settings) -> bool:
+    local_types = {classify_document(candidate, settings, allow_ai=False).document_type for candidate in candidates}
+    local_types.discard(settings.default_category)
+    return len(local_types) > 1
 
 
 def route_non_pdf(path: Path, output_root: Path, settings: Settings, errors_root: Path) -> list[OutputDocument]:

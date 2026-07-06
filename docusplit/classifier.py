@@ -9,11 +9,19 @@ from .models import Classification, DocumentCandidate, Settings
 from .utils import extract_date, guess_sender
 
 
-def classify_document(candidate: DocumentCandidate, settings: Settings) -> Classification:
+def classify_document(candidate: DocumentCandidate, settings: Settings, allow_ai: bool = False) -> Classification:
+    rule_result = classify_with_rules(candidate, settings)
+    if not should_use_ai(rule_result, settings, allow_ai):
+        return rule_result
+
     ai_result = classify_with_ai(candidate, settings)
     if ai_result:
         return ai_result
-    return classify_with_rules(candidate, settings)
+    return rule_result
+
+
+def should_use_ai(classification: Classification, settings: Settings, allow_ai: bool) -> bool:
+    return allow_ai
 
 
 def classify_with_rules(candidate: DocumentCandidate, settings: Settings) -> Classification:

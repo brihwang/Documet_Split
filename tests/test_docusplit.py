@@ -182,6 +182,48 @@ categories:
         self.assertEqual(classification.document_type, "Invoice")
         self.assertEqual(classification.metadata["classifier"], "rules")
 
+    def test_single_category_pdf_does_not_call_ai(self) -> None:
+        source = self.root / "single_category.pdf"
+        write_text_pdf(
+            source,
+            [
+                ["Acme Supplies", "Invoice Number 123", "Date 2026-07-01", "Amount Due $100"],
+                ["Acme Supplies", "Invoice Number 124", "Date 2026-07-02", "Amount Due $200"],
+            ],
+        )
+
+        with patch("docusplit.classifier.classify_with_ai") as ai:
+            outputs = process_file(source, self.root / "organized", self.settings, self.root / "errors")
+
+        ai.assert_not_called()
+        self.assertEqual(len(outputs), 2)
+        self.assertEqual(outputs[0].classification.metadata["classifier"], "rules")
+        self.assertFalse(outputs[0].classification.metadata["mixed_source_pdf"])
+
+    def test_mixed_category_pdf_allows_ai(self) -> None:
+        source = self.root / "mixed_category.pdf"
+        write_text_pdf(
+            source,
+            [
+                ["Acme Supplies", "Invoice Number 123", "Date 2026-07-01", "Amount Due $100"],
+                ["Northwind Legal", "Contract Agreement", "Effective Date 2026-06-15", "Parties agree"],
+            ],
+        )
+        ai_classification = Classification(
+            document_type="Invoice",
+            sender="AI Sender",
+            date="2026-07-01",
+            confidence=0.95,
+            reason="AI classification used for mixed source PDF.",
+            metadata={"classifier": "ai"},
+        )
+
+        with patch("docusplit.classifier.classify_with_ai", return_value=ai_classification) as ai:
+            outputs = process_file(source, self.root / "organized", self.settings, self.root / "errors")
+
+        self.assertGreaterEqual(ai.call_count, 1)
+        self.assertTrue(outputs[0].classification.metadata["mixed_source_pdf"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -10,7 +10,9 @@ python3 -m docusplit process --input inbox --output organized --config config.ya
 python3 -m docusplit preview --file path/to/file.pdf --config config.yaml
 ```
 
-The tool works without an API key using local rules. For better document boundaries, categories, and names, copy `.env.example` to `.env` and set `OPENAI_API_KEY`.
+To try it, put PDFs or files in `inbox/`, run the `process` command, then check `organized/`. The original input files are moved to `processed/` after a successful run.
+
+The tool works without an API key using local rules. To reduce cost, AI is not used for ordinary single-category PDFs. When an API key is configured, AI is only considered for PDFs where local rules detect multiple document types in the same source file, or where a locally detected document is too ambiguous to classify confidently.
 
 ## Folder Flow
 

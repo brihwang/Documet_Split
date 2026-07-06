@@ -1,0 +1,23 @@
+[project]
+name = "docusplit-local"
+version = "0.1.0"
+description = "Local Docusplit-style PDF splitter, classifier, renamer, and organizer."
+requires-python = ">=3.11"
+dependencies = [
+  "PyPDF2",
+  "pdfplumber",
+  "PyYAML",
+  "typer",
+  "rich",
+]
+
+[project.optional-dependencies]
+ai = ["openai"]
+ocr = ["pytesseract", "PyMuPDF"]
+
+[project.scripts]
+docusplit = "docusplit.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["docusplit*"]

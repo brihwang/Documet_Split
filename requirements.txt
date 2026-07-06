@@ -1,0 +1,8 @@
+PyPDF2
+pdfplumber
+PyYAML
+typer
+rich
+openai
+pytesseract
+PyMuPDF

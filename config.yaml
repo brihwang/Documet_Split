@@ -1,0 +1,39 @@
+min_confidence: 0.70
+filename_template: "{date}_{sender}_{type}.pdf"
+default_category: Other
+review_folder: review_needed
+
+categories:
+  Invoice:
+    folder: "Finance/Invoices/{year}/{sender}"
+    keywords:
+      - invoice
+      - amount due
+      - bill to
+      - payment terms
+  Contract:
+    folder: "Legal/Contracts/{sender}"
+    keywords:
+      - agreement
+      - contract
+      - parties
+      - effective date
+      - terms and conditions
+  Receipt:
+    folder: "Finance/Receipts/{year}"
+    keywords:
+      - receipt
+      - paid
+      - transaction
+      - subtotal
+      - total
+  Statement:
+    folder: "Finance/Statements/{year}/{sender}"
+    keywords:
+      - statement
+      - account summary
+      - beginning balance
+      - ending balance
+  Other:
+    folder: "Other/{year}"
+    keywords: []

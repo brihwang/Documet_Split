@@ -5,14 +5,14 @@ review_folder: review_needed
 
 categories:
   Invoice:
-    folder: "Finance/Invoices/{year}/{sender}"
+    folder: "Invoice"
     keywords:
       - invoice
       - amount due
       - bill to
       - payment terms
   Contract:
-    folder: "Legal/Contracts/{sender}"
+    folder: "Contract"
     keywords:
       - agreement
       - contract
@@ -20,7 +20,7 @@ categories:
       - effective date
       - terms and conditions
   Receipt:
-    folder: "Finance/Receipts/{year}"
+    folder: "Receipt"
     keywords:
       - receipt
       - paid
@@ -28,12 +28,65 @@ categories:
       - subtotal
       - total
   Statement:
-    folder: "Finance/Statements/{year}/{sender}"
+    folder: "Statement"
     keywords:
       - statement
       - account summary
       - beginning balance
       - ending balance
+  Drivers License:
+    folder: "Drivers License"
+    keywords:
+      - driver's license
+      - drivers license
+      - driver license
+      - date of birth
+      - license number
+      - state id
+      - class
+      - endorsements
+      - restrictions
+  Passport:
+    folder: "Passport"
+    keywords:
+      - passport
+      - nationality
+      - place of birth
+      - issuing authority
+      - travel document
+  Tax Form:
+    folder: "Tax Form"
+    keywords:
+      - w-2
+      - 1099
+      - 1040
+      - w2
+      - tax return
+      - taxable income
+      - withholding
+      - irs
+      - internal revenue
+  Insurance:
+    folder: "Insurance"
+    keywords:
+      - insurance
+      - policy number
+      - premium
+      - coverage
+      - deductible
+      - insured
+      - beneficiary
+  Medical:
+    folder: "Medical"
+    keywords:
+      - patient
+      - diagnosis
+      - prescription
+      - physician
+      - medical record
+      - hospital
+      - clinic
+      - health
   Other:
-    folder: "Other/{year}"
+    folder: "Other"
     keywords: []

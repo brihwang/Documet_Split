@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from typing import Any
 
 from .detector import best_keyword_category
@@ -47,7 +48,16 @@ def classify_with_rules(candidate: DocumentCandidate, settings: Settings) -> Cla
 
 
 def classify_with_ai(candidate: DocumentCandidate, settings: Settings) -> Classification | None:
-    api_key = os.environ.get("OPENAI_API_KEY")
+    provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
+    if provider in ("", "rules", "none", "off"):
+        return None
+    if provider in ("llmgateway", "gateway"):
+        return classify_with_llm_gateway(candidate, settings)
+    return None
+
+
+def classify_with_llm_gateway(candidate: DocumentCandidate, settings: Settings) -> Classification | None:
+    api_key = os.environ.get("LLM_GATEWAY_API_KEY")
     if not api_key:
         return None
 
@@ -56,26 +66,42 @@ def classify_with_ai(candidate: DocumentCandidate, settings: Settings) -> Classi
     except Exception:
         return None
 
-    model = os.environ.get("OPENAI_MODEL", "gpt-4.1-mini")
-    categories = ", ".join(settings.categories)
-    prompt = (
-        "Classify this document and return only JSON with keys: "
-        "document_type, sender, date, confidence, suggested_filename, reason. "
-        f"Allowed document_type values: {categories}. Use ISO date if possible.\n\n"
-        f"{candidate.text[:12000]}"
-    )
-
+    base_url = os.environ.get("LLM_GATEWAY_BASE_URL", "https://api.llmgateway.io/v1")
+    model = os.environ.get("LLM_GATEWAY_MODEL", "openai/gpt-4o-mini")
     try:
-        client = OpenAI(api_key=api_key)
-        response = client.responses.create(
+        client = OpenAI(api_key=api_key, base_url=base_url)
+        response = client.chat.completions.create(
             model=model,
-            input=prompt,
+            messages=[{"role": "user", "content": build_ai_prompt(candidate, settings)}],
             temperature=0,
         )
-        payload = json.loads(response.output_text)
+        content = response.choices[0].message.content or ""
+        payload = parse_json_object(content)
         return _classification_from_payload(payload, settings)
     except Exception:
         return None
+
+
+def build_ai_prompt(candidate: DocumentCandidate, settings: Settings) -> str:
+    categories = ", ".join(settings.categories)
+    return (
+        "You classify documents for an automated document routing system. "
+        "Return only valid JSON with keys: document_type, sender, date, confidence, "
+        "suggested_filename, reason. "
+        f"Allowed document_type values: {categories}. "
+        "Use ISO date format when possible. Confidence must be a number from 0 to 1.\n\n"
+        f"{candidate.text[:12000]}"
+    )
+
+
+def parse_json_object(text: str) -> dict[str, Any]:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        if not match:
+            raise
+        return json.loads(match.group(0))
 
 
 def _classification_from_payload(payload: dict[str, Any], settings: Settings) -> Classification:

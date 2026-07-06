@@ -9,7 +9,7 @@ from unittest.mock import patch
 from PyPDF2 import PdfReader
 from PyPDF2 import PdfWriter
 
-from docusplit.classifier import classify_document
+from docusplit.classifier import classify_document, parse_json_object
 from docusplit.config import load_settings
 from docusplit.extractor import extract_pdf_text
 from docusplit.models import Classification, DocumentCandidate
@@ -223,6 +223,47 @@ categories:
 
         self.assertGreaterEqual(ai.call_count, 1)
         self.assertTrue(outputs[0].classification.metadata["mixed_source_pdf"])
+
+    def test_provider_specific_ai_selection_uses_llm_gateway(self) -> None:
+        candidate = DocumentCandidate(
+            start_page=1,
+            end_page=1,
+            text="Acme Supplies\nInvoice Number 123\nDate 2026-07-01\nAmount Due $100",
+        )
+        ai_classification = Classification(
+            document_type="Invoice",
+            sender="Gateway Sender",
+            date="2026-07-01",
+            confidence=0.93,
+            reason="LLM Gateway classification.",
+            metadata={"classifier": "ai"},
+        )
+
+        with patch.dict("os.environ", {"AI_PROVIDER": "llmgateway", "LLM_GATEWAY_API_KEY": "test-key"}, clear=True):
+            with patch("docusplit.classifier.classify_with_llm_gateway", return_value=ai_classification) as gateway:
+                classification = classify_document(candidate, self.settings, allow_ai=True)
+
+        gateway.assert_called_once()
+        self.assertEqual(classification.sender, "Gateway Sender")
+
+    def test_unknown_ai_provider_falls_back_to_rules(self) -> None:
+        candidate = DocumentCandidate(
+            start_page=1,
+            end_page=1,
+            text="Acme Supplies\nInvoice Number 123\nDate 2026-07-01\nAmount Due $100",
+        )
+
+        with patch.dict("os.environ", {"AI_PROVIDER": "unknown"}, clear=True):
+            classification = classify_document(candidate, self.settings, allow_ai=True)
+
+        self.assertEqual(classification.metadata["classifier"], "rules")
+
+    def test_parse_json_object_handles_fenced_explanation(self) -> None:
+        parsed = parse_json_object(
+            'Here is the result:\n{"document_type":"Invoice","sender":"Acme","date":"2026-07-01","confidence":0.9,"reason":"match"}'
+        )
+
+        self.assertEqual(parsed["document_type"], "Invoice")
 
 
 if __name__ == "__main__":

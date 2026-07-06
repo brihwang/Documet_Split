@@ -12,7 +12,12 @@ python3 -m docusplit preview --file path/to/file.pdf --config config.yaml
 
 To try it, put PDFs or files in `inbox/`, run the `process` command, then check `organized/`. The original input files are moved to `processed/` after a successful run.
 
-The tool works without an API key using local rules. To reduce cost, AI is not used for ordinary single-category PDFs. When an API key is configured, AI is only considered for PDFs where local rules detect multiple document types in the same source file, or where a locally detected document is too ambiguous to classify confidently.
+The tool works without an API key using local rules. To reduce cost, AI is not used for ordinary single-category PDFs. When AI is configured, it is only considered for PDFs where local rules detect multiple document types in the same source file, or where a locally detected document is too ambiguous to classify confidently.
+
+For AI setup, see `AI_OPTIONS.md`. The short version:
+
+- `AI_PROVIDER=rules`: no AI.
+- `AI_PROVIDER=llmgateway`: one gateway integration for all AI providers/models.
 
 ## Folder Flow
 
@@ -25,7 +30,7 @@ The tool works without an API key using local rules. To reduce cost, AI is not u
 
 These are placeholders until you install them:
 
-- `openai`: enables AI boundary detection, classification, and naming.
+- `openai`: used only as the OpenAI-compatible Python client for LLM Gateway.
 - `pytesseract` and `PyMuPDF`: enable OCR for scanned PDFs. The system already has the `tesseract` binary, but Python bindings and a reliable PDF renderer are still needed.
 
 Install later with:

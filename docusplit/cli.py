@@ -10,6 +10,22 @@ from rich.table import Table
 from .config import load_settings
 from .organizer import move_to_processed, process_file
 
+
+def load_env_file(path: Path = Path(".env")) -> None:
+    if not path.exists():
+        return
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        name = name.strip()
+        value = value.strip().strip('"').strip("'")
+        if name:
+            import os
+
+            os.environ[name] = value
+
 app = typer.Typer(help="Split, classify, rename, and organize document files.")
 console = Console()
 
@@ -33,6 +49,7 @@ def preview(
     config: Path = typer.Option(Path("config.yaml"), "--config"),
 ) -> None:
     """Show how one file would be split and categorized without moving the source."""
+    load_env_file()
     settings = load_settings(config)
     temp_output = Path(".docusplit_preview")
     temp_errors = temp_output / "errors"
@@ -52,6 +69,7 @@ def process(
     errors_dir: Path = typer.Option(Path("errors"), "--errors"),
 ) -> None:
     """Process all files currently in the input folder."""
+    load_env_file()
     settings = load_settings(config)
     output_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
@@ -82,7 +100,6 @@ def print_outputs(outputs) -> None:
     table = Table(title="Docusplit Results")
     table.add_column("Pages")
     table.add_column("Type")
-    table.add_column("Sender")
     table.add_column("Confidence")
     table.add_column("Output")
 
@@ -90,7 +107,6 @@ def print_outputs(outputs) -> None:
         table.add_row(
             f"{item.start_page}-{item.end_page}",
             item.classification.document_type,
-            item.classification.sender,
             f"{item.classification.confidence:.2f}",
             str(item.output_file),
         )

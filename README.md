@@ -5,9 +5,9 @@ A local CLI that splits multi-document PDFs, classifies each document, renames i
 ## Quick Start
 
 ```bash
-python3 -m docusplit init
-python3 -m docusplit process --input inbox --output organized --config config.yaml
-python3 -m docusplit preview --file path/to/file.pdf --config config.yaml
+python -m docusplit init
+python -m docusplit process --input inbox --output organized --config config.yaml
+python -m docusplit preview --file path/to/file.pdf --config config.yaml
 ```
 
 To try it, put PDFs or files in `inbox/`, run the `process` command, then check `organized/`. The original input files are moved to `processed/` after a successful run.
@@ -41,4 +41,4 @@ python3 -m pip install openai pytesseract PyMuPDF
 
 ## Configuration
 
-Edit `config.yaml` to add categories, keyword hints, filename templates, and output folder templates. Folder templates can use `{type}`, `{sender}`, `{date}`, and `{year}`.
+Edit `config.yaml` to add categories, keyword hints, filename templates, and output folder templates. Folder templates can use `{type}`, `{date}`, and `{year}`.

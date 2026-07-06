@@ -38,7 +38,6 @@ class DocumentCandidate:
 @dataclass
 class Classification:
     document_type: str
-    sender: str
     date: str
     confidence: float
     reason: str

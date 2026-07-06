@@ -40,19 +40,6 @@ def extract_year(value: str) -> str:
     return match.group(1) if match else "unknown_year"
 
 
-def guess_sender(text: str) -> str:
-    for line in text.splitlines():
-        cleaned = line.strip(" \t:-")
-        if not cleaned:
-            continue
-        lowered = cleaned.lower()
-        if lowered.startswith(("invoice", "receipt", "contract", "agreement", "statement", "date ")):
-            continue
-        if len(cleaned) <= 80:
-            return cleaned
-    return "Unknown Sender"
-
-
 def unique_path(path: Path) -> Path:
     if not path.exists():
         return path

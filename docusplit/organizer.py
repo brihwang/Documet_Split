@@ -7,7 +7,7 @@ from pathlib import Path
 from PyPDF2 import PdfReader, PdfWriter
 
 from .classifier import classify_document, get_last_ai_error, split_documents_with_ai
-from .detector import best_keyword_category
+from .detector import best_keyword_category, detect_documents
 from .extractor import extract_pdf_text
 from .models import Classification, DocumentCandidate, OutputDocument, PageText, Settings
 from .utils import extract_year, sanitize_part, unique_path
@@ -21,22 +21,15 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
     if not pages:
         raise ValueError(f"No pages could be read from {path}")
     mixed_source_pdf = has_multiple_local_page_categories(pages, settings)
-    candidates, ai_split_failed = choose_document_candidates(pages, settings, mixed_source_pdf)
+    candidates, ai_split_error = choose_document_candidates(pages, settings, mixed_source_pdf)
 
     reader = PdfReader(str(path))
     outputs: list[OutputDocument] = []
     for candidate in candidates:
-        if ai_split_failed:
-            ai_error = get_last_ai_error() or "AI splitting was unavailable or failed."
-            classification = Classification(
-                document_type=settings.default_category,
-                date="undated",
-                confidence=0.0,
-                reason=f"AI split is required for mixed-document PDFs. {ai_error}",
-                metadata={"classifier": "rules", "ai_split": "failed_or_unavailable", "ai_error": ai_error},
-            )
-        else:
-            classification = classify_document(candidate, settings, allow_ai=mixed_source_pdf)
+        classification = classify_document(candidate, settings, allow_ai=mixed_source_pdf and ai_split_error is None)
+        if ai_split_error:
+            classification.metadata["ai_split"] = "local_fallback"
+            classification.metadata["ai_error"] = ai_split_error
         classification.metadata["mixed_source_pdf"] = mixed_source_pdf
         output_file = write_split_pdf(path, reader, candidate.start_page, candidate.end_page, classification, output_root, errors_root, settings)
         sidecar = write_sidecar(output_file, path, candidate.start_page, candidate.end_page, classification)
@@ -54,13 +47,14 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
     return outputs
 
 
-def choose_document_candidates(pages: list[PageText], settings: Settings, mixed_source_pdf: bool) -> tuple[list[DocumentCandidate], bool]:
+def choose_document_candidates(pages: list[PageText], settings: Settings, mixed_source_pdf: bool) -> tuple[list[DocumentCandidate], str | None]:
     if mixed_source_pdf:
         ai_candidates = split_documents_with_ai(pages, settings)
         if ai_candidates:
-            return ai_candidates, False
-        return [candidate_from_pages(pages)], True
-    return [candidate_from_pages(pages)], False
+            return ai_candidates, None
+        ai_error = get_last_ai_error() or "AI splitting was unavailable or failed."
+        return detect_documents(pages, settings) or [candidate_from_pages(pages)], ai_error
+    return [candidate_from_pages(pages)], None
 
 
 def candidate_from_pages(pages: list[PageText]) -> DocumentCandidate:

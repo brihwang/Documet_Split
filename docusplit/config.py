@@ -35,13 +35,13 @@ categories:
     keywords: [passport, nationality, place of birth, issuing authority, travel document]
   Tax Form:
     folder: "Tax Form"
-    keywords: [w-2, 1099, 1040, w2, tax return, taxable income, withholding, irs, internal revenue]
+    keywords: [w-2, form w-2, wage and tax statement, employer identification number, 1099, 1040, w2, tax return, taxable income, withholding, irs, internal revenue]
   Insurance:
     folder: "Insurance"
     keywords: [insurance, policy number, premium, coverage, deductible, insured, beneficiary]
   Medical:
     folder: "Medical"
-    keywords: [patient, diagnosis, prescription, physician, medical record, hospital, clinic, health]
+    keywords: [medical intake, patient information, patient, diagnosis, prescription, physician, medical record, hospital, clinic, health]
   Other:
     folder: "Other"
     keywords: []

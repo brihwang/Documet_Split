@@ -1,5 +1,5 @@
 min_confidence: 0.70
-filename_template: "{date}_{sender}_{type}.pdf"
+filename_template: "{date}_{type}.pdf"
 default_category: Other
 review_folder: review_needed
 
@@ -58,6 +58,9 @@ categories:
     folder: "Tax Form"
     keywords:
       - w-2
+      - form w-2
+      - wage and tax statement
+      - employer identification number
       - 1099
       - 1040
       - w2
@@ -79,6 +82,8 @@ categories:
   Medical:
     folder: "Medical"
     keywords:
+      - medical intake
+      - patient information
       - patient
       - diagnosis
       - prescription

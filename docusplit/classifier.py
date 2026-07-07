@@ -11,6 +11,7 @@ from .utils import extract_date
 
 
 LAST_AI_ERROR: str | None = None
+LAST_AI_MODEL: str | None = None
 
 
 def set_last_ai_error(message: str | None) -> None:
@@ -18,8 +19,17 @@ def set_last_ai_error(message: str | None) -> None:
     LAST_AI_ERROR = message
 
 
+def set_last_ai_model(model: str | None) -> None:
+    global LAST_AI_MODEL
+    LAST_AI_MODEL = model
+
+
 def get_last_ai_error() -> str | None:
     return LAST_AI_ERROR
+
+
+def get_last_ai_model() -> str | None:
+    return LAST_AI_MODEL
 
 
 def classify_document(candidate: DocumentCandidate, settings: Settings, allow_ai: bool = False) -> Classification:
@@ -84,26 +94,35 @@ def ai_split_is_configured() -> bool:
 
 def split_documents_with_ai(pages: list[PageText], settings: Settings) -> list[DocumentCandidate] | None:
     set_last_ai_error(None)
+    set_last_ai_model(None)
     provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
     if provider not in ("llmgateway", "gateway"):
         set_last_ai_error(f"AI_PROVIDER is {provider!r}, not 'llmgateway'.")
         return None
 
-    content = complete_with_llm_gateway(build_split_prompt(pages, settings))
-    if not content:
-        return None
-    try:
-        payload = parse_json_object(content)
-        candidates = candidates_from_split_payload(payload, pages)
-        if not candidates:
-            set_last_ai_error("AI split response did not contain valid contiguous page ranges.")
-        return candidates
-    except Exception as exc:
-        set_last_ai_error(f"AI split response was not valid JSON: {exc}")
-        return None
+    errors = []
+    prompt = build_split_prompt(pages, settings)
+    for model in llm_gateway_models():
+        content = complete_with_llm_gateway(prompt, model=model)
+        if not content:
+            errors.append(get_last_ai_error() or f"{model}: no response")
+            continue
+        try:
+            payload = parse_json_object(content)
+            candidates = candidates_from_split_payload(payload, pages)
+            if candidates:
+                set_last_ai_model(model)
+                set_last_ai_error(None)
+                return candidates
+            errors.append(f"{model}: AI split response did not contain valid contiguous page ranges.")
+        except Exception as exc:
+            errors.append(f"{model}: AI split response was not valid JSON: {exc}")
+
+    set_last_ai_error(" | ".join(errors) if errors else "No LLM Gateway models were configured.")
+    return None
 
 
-def complete_with_llm_gateway(prompt: str) -> str | None:
+def complete_with_llm_gateway(prompt: str, model: str | None = None) -> str | None:
     api_key = os.environ.get("LLM_GATEWAY_API_KEY")
     if not api_key:
         set_last_ai_error("LLM_GATEWAY_API_KEY is not set.")
@@ -116,7 +135,7 @@ def complete_with_llm_gateway(prompt: str) -> str | None:
         return None
 
     base_url = os.environ.get("LLM_GATEWAY_BASE_URL", "https://api.llmgateway.io/v1")
-    model = os.environ.get("LLM_GATEWAY_MODEL", "openai/gpt-4o-mini")
+    model = model or os.environ.get("LLM_GATEWAY_MODEL", "openai/gpt-4o-mini")
     try:
         client = OpenAI(api_key=api_key, base_url=base_url)
         response = client.chat.completions.create(
@@ -126,8 +145,20 @@ def complete_with_llm_gateway(prompt: str) -> str | None:
         )
         return response.choices[0].message.content or ""
     except Exception as exc:
-        set_last_ai_error(f"LLM Gateway request failed: {exc}")
+        set_last_ai_error(f"{model}: LLM Gateway request failed: {exc}")
         return None
+
+
+def llm_gateway_models() -> list[str]:
+    primary = os.environ.get("LLM_GATEWAY_MODEL", "openai/gpt-4o-mini")
+    fallbacks = os.environ.get("LLM_GATEWAY_FALLBACK_MODELS", "")
+    models = [primary, *fallbacks.split(",")]
+    cleaned = []
+    for model in models:
+        model = model.strip()
+        if model and model not in cleaned:
+            cleaned.append(model)
+    return cleaned
 
 
 def build_ai_prompt(candidate: DocumentCandidate, settings: Settings) -> str:

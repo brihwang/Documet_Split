@@ -15,7 +15,8 @@ Hosted gateway:
 AI_PROVIDER=llmgateway
 LLM_GATEWAY_API_KEY=your_gateway_key
 LLM_GATEWAY_BASE_URL=https://api.llmgateway.io/v1
-LLM_GATEWAY_MODEL=openai/gpt-4o-mini
+LLM_GATEWAY_MODEL=gemini-2.5-flash-lite
+LLM_GATEWAY_FALLBACK_MODELS=llama-3.1-8b-instant
 ```
 
 Self-hosted gateway:
@@ -25,6 +26,7 @@ AI_PROVIDER=llmgateway
 LLM_GATEWAY_API_KEY=your_self_hosted_gateway_key
 LLM_GATEWAY_BASE_URL=http://your-gateway-server:4001/v1
 LLM_GATEWAY_MODEL=your_gateway_model_name
+LLM_GATEWAY_FALLBACK_MODELS=your_fallback_model_name
 ```
 
 ## Where Provider Choice Goes
@@ -34,8 +36,13 @@ Choose providers and models inside LLM Gateway. The document splitter should onl
 For example, after adding provider keys/models in LLM Gateway, only change:
 
 ```bash
-LLM_GATEWAY_MODEL=provider/model-name
+LLM_GATEWAY_MODEL=exact-primary-model-id
+LLM_GATEWAY_FALLBACK_MODELS=exact-fallback-model-id,another-fallback-id
 ```
+
+`LLM_GATEWAY_MODEL` is tried first. If that model is rate-limited, unavailable, returns invalid split JSON, or fails for any other reason, the splitter tries each comma-separated model in `LLM_GATEWAY_FALLBACK_MODELS`. If all AI models fail, the local page-pattern splitter is used.
+
+AI is used only for split detection in the normal processing path. Classification remains rules-based to avoid extra API calls after a document has already been split.
 
 ## Recommended Workflow
 

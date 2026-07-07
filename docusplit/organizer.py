@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PyPDF2 import PdfReader, PdfWriter
 
-from .classifier import ai_split_is_configured, classify_document, get_last_ai_error, split_documents_with_ai
+from .classifier import ai_split_is_configured, classify_document, get_last_ai_error, get_last_ai_model, split_documents_with_ai
 from .detector import best_keyword_category, detect_documents
 from .extractor import extract_pdf_text
 from .models import Classification, DocumentCandidate, OutputDocument, PageText, Settings
@@ -52,7 +52,11 @@ def choose_document_candidates(pages: list[PageText], settings: Settings) -> tup
     if ai_split_is_configured():
         ai_candidates = split_documents_with_ai(pages, settings)
         if ai_candidates:
-            return ai_candidates, {"splitter": "ai", "document_count": len(ai_candidates)}
+            metadata = {"splitter": "ai", "document_count": len(ai_candidates)}
+            ai_model = get_last_ai_model()
+            if ai_model:
+                metadata["ai_model"] = ai_model
+            return ai_candidates, metadata
         ai_error = get_last_ai_error() or "AI splitting was unavailable or failed."
         candidates = detect_documents(pages, settings) or [candidate_from_pages(pages)]
         return candidates, {"splitter": "local_page_patterns", "document_count": len(candidates), "ai_error": ai_error}

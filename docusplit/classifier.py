@@ -5,9 +5,7 @@ import os
 import re
 from typing import Any
 
-from .detector import best_keyword_category, keyword_score
-from .models import Classification, DocumentCandidate, PageText, Settings
-from .utils import extract_date
+from .models import DocumentCandidate, PageText
 
 
 LAST_AI_ERROR: str | None = None
@@ -32,67 +30,12 @@ def get_last_ai_model() -> str | None:
     return LAST_AI_MODEL
 
 
-def classify_document(candidate: DocumentCandidate, settings: Settings, allow_ai: bool = False) -> Classification:
-    rule_result = classify_with_rules(candidate, settings)
-    if not should_use_ai(rule_result, settings, allow_ai):
-        return rule_result
-
-    ai_result = classify_with_ai(candidate, settings)
-    if ai_result:
-        return ai_result
-    return rule_result
-
-
-def should_use_ai(classification: Classification, settings: Settings, allow_ai: bool) -> bool:
-    return allow_ai
-
-
-def classify_with_rules(candidate: DocumentCandidate, settings: Settings) -> Classification:
-    text = candidate.text
-    lowered = text.lower()
-    category = best_keyword_category(lowered, settings) or settings.default_category
-    keyword_hits = keyword_score(lowered, settings.categories[category].keywords)
-    confidence = min(0.95, 0.45 + (keyword_hits * 0.15))
-    if category == settings.default_category and keyword_hits == 0:
-        confidence = 0.35
-
-    doc_date = extract_date(text)
-    reason = f"Rule-based match for {category} using {keyword_hits} keyword hit(s)."
-    return Classification(
-        document_type=category,
-        date=doc_date,
-        confidence=confidence,
-        reason=reason,
-        metadata={"classifier": "rules", "keyword_hits": keyword_hits},
-    )
-
-
-def classify_with_ai(candidate: DocumentCandidate, settings: Settings) -> Classification | None:
-    provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
-    if provider in ("", "rules", "none", "off"):
-        return None
-    if provider in ("llmgateway", "gateway"):
-        return classify_with_llm_gateway(candidate, settings)
-    return None
-
-
-def classify_with_llm_gateway(candidate: DocumentCandidate, settings: Settings) -> Classification | None:
-    content = complete_with_llm_gateway(build_ai_prompt(candidate, settings))
-    if not content:
-        return None
-    try:
-        payload = parse_json_object(content)
-        return _classification_from_payload(payload, settings)
-    except Exception:
-        return None
-
-
 def ai_split_is_configured() -> bool:
     provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
     return provider in ("llmgateway", "gateway")
 
 
-def split_documents_with_ai(pages: list[PageText], settings: Settings) -> list[DocumentCandidate] | None:
+def split_documents_with_ai(pages: list[PageText]) -> list[DocumentCandidate] | None:
     set_last_ai_error(None)
     set_last_ai_model(None)
     provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
@@ -101,7 +44,7 @@ def split_documents_with_ai(pages: list[PageText], settings: Settings) -> list[D
         return None
 
     errors = []
-    prompt = build_split_prompt(pages, settings)
+    prompt = build_split_prompt(pages)
     for model in llm_gateway_models():
         content = complete_with_llm_gateway(prompt, model=model)
         if not content:
@@ -161,23 +104,7 @@ def llm_gateway_models() -> list[str]:
     return cleaned
 
 
-def build_ai_prompt(candidate: DocumentCandidate, settings: Settings) -> str:
-    categories = ", ".join(settings.categories)
-    return (
-        "You are classifying one already-split document for an automated filing workflow. "
-        "Choose exactly one document_type from the allowed list. Base the choice on the document's purpose, "
-        "title, form labels, and category-specific fields; ignore names, addresses, sender-like headings, and incidental words. "
-        "If a broad word appears inside another word, do not count it as evidence. "
-        "Return only valid JSON with keys: document_type, date, confidence, suggested_filename, reason. "
-        f"Allowed document_type values: {categories}. "
-        "Use ISO date format for date when visible, otherwise use undated. Confidence must be a number from 0 to 1. "
-        "Keep reason to one short sentence naming the decisive evidence.\n\n"
-        f"{candidate.text[:12000]}"
-    )
-
-
-def build_split_prompt(pages: list[PageText], settings: Settings) -> str:
-    categories = ", ".join(settings.categories)
+def build_split_prompt(pages: list[PageText]) -> str:
     page_blocks = []
     for page in pages:
         page_blocks.append(f"<page number=\"{page.page_number}\">\n{page.text[:4000]}\n</page>")
@@ -192,9 +119,7 @@ def build_split_prompt(pages: list[PageText], settings: Settings) -> str:
         "Split only when there is clear evidence that a new distinct document begins. "
         "Every page must be assigned to exactly one document, ranges must be contiguous, and ranges must cover all pages from 1 through the final page. "
         "Return only valid JSON shaped exactly like: "
-        "{\"documents\":[{\"start_page\":1,\"end_page\":1,\"document_type\":\"Invoice\",\"reason\":\"short evidence\"}]}. "
-        "Use document_type only as a short label for the range; use Other when the type is not obvious. "
-        f"Known document_type values: {categories}.\n\n"
+        "{\"documents\":[{\"start_page\":1,\"end_page\":1,\"reason\":\"short evidence\"}]}.\n\n"
         + "\n\n".join(page_blocks)
     )
 
@@ -232,18 +157,3 @@ def parse_json_object(text: str) -> dict[str, Any]:
         if not match:
             raise
         return json.loads(match.group(0))
-
-
-def _classification_from_payload(payload: dict[str, Any], settings: Settings) -> Classification:
-    doc_type = str(payload.get("document_type") or settings.default_category)
-    if doc_type not in settings.categories:
-        doc_type = settings.default_category
-    confidence = float(payload.get("confidence") or 0.0)
-    return Classification(
-        document_type=doc_type,
-        date=str(payload.get("date") or "undated"),
-        confidence=max(0.0, min(1.0, confidence)),
-        reason=str(payload.get("reason") or "AI classification."),
-        suggested_filename=payload.get("suggested_filename"),
-        metadata={"classifier": "ai"},
-    )

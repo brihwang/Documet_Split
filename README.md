@@ -1,18 +1,20 @@
 # Docusplit Local
 
-A local CLI that splits multi-document PDFs, classifies each document, renames it, and routes it into configurable folders.
+A local CLI that splits multi-document PDFs into separate output PDFs.
 
 ## Quick Start
 
 ```bash
 python -m docusplit init
 python -m docusplit process --input inbox --output organized --config config.yaml
-python -m docusplit preview --file path/to/file.pdf --config config.yaml
+python -m docusplit process --input inbox --output organized --config config.yaml --rules-only
 ```
 
 To try it, put PDFs or files in `inbox/`, run the `process` command, then check `organized/`. The original input files are moved to `processed/` after a successful run.
 
 The tool works without an API key using local rules. Multi-page PDFs are now treated as page-boundary problems, not just category-keyword problems: the local splitter compares page titles, field labels, visible page numbering, repeated document markers, content continuity, formatting consistency, logical end cues, and structural changes such as tables or key-value blocks. When AI is configured, it can decide the split ranges for any multi-page PDF, with the local splitter as a fallback.
+
+Use `--rules-only` with `process` to bypass AI for that run even when `.env` is configured for LLM Gateway.
 
 The splitter follows a page-boundary workflow: each page is treated as a possible start page, inner/continue page, or end page. This helps separate adjacent documents of the same broad type when a fresh title, new identifier, completed prior document, or semantic/structural shift shows that a new document begins.
 
@@ -24,9 +26,9 @@ For AI setup, see `AI_OPTIONS.md`. The short version:
 ## Folder Flow
 
 - `inbox/`: place incoming PDFs here.
-- `organized/`: split and categorized PDFs are written here.
+- `organized/`: split PDFs are written here.
 - `processed/`: originals are moved here after successful processing.
-- `errors/review_needed/`: low-confidence or failed results go here with JSON sidecars.
+- `errors/review_needed/`: failed or unsupported files go here with JSON sidecars.
 
 ## Optional Setup For Full Quality
 
@@ -43,4 +45,4 @@ python3 -m pip install openai pytesseract PyMuPDF
 
 ## Configuration
 
-Edit `config.yaml` to add categories, keyword hints, filename templates, and output folder templates. Folder templates can use `{type}`, `{date}`, and `{year}`.
+Edit `config.yaml` to tune the local fallback splitter's category keyword hints. The current processing flow does not classify or route PDFs by category; it writes split PDFs directly to the output folder.

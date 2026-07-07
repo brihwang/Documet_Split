@@ -42,7 +42,7 @@ LLM_GATEWAY_FALLBACK_MODELS=exact-fallback-model-id,another-fallback-id
 
 `LLM_GATEWAY_MODEL` is tried first. If that model is rate-limited, unavailable, returns invalid split JSON, or fails for any other reason, the splitter tries each comma-separated model in `LLM_GATEWAY_FALLBACK_MODELS`. If all AI models fail, the local page-pattern splitter is used.
 
-AI is used only for split detection in the normal processing path. Classification remains rules-based to avoid extra API calls after a document has already been split.
+AI is used only for split detection in the normal processing path. The app does not classify split PDFs or spend API calls assigning document categories.
 
 ## Recommended Workflow
 

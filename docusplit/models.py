@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 
 @dataclass(frozen=True)
@@ -14,7 +13,6 @@ class CategoryRule:
 
 @dataclass(frozen=True)
 class Settings:
-    min_confidence: float
     default_category: str
     review_folder: str
     categories: dict[str, CategoryRule]
@@ -34,16 +32,6 @@ class DocumentCandidate:
     text: str
 
 
-@dataclass
-class Classification:
-    document_type: str
-    date: str
-    confidence: float
-    reason: str
-    suggested_filename: str | None = None
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-
 @dataclass(frozen=True)
 class OutputDocument:
     source_file: Path
@@ -51,5 +39,4 @@ class OutputDocument:
     sidecar_file: Path
     start_page: int
     end_page: int
-    classification: Classification
     routed_to_review: bool

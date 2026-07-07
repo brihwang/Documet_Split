@@ -9,8 +9,7 @@ import yaml
 from .models import CategoryRule, Settings
 
 
-DEFAULT_CONFIG = """min_confidence: 0.70
-default_category: Other
+DEFAULT_CONFIG = """default_category: Other
 review_folder: review_needed
 
 categories:
@@ -71,7 +70,6 @@ def load_settings(path: Path) -> Settings:
         raise ValueError(f"default_category {default_category!r} is not listed in categories.")
 
     return Settings(
-        min_confidence=float(raw.get("min_confidence", 0.7)),
         default_category=default_category,
         review_folder=str(raw.get("review_folder", "review_needed")),
         categories=categories,

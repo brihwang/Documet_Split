@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
 
 import typer
@@ -26,7 +25,7 @@ def load_env_file(path: Path = Path(".env")) -> None:
 
             os.environ[name] = value
 
-app = typer.Typer(help="Split, classify, rename, and organize document files.")
+app = typer.Typer(help="Split document files into separate PDFs.")
 console = Console()
 
 
@@ -44,29 +43,13 @@ def init(
 
 
 @app.command()
-def preview(
-    file: Path = typer.Option(..., "--file", exists=True, dir_okay=False),
-    config: Path = typer.Option(Path("config.yaml"), "--config"),
-) -> None:
-    """Show how one file would be split and categorized without moving the source."""
-    load_env_file()
-    settings = load_settings(config)
-    temp_output = Path(".docusplit_preview")
-    temp_errors = temp_output / "errors"
-    if temp_output.exists():
-        shutil.rmtree(temp_output)
-    outputs = process_file(file, temp_output / "organized", settings, temp_errors)
-    print_outputs(outputs)
-    shutil.rmtree(temp_output)
-
-
-@app.command()
 def process(
     input_dir: Path = typer.Option(Path("inbox"), "--input", exists=True, file_okay=False),
     output_dir: Path = typer.Option(Path("organized"), "--output"),
     config: Path = typer.Option(Path("config.yaml"), "--config"),
     processed_dir: Path = typer.Option(Path("processed"), "--processed"),
     errors_dir: Path = typer.Option(Path("errors"), "--errors"),
+    rules_only: bool = typer.Option(False, "--rules-only", help="Skip AI splitting and use local page-pattern rules."),
 ) -> None:
     """Process all files currently in the input folder."""
     load_env_file()
@@ -83,7 +66,7 @@ def process(
     all_outputs = []
     for file_path in files:
         try:
-            outputs = process_file(file_path, output_dir, settings, errors_dir)
+            outputs = process_file(file_path, output_dir, settings, errors_dir, use_ai=not rules_only)
             all_outputs.extend(outputs)
             move_to_processed(file_path, processed_dir)
         except Exception as exc:
@@ -99,16 +82,28 @@ def process(
 def print_outputs(outputs) -> None:
     table = Table(title="Docusplit Results")
     table.add_column("Pages")
-    table.add_column("Type")
-    table.add_column("Confidence")
+    table.add_column("Splitter")
+    table.add_column("AI Model")
     table.add_column("Output")
 
     for item in outputs:
+        metadata = read_sidecar_metadata(item.sidecar_file)
         table.add_row(
             f"{item.start_page}-{item.end_page}",
-            item.classification.document_type,
-            f"{item.classification.confidence:.2f}",
+            str(metadata.get("splitter", "review")),
+            str(metadata.get("ai_model", "-")),
             str(item.output_file),
         )
 
     console.print(table)
+
+
+def read_sidecar_metadata(path: Path) -> dict:
+    try:
+        import json
+
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        metadata = payload.get("metadata")
+        return metadata if isinstance(metadata, dict) else {}
+    except Exception:
+        return {}

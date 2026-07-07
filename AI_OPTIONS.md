@@ -40,8 +40,8 @@ LLM_GATEWAY_MODEL=provider/model-name
 ## Recommended Workflow
 
 1. Start with `AI_PROVIDER=rules` and test obvious single-category documents.
-2. Add LLM Gateway when you want AI help for mixed-category PDFs.
+2. Add LLM Gateway when you want AI help deciding split boundaries in multi-page PDFs.
 3. Use hosted LLM Gateway for quick testing.
 4. Move to self-hosted LLM Gateway when the project becomes a shared workflow or needs tighter control.
 
-The splitter still stays cost-conscious: local rules run first, and AI is only allowed for mixed-category source PDFs.
+The splitter still stays cost-conscious: single-page PDFs never need split AI, and local page-pattern splitting remains the fallback whenever AI is unavailable.

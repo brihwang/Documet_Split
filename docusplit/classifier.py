@@ -77,6 +77,11 @@ def classify_with_llm_gateway(candidate: DocumentCandidate, settings: Settings) 
         return None
 
 
+def ai_split_is_configured() -> bool:
+    provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
+    return provider in ("llmgateway", "gateway")
+
+
 def split_documents_with_ai(pages: list[PageText], settings: Settings) -> list[DocumentCandidate] | None:
     set_last_ai_error(None)
     provider = os.environ.get("AI_PROVIDER", "rules").strip().lower()
@@ -144,16 +149,21 @@ def build_split_prompt(pages: list[PageText], settings: Settings) -> str:
     categories = ", ".join(settings.categories)
     page_blocks = []
     for page in pages:
-        page_blocks.append(f"PAGE {page.page_number}:\n{page.text[:4000]}")
+        page_blocks.append(f"<page number=\"{page.page_number}\">\n{page.text[:4000]}\n</page>")
     return (
         "You decide where a PDF should be split into separate documents for an automated filing workflow. "
-        "The PDF has already been flagged by local rules as likely containing more than one document. "
-        "Use page content, titles, form names, document purpose, repeated headers, page numbering, and category changes to choose page ranges. "
+        "The PDF may contain one document or multiple documents. "
+        "Analyze each page as a possible start page, end page, or inner/continue page. "
+        "Use content continuity, repeated headers or footers, formatting consistency, visible page numbering, logical completion cues, titles, form names, and subject matter changes. "
+        "Pages belong together when they form a coherent continuous document, even if page text varies. "
+        "Distinct documents of the same apparent type may be adjacent; split them when a fresh title, new identifier, new cover/title page, or completed prior document shows a new document begins. "
         "Do not split just because a person, company, address, date, or incidental keyword changes. "
+        "Split only when there is clear evidence that a new distinct document begins. "
         "Every page must be assigned to exactly one document, ranges must be contiguous, and ranges must cover all pages from 1 through the final page. "
         "Return only valid JSON shaped exactly like: "
         "{\"documents\":[{\"start_page\":1,\"end_page\":1,\"document_type\":\"Invoice\",\"reason\":\"short evidence\"}]}. "
-        f"Allowed document_type values: {categories}.\n\n"
+        "Use document_type only as a short label for the range; use Other when the type is not obvious. "
+        f"Known document_type values: {categories}.\n\n"
         + "\n\n".join(page_blocks)
     )
 

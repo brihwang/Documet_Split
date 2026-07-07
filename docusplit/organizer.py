@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PyPDF2 import PdfReader, PdfWriter
 
-from .classifier import classify_document, get_last_ai_error, split_documents_with_ai
+from .classifier import ai_split_is_configured, classify_document, get_last_ai_error, split_documents_with_ai
 from .detector import best_keyword_category, detect_documents
 from .extractor import extract_pdf_text
 from .models import Classification, DocumentCandidate, OutputDocument, PageText, Settings
@@ -20,17 +20,15 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
     pages = extract_pdf_text(path)
     if not pages:
         raise ValueError(f"No pages could be read from {path}")
-    mixed_source_pdf = has_multiple_local_page_categories(pages, settings)
-    candidates, ai_split_error = choose_document_candidates(pages, settings, mixed_source_pdf)
+    local_category_hint = has_multiple_local_page_categories(pages, settings)
+    candidates, split_metadata = choose_document_candidates(pages, settings)
 
     reader = PdfReader(str(path))
     outputs: list[OutputDocument] = []
     for candidate in candidates:
-        classification = classify_document(candidate, settings, allow_ai=mixed_source_pdf and ai_split_error is None)
-        if ai_split_error:
-            classification.metadata["ai_split"] = "local_fallback"
-            classification.metadata["ai_error"] = ai_split_error
-        classification.metadata["mixed_source_pdf"] = mixed_source_pdf
+        classification = classify_document(candidate, settings, allow_ai=local_category_hint and split_metadata["splitter"] == "ai")
+        classification.metadata.update(split_metadata)
+        classification.metadata["local_category_hint"] = local_category_hint
         output_file = write_split_pdf(path, reader, candidate.start_page, candidate.end_page, classification, output_root, errors_root, settings)
         sidecar = write_sidecar(output_file, path, candidate.start_page, candidate.end_page, classification)
         outputs.append(
@@ -47,14 +45,21 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
     return outputs
 
 
-def choose_document_candidates(pages: list[PageText], settings: Settings, mixed_source_pdf: bool) -> tuple[list[DocumentCandidate], str | None]:
-    if mixed_source_pdf:
+def choose_document_candidates(pages: list[PageText], settings: Settings) -> tuple[list[DocumentCandidate], dict[str, object]]:
+    if len(pages) == 1:
+        return [candidate_from_pages(pages)], {"splitter": "single_page", "document_count": 1}
+
+    if ai_split_is_configured():
         ai_candidates = split_documents_with_ai(pages, settings)
         if ai_candidates:
-            return ai_candidates, None
+            return ai_candidates, {"splitter": "ai", "document_count": len(ai_candidates)}
         ai_error = get_last_ai_error() or "AI splitting was unavailable or failed."
-        return detect_documents(pages, settings) or [candidate_from_pages(pages)], ai_error
-    return [candidate_from_pages(pages)], None
+        candidates = detect_documents(pages, settings) or [candidate_from_pages(pages)]
+        return candidates, {"splitter": "local_page_patterns", "document_count": len(candidates), "ai_error": ai_error}
+
+    candidates = detect_documents(pages, settings) or [candidate_from_pages(pages)]
+    splitter = "local_page_patterns" if len(candidates) > 1 else "local_single_document"
+    return candidates, {"splitter": splitter, "document_count": len(candidates)}
 
 
 def candidate_from_pages(pages: list[PageText]) -> DocumentCandidate:

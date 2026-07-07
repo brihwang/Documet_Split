@@ -15,7 +15,6 @@ class CategoryRule:
 @dataclass(frozen=True)
 class Settings:
     min_confidence: float
-    filename_template: str
     default_category: str
     review_folder: str
     categories: dict[str, CategoryRule]

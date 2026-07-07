@@ -1,5 +1,4 @@
 min_confidence: 0.70
-filename_template: "{date}_{type}.pdf"
 default_category: Other
 review_folder: review_needed
 

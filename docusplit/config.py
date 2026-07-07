@@ -10,7 +10,6 @@ from .models import CategoryRule, Settings
 
 
 DEFAULT_CONFIG = """min_confidence: 0.70
-filename_template: "{date}_{type}.pdf"
 default_category: Other
 review_folder: review_needed
 
@@ -71,12 +70,8 @@ def load_settings(path: Path) -> Settings:
     if default_category not in categories:
         raise ValueError(f"default_category {default_category!r} is not listed in categories.")
 
-    filename_template = str(raw.get("filename_template", "{date}_{type}.pdf"))
-    validate_template(filename_template, "filename_template")
-
     return Settings(
         min_confidence=float(raw.get("min_confidence", 0.7)),
-        filename_template=filename_template,
         default_category=default_category,
         review_folder=str(raw.get("review_folder", "review_needed")),
         categories=categories,

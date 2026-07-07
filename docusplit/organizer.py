@@ -114,22 +114,10 @@ def write_split_pdf(
     routed_to_review = classification.confidence < settings.min_confidence
     target_dir = errors_root / settings.review_folder if routed_to_review else output_root / folder_for(classification, settings)
     target_dir.mkdir(parents=True, exist_ok=True)
-    target = unique_path(target_dir / filename_for(classification, settings))
+    target = unique_path(target_dir / source.name)
     with target.open("wb") as handle:
         writer.write(handle)
     return target
-
-
-def filename_for(classification: Classification, settings: Settings) -> str:
-    if classification.suggested_filename:
-        name = sanitize_part(classification.suggested_filename)
-        return name if name.lower().endswith(".pdf") else f"{name}.pdf"
-
-    values = template_values(classification)
-    raw = settings.filename_template.format(**values)
-    if not raw.lower().endswith(".pdf"):
-        raw = f"{raw}.pdf"
-    return sanitize_part(raw, "document.pdf")
 
 
 def folder_for(classification: Classification, settings: Settings) -> Path:

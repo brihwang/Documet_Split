@@ -26,7 +26,7 @@ def process_file(path: Path, output_root: Path, settings: Settings, errors_root:
     reader = PdfReader(str(path))
     outputs: list[OutputDocument] = []
     for candidate in candidates:
-        classification = classify_document(candidate, settings, allow_ai=local_category_hint and split_metadata["splitter"] == "ai")
+        classification = classify_document(candidate, settings, allow_ai=False)
         classification.metadata.update(split_metadata)
         classification.metadata["local_category_hint"] = local_category_hint
         output_file = write_split_pdf(path, reader, candidate.start_page, candidate.end_page, classification, output_root, errors_root, settings)

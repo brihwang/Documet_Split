@@ -26,13 +26,18 @@ categories:
       - transaction
       - subtotal
       - total
-  Statement:
-    folder: "Statement"
+  Bank Statement:
+    folder: "Bank Statement"
     keywords:
+      - bank statement
       - statement
       - account summary
+      - account statement
+      - account number
       - beginning balance
       - ending balance
+      - transaction activity
+      - interest summary
   Drivers License:
     folder: "Drivers License"
     keywords:
@@ -68,19 +73,26 @@ categories:
       - withholding
       - irs
       - internal revenue
-  Insurance:
-    folder: "Insurance"
+  Insurance Policy:
+    folder: "Insurance Policy"
     keywords:
       - insurance
+      - insurance policy
+      - declarations
       - policy number
       - premium
       - coverage
       - deductible
       - insured
       - beneficiary
-  Medical:
-    folder: "Medical"
+      - exclusions
+      - underwriter
+  Medical Record:
+    folder: "Medical Record"
     keywords:
+      - medical record
+      - medical record number
+      - medical visit summary
       - medical intake
       - patient information
       - patient
@@ -91,6 +103,22 @@ categories:
       - hospital
       - clinic
       - health
+      - lab results
+      - visit notes
+  Utility Bill:
+    folder: "Utility Bill"
+    keywords:
+      - utility bill
+      - service address
+      - billing date
+      - previous balance
+      - current charges
+      - amount due
+      - due date
+      - usage detail
+      - meter
+      - electric
+      - water
   Other:
     folder: "Other"
     keywords: []

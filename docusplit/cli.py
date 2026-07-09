@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 
 import typer
 from rich.console import Console
@@ -49,6 +50,8 @@ def process(
     config: Path = typer.Option(Path("config.yaml"), "--config"),
     processed_dir: Path = typer.Option(Path("processed"), "--processed"),
     errors_dir: Path = typer.Option(Path("errors"), "--errors"),
+    raw_dir: Path | None = typer.Option(None, "--raw-dir", help="Folder containing Textract raw JSON files for policy-code splitting."),
+    form_lookup: Path = typer.Option(Path("form_lookup.json"), "--form-lookup", help="Policy-code lookup JSON."),
     rules_only: bool = typer.Option(False, "--rules-only", help="Skip AI splitting and use local page-pattern rules."),
 ) -> None:
     """Process all files currently in the input folder."""
@@ -57,6 +60,8 @@ def process(
     output_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
     errors_dir.mkdir(parents=True, exist_ok=True)
+    if raw_dir is not None and not raw_dir.exists():
+        raise typer.BadParameter(f"Raw JSON folder does not exist: {raw_dir}")
 
     files = [path for path in sorted(input_dir.iterdir()) if path.is_file() and path.name != ".gitkeep"]
     if not files:
@@ -66,7 +71,15 @@ def process(
     all_outputs = []
     for file_path in files:
         try:
-            outputs = process_file(file_path, output_dir, settings, errors_dir, use_ai=not rules_only)
+            outputs = process_file(
+                file_path,
+                output_dir,
+                settings,
+                errors_dir,
+                use_ai=not rules_only,
+                raw_dir=raw_dir,
+                form_lookup=form_lookup,
+            )
             all_outputs.extend(outputs)
             move_to_processed(file_path, processed_dir)
         except Exception as exc:

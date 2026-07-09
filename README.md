@@ -8,6 +8,7 @@ A local CLI that splits multi-document PDFs into separate output PDFs.
 python -m docusplit init
 python -m docusplit process --input inbox --output organized --config config.yaml
 python -m docusplit process --input inbox --output organized --config config.yaml --rules-only
+python -m docusplit process --input inbox --raw-dir raw --form-lookup form_lookup.json --rules-only
 ```
 
 To try it, put PDFs or files in `inbox/`, run the `process` command, then check `organized/`. The original input files are moved to `processed/` after a successful run.
@@ -17,6 +18,8 @@ The tool works without an API key using local rules. Multi-page PDFs are now tre
 Use `--rules-only` with `process` to bypass AI for that run even when `.env` is configured for LLM Gateway.
 
 The splitter follows a page-boundary workflow: each page is treated as a possible start page, inner/continue page, or end page. This helps separate adjacent documents of the same broad type when a fresh title, new identifier, completed prior document, or semantic/structural shift shows that a new document begins.
+
+When Textract-style raw JSON is available, the processor checks every page for policy/form codes from `form_lookup.json` before using AI or local page-pattern rules. Matching uses an Aho-Corasick automaton over normalized lookup keys, so it scans each page once and handles hundreds of codes efficiently. Pages with a matched code are grouped by the lookup `requirement_type`; contiguous uncoded page runs are passed through the existing local splitter. Raw files are matched by PDF name from `--raw-dir` using names like `packet.pdf.json`, `packet.json`, `packet.raw.json`, or `packet_raw.json`.
 
 For AI setup, see `AI_OPTIONS.md`. The short version:
 

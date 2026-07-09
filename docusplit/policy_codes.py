@@ -1,0 +1,242 @@
+from __future__ import annotations
+
+from collections import Counter, defaultdict, deque
+from dataclasses import dataclass, field
+import json
+from pathlib import Path
+from typing import Any
+
+from .detector import detect_documents
+from .models import DocumentCandidate, PageText, Settings
+
+
+@dataclass(frozen=True)
+class PolicyCodeMatch:
+    page_number: int
+    code: str
+    category: str
+
+
+@dataclass
+class _AutomatonNode:
+    children: dict[str, int] = field(default_factory=dict)
+    failure: int = 0
+    outputs: list[str] = field(default_factory=list)
+
+
+class PolicyCodeMatcher:
+    def __init__(self, codes: dict[str, str]) -> None:
+        self.codes = {normalize_code(code): category for code, category in codes.items() if normalize_code(code)}
+        self.nodes = [_AutomatonNode()]
+        for code in self.codes:
+            self._insert(code)
+        self._build_failures()
+
+    @classmethod
+    def from_lookup_file(cls, path: Path) -> PolicyCodeMatcher:
+        lookup = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(lookup, dict):
+            raise ValueError(f"Policy lookup must be a JSON object: {path}")
+
+        codes: dict[str, str] = {}
+        for code, payload in lookup.items():
+            if not isinstance(code, str):
+                continue
+            category = code
+            if isinstance(payload, dict):
+                value = payload.get("requirement_type")
+                if isinstance(value, str) and value.strip():
+                    category = value.strip()
+            codes[code] = category
+        return cls(codes)
+
+    def find_matches(self, text: str) -> list[tuple[str, str]]:
+        state = 0
+        found: list[tuple[str, str]] = []
+        for char in normalize_text(text):
+            while state and char not in self.nodes[state].children:
+                state = self.nodes[state].failure
+            state = self.nodes[state].children.get(char, 0)
+            for code in self.nodes[state].outputs:
+                found.append((code, self.codes[code]))
+        return found
+
+    def _insert(self, code: str) -> None:
+        state = 0
+        for char in code:
+            next_state = self.nodes[state].children.get(char)
+            if next_state is None:
+                next_state = len(self.nodes)
+                self.nodes[state].children[char] = next_state
+                self.nodes.append(_AutomatonNode())
+            state = next_state
+        self.nodes[state].outputs.append(code)
+
+    def _build_failures(self) -> None:
+        queue: deque[int] = deque()
+        for child in self.nodes[0].children.values():
+            queue.append(child)
+
+        while queue:
+            state = queue.popleft()
+            for char, child in self.nodes[state].children.items():
+                queue.append(child)
+                failure = self.nodes[state].failure
+                while failure and char not in self.nodes[failure].children:
+                    failure = self.nodes[failure].failure
+                self.nodes[child].failure = self.nodes[failure].children.get(char, 0)
+                self.nodes[child].outputs.extend(self.nodes[self.nodes[child].failure].outputs)
+
+
+def normalize_code(value: str) -> str:
+    return "".join(char for char in value.upper() if char.isalnum())
+
+
+def normalize_text(value: str) -> str:
+    return normalize_code(value)
+
+
+def extract_raw_pages(path: Path) -> list[PageText]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    blocks = payload.get("Blocks") if isinstance(payload, dict) else None
+    if not isinstance(blocks, list):
+        raise ValueError(f"Raw JSON must contain a Blocks list: {path}")
+
+    line_blocks: dict[int, list[tuple[float, float, str]]] = defaultdict(list)
+    word_blocks: dict[int, list[tuple[float, float, str]]] = defaultdict(list)
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        text = block.get("Text")
+        page = block.get("Page")
+        block_type = block.get("BlockType")
+        if not isinstance(text, str) or not isinstance(page, int):
+            continue
+        top, left = block_position(block)
+        target = line_blocks if block_type == "LINE" else word_blocks if block_type == "WORD" else None
+        if target is not None:
+            target[page].append((top, left, text))
+
+    pages: list[PageText] = []
+    for page_number in sorted(set(line_blocks) | set(word_blocks)):
+        blocks_for_page = line_blocks.get(page_number) or word_blocks.get(page_number, [])
+        text = "\n".join(text for _, _, text in sorted(blocks_for_page)).strip()
+        pages.append(PageText(page_number=page_number, text=text, source="raw_json"))
+    return pages
+
+
+def block_position(block: dict[str, Any]) -> tuple[float, float]:
+    geometry = block.get("Geometry")
+    if not isinstance(geometry, dict):
+        return (0.0, 0.0)
+    box = geometry.get("BoundingBox")
+    if not isinstance(box, dict):
+        return (0.0, 0.0)
+    top = box.get("Top")
+    left = box.get("Left")
+    return (float(top) if isinstance(top, int | float) else 0.0, float(left) if isinstance(left, int | float) else 0.0)
+
+
+def find_page_policy_matches(pages: list[PageText], matcher: PolicyCodeMatcher) -> dict[int, list[PolicyCodeMatch]]:
+    matches_by_page: dict[int, list[PolicyCodeMatch]] = {}
+    for page in pages:
+        matches = [
+            PolicyCodeMatch(page_number=page.page_number, code=code, category=category)
+            for code, category in matcher.find_matches(page.text)
+        ]
+        if matches:
+            matches_by_page[page.page_number] = matches
+    return matches_by_page
+
+
+def split_with_policy_codes(
+    pages: list[PageText],
+    raw_pages: list[PageText],
+    matcher: PolicyCodeMatcher,
+    settings: Settings,
+) -> tuple[list[DocumentCandidate], dict[str, object]] | None:
+    matches_by_page = find_page_policy_matches(raw_pages, matcher)
+    if not matches_by_page:
+        return None
+
+    raw_text_by_page = {page.page_number: page.text for page in raw_pages}
+    policy_pages = {page_number: best_page_category(matches) for page_number, matches in matches_by_page.items()}
+    candidates: list[DocumentCandidate] = []
+
+    index = 0
+    while index < len(pages):
+        page = pages[index]
+        category = policy_pages.get(page.page_number)
+        run_start = index
+        if category is None:
+            while index + 1 < len(pages) and policy_pages.get(pages[index + 1].page_number) is None:
+                index += 1
+            candidates.extend(split_uncoded_pages(pages[run_start : index + 1], settings))
+        else:
+            while index + 1 < len(pages) and policy_pages.get(pages[index + 1].page_number) == category:
+                index += 1
+            candidates.append(candidate_from_slice(pages[run_start : index + 1]))
+        index += 1
+
+    all_pages_coded = len(policy_pages) == len(pages)
+    single_category = len(set(policy_pages.values())) == 1
+    metadata: dict[str, object] = {
+        "splitter": "policy_codes" if all_pages_coded else "policy_codes_with_local_page_patterns",
+        "document_count": len(candidates),
+        "policy_code_pages": len(policy_pages),
+        "uncoded_pages": len(pages) - len(policy_pages),
+        "all_pages_policy_coded": all_pages_coded,
+        "single_policy_category": single_category,
+        "policy_matches": {
+            str(page_number): sorted({match.code for match in matches})
+            for page_number, matches in sorted(matches_by_page.items())
+        },
+        "policy_categories": {str(page_number): category for page_number, category in sorted(policy_pages.items())},
+    }
+    if any(page.page_number not in raw_text_by_page for page in pages):
+        metadata["policy_warning"] = "Some PDF pages were missing from the raw JSON."
+    return candidates, metadata
+
+
+def best_page_category(matches: list[PolicyCodeMatch]) -> str:
+    weighted: Counter[str] = Counter()
+    for match in matches:
+        weighted[match.category] += max(len(match.code), 1)
+    return weighted.most_common(1)[0][0]
+
+
+def split_uncoded_pages(pages: list[PageText], settings: Settings) -> list[DocumentCandidate]:
+    if not pages:
+        return []
+    detected = detect_documents(pages, settings)
+    if not detected:
+        return [candidate_from_slice(pages)]
+
+    offset = pages[0].page_number - 1
+    return [
+        DocumentCandidate(
+            start_page=candidate.start_page + offset,
+            end_page=candidate.end_page + offset,
+            text=candidate.text,
+        )
+        for candidate in detected
+    ]
+
+
+def candidate_from_slice(pages: list[PageText]) -> DocumentCandidate:
+    return DocumentCandidate(
+        start_page=pages[0].page_number,
+        end_page=pages[-1].page_number,
+        text="\n\n".join(page.text for page in pages).strip(),
+    )
+
+
+def find_raw_json_for_pdf(pdf_path: Path, raw_dir: Path | None = None) -> Path | None:
+    search_dir = raw_dir or pdf_path.parent
+    candidates = [
+        search_dir / f"{pdf_path.name}.json",
+        search_dir / f"{pdf_path.stem}.json",
+        search_dir / f"{pdf_path.stem}.raw.json",
+        search_dir / f"{pdf_path.stem}_raw.json",
+    ]
+    return next((candidate for candidate in candidates if candidate.exists()), None)

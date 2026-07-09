@@ -10,6 +10,7 @@ from .classifier import ai_split_is_configured, get_last_ai_error, get_last_ai_m
 from .detector import detect_documents
 from .extractor import extract_pdf_text
 from .models import DocumentCandidate, OutputDocument, PageText, Settings
+from .policy_codes import PolicyCodeMatcher, extract_raw_pages, find_raw_json_for_pdf, split_with_policy_codes
 from .utils import sanitize_part, unique_path
 
 
@@ -19,6 +20,8 @@ def process_file(
     settings: Settings,
     errors_root: Path,
     use_ai: bool = True,
+    raw_dir: Path | None = None,
+    form_lookup: Path | None = None,
 ) -> list[OutputDocument]:
     if path.suffix.lower() != ".pdf":
         return route_non_pdf(path, output_root, settings, errors_root)
@@ -26,7 +29,19 @@ def process_file(
     pages = extract_pdf_text(path)
     if not pages:
         raise ValueError(f"No pages could be read from {path}")
-    candidates, split_metadata = choose_document_candidates(pages, settings, use_ai=use_ai)
+    raw_pages = None
+    raw_path = find_raw_json_for_pdf(path, raw_dir)
+    if raw_path is not None:
+        raw_pages = extract_raw_pages(raw_path)
+    candidates, split_metadata = choose_document_candidates(
+        pages,
+        settings,
+        use_ai=use_ai,
+        raw_pages=raw_pages,
+        form_lookup=form_lookup,
+    )
+    if raw_path is not None:
+        split_metadata["raw_json"] = str(raw_path)
 
     reader = PdfReader(str(path))
     outputs: list[OutputDocument] = []
@@ -50,9 +65,16 @@ def choose_document_candidates(
     pages: list[PageText],
     settings: Settings,
     use_ai: bool = True,
+    raw_pages: list[PageText] | None = None,
+    form_lookup: Path | None = None,
 ) -> tuple[list[DocumentCandidate], dict[str, object]]:
     if len(pages) == 1:
         return [candidate_from_pages(pages)], {"splitter": "single_page", "document_count": 1}
+
+    if raw_pages and form_lookup and form_lookup.exists():
+        policy_result = split_with_policy_codes(pages, raw_pages, PolicyCodeMatcher.from_lookup_file(form_lookup), settings)
+        if policy_result is not None:
+            return policy_result
 
     if use_ai and ai_split_is_configured():
         ai_candidates = split_documents_with_ai(pages)

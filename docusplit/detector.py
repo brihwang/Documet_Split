@@ -31,6 +31,15 @@ END_HINTS = (
     "balance due",
 )
 
+# Pages that support a preceding document (instruction sheets, continuation
+# pages, addenda) rather than beginning a new one. These frequently repeat the
+# parent document's title/markers and therefore fool title/marker heuristics
+# into declaring a fresh document, causing same-category over-splitting.
+ACCESSORY_TITLE_PATTERN = re.compile(
+    r"\b(instructions|continued|continuation sheet|continuation|addendum|"
+    r"appendix|attachment|exhibit|notice to recipient)\b"
+)
+
 IDENTITY_LABELS = (
     "account",
     "account number",
@@ -153,6 +162,7 @@ class PageProfile:
     key_value_line_count: int
     starts_like_document: bool
     ends_like_document: bool
+    is_accessory: bool
     continuation: bool
     page_number: int | None
 
@@ -190,7 +200,11 @@ def build_page_profile(page: PageText, settings: Settings) -> PageProfile:
     page_number = extract_visible_page_number(text)
     key_value_line_count = sum(1 for line in lines if looks_like_key_value(line))
     table_line_count = sum(1 for line in lines if looks_like_table_row(line))
-    starts_like_document = looks_like_document_start(text, title_lines, labels, markers)
+    is_accessory = looks_like_accessory_page(text, title_lines)
+    # An accessory page never counts as a document start: its title/markers
+    # mirror the parent document, so treating it as a start manufactures a
+    # spurious boundary inside a single document.
+    starts_like_document = looks_like_document_start(text, title_lines, labels, markers) and not is_accessory
     ends_like_document = looks_like_document_end(text, lines)
 
     return PageProfile(
@@ -211,6 +225,7 @@ def build_page_profile(page: PageText, settings: Settings) -> PageProfile:
         key_value_line_count=key_value_line_count,
         starts_like_document=starts_like_document,
         ends_like_document=ends_like_document,
+        is_accessory=is_accessory,
         continuation=looks_like_continuation(text, page_number),
         page_number=page_number,
     )
@@ -219,6 +234,15 @@ def build_page_profile(page: PageText, settings: Settings) -> PageProfile:
 def boundary_score(previous: PageProfile, current: PageProfile) -> float:
     if is_likely_continuation(previous, current):
         return 0.0
+
+    same_category = bool(previous.category and current.category and previous.category == current.category)
+    fresh_start = same_type_fresh_start(previous, current)
+    # Inside a single same-category document, page-to-page variation in wording,
+    # titles, and layout is normal (e.g. a form followed by its instructions).
+    # Discount those "dissimilarity" signals when the category is unchanged and
+    # there is no genuine fresh-start marker, so they cannot, on their own,
+    # fabricate a boundary within one document.
+    dissimilarity_weight = 0.35 if same_category and not fresh_start else 1.0
 
     score = 0.0
     if previous.category and current.category and previous.category != current.category:
@@ -234,24 +258,24 @@ def boundary_score(previous: PageProfile, current: PageProfile) -> float:
     elif previous.ends_like_document:
         score += 0.5
 
-    if same_type_fresh_start(previous, current):
+    if fresh_start:
         score += 2.25
 
     text_similarity = jaccard(previous.tokens, current.tokens)
     if text_similarity < 0.12:
-        score += 1.5
+        score += 1.5 * dissimilarity_weight
     elif text_similarity < 0.24:
-        score += 0.75
+        score += 0.75 * dissimilarity_weight
 
     title_similarity = jaccard(previous.title_tokens, current.title_tokens)
     if current.title_tokens and title_similarity < 0.18:
-        score += 1.0
+        score += 1.0 * dissimilarity_weight
     elif title_similarity > 0.45:
         score -= 1.0
 
     label_similarity = jaccard(previous.labels, current.labels)
     if current.labels and previous.labels and label_similarity < 0.2:
-        score += 1.25
+        score += 1.25 * dissimilarity_weight
 
     if previous.markers and current.markers and previous.markers.isdisjoint(current.markers):
         score += 1.0
@@ -260,15 +284,17 @@ def boundary_score(previous: PageProfile, current: PageProfile) -> float:
         score -= 1.0
 
     if structural_shift(previous, current) >= 4:
-        score += 0.75
+        score += 0.75 * dissimilarity_weight
 
-    if previous.category and previous.category == current.category:
-        score -= 0.75 if same_type_fresh_start(previous, current) else 1.5
+    if same_category:
+        score -= 0.75 if fresh_start else 1.5
 
     return score
 
 
 def is_likely_continuation(previous: PageProfile, current: PageProfile) -> bool:
+    if current.is_accessory and categories_compatible(previous, current):
+        return True
     if current.starts_like_document and previous.ends_like_document:
         return False
     if current.starts_like_document and same_type_fresh_start(previous, current):
@@ -282,6 +308,12 @@ def is_likely_continuation(previous: PageProfile, current: PageProfile) -> bool:
     if previous.category and previous.category == current.category and jaccard(previous.title_tokens, current.title_tokens) > 0.35:
         return True
     return False
+
+
+def categories_compatible(previous: PageProfile, current: PageProfile) -> bool:
+    if not previous.category or not current.category:
+        return True
+    return previous.category == current.category
 
 
 def meaningful_lines(text: str) -> list[str]:
@@ -366,6 +398,19 @@ def looks_like_document_start(text: str, title_lines: list[str], labels: frozens
     if re.search(r"\b(dear\s+\w+|re:)\b", first_text):
         return True
     if len(labels) >= 4 and has_title_like_line(title_lines):
+        return True
+    return False
+
+
+def looks_like_accessory_page(text: str, title_lines: list[str]) -> bool:
+    head = " ".join(title_lines[:4]).lower()
+    if ACCESSORY_TITLE_PATTERN.search(head):
+        return True
+    if re.search(r"\binstructions?\s+for\s+(recipient|recipients|payer|payee|employee|filer|filers)\b", text):
+        return True
+    if re.search(r"\b(paperwork reduction act|privacy act and paperwork reduction act)\b", text):
+        return True
+    if re.search(r"\bcontinued\s+(on|from)\s+(the\s+)?(next|previous|following|prior)\s+page\b", text):
         return True
     return False
 
@@ -463,7 +508,13 @@ def same_type_fresh_start(previous: PageProfile, current: PageProfile) -> bool:
         return True
     if previous.ends_like_document and formatting_similarity(previous, current) < 0.35:
         return True
-    if previous.markers and current.markers and previous.markers == current.markers and jaccard(previous.title_tokens, current.title_tokens) < 0.25:
+    if (
+        previous.ends_like_document
+        and previous.markers
+        and current.markers
+        and previous.markers == current.markers
+        and jaccard(previous.title_tokens, current.title_tokens) < 0.25
+    ):
         return True
     return False
 

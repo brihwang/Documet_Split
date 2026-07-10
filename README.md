@@ -6,20 +6,17 @@ A local CLI that splits multi-document PDFs into separate output PDFs.
 
 ```bash
 python -m docusplit init
-python -m docusplit process --input inbox --output organized --config config.yaml
-python -m docusplit process --input inbox --output organized --config config.yaml --rules-only
-python -m docusplit process --input inbox --raw-dir raw --form-lookup form_lookup.json --rules-only
+python -m docusplit policy-ai --input inbox --output organized --config config.yaml
+python -m docusplit policy-rules --input inbox --output organized --config config.yaml
 ```
 
-To try it, put PDFs or files in `inbox/`, run the `process` command, then check `organized/`. The original input files are moved to `processed/` after a successful run.
+To try it, put PDFs and/or Textract raw JSON files in `inbox/`, run one of the policy-first commands, then check `organized/`. PDF inputs produce split PDFs. Raw JSON inputs produce `*.split_plan.json` files that list the document page ranges, so you can compare the split points directly against a manifest. Successfully processed inputs are moved to `processed/`.
 
-The tool works without an API key using local rules. Multi-page PDFs are now treated as page-boundary problems, not just category-keyword problems: the local splitter compares page titles, field labels, visible page numbering, repeated document markers, content continuity, formatting consistency, logical end cues, and structural changes such as tables or key-value blocks. When AI is configured, it can decide the split ranges for any multi-page PDF, with the local splitter as a fallback.
-
-Use `--rules-only` with `process` to bypass AI for that run even when `.env` is configured for LLM Gateway.
+The tool works without an API key using local rules. Multi-page PDFs are now treated as page-boundary problems, not just category-keyword problems: the local splitter compares page titles, field labels, visible page numbering, repeated document markers, content continuity, formatting consistency, logical end cues, and structural changes such as tables or key-value blocks. When AI is configured, `policy-ai` can decide split ranges for pages that do not have policy codes, with the local splitter as a fallback. Use `policy-rules` to bypass AI for uncoded pages.
 
 The splitter follows a page-boundary workflow: each page is treated as a possible start page, inner/continue page, or end page. This helps separate adjacent documents of the same broad type when a fresh title, new identifier, completed prior document, or semantic/structural shift shows that a new document begins.
 
-When Textract-style raw JSON is available, the processor checks every page for policy/form codes from `form_lookup.json` before using AI or local page-pattern rules. Matching uses an Aho-Corasick automaton over normalized lookup keys, so it scans each page once and handles hundreds of codes efficiently. Pages with a matched code are grouped by the lookup `requirement_type`; contiguous uncoded page runs are passed through the existing local splitter. Raw files are matched by PDF name from `--raw-dir` using names like `packet.pdf.json`, `packet.json`, `packet.raw.json`, or `packet_raw.json`.
+When Textract-style raw JSON is available, the processor checks every page for policy/form codes from `form_lookup.json` before using AI or local page-pattern rules. Matching uses an Aho-Corasick automaton over normalized lookup keys, so it scans each page once and handles hundreds of codes efficiently. A code only counts as a match when the normalized code is bounded by non-alphanumeric characters or page text edges, so a shorter code like `AB12` is not matched inside a longer code like `AB123`. Pages with a matched code are grouped by the lookup `requirement_type`; contiguous uncoded page runs are passed through AI with `policy-ai` or local rules with `policy-rules`. Raw files are matched from `inbox/` by PDF name using names like `packet.pdf.json`, `packet.json`, `packet.raw.json`, or `packet_raw.json`.
 
 For AI setup, see `AI_OPTIONS.md`. The short version:
 

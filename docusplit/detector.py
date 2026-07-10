@@ -172,11 +172,12 @@ def detect_documents(pages: list[PageText], settings: Settings) -> list[Document
         return []
 
     profiles = [build_page_profile(page, settings) for page in pages]
+    threshold = boundary_threshold(pages)
     starts = [0]
     for index in range(1, len(pages)):
         previous = profiles[index - 1]
         current = profiles[index]
-        if boundary_score(previous, current) >= 3.0:
+        if boundary_score(previous, current) >= threshold:
             starts.append(index)
 
     starts = sorted(set(starts))
@@ -299,9 +300,13 @@ def is_likely_continuation(previous: PageProfile, current: PageProfile) -> bool:
         return False
     if current.starts_like_document and same_type_fresh_start(previous, current):
         return False
+    if current.starts_like_document and categories_conflict(previous, current):
+        if current.continuation and previous.first_line and previous.first_line == current.first_line:
+            return True
+        return False
     if content_continues(previous, current):
         return True
-    if current.continuation:
+    if current.continuation and categories_compatible(previous, current):
         return True
     if previous.page_number is not None and current.page_number == previous.page_number + 1:
         return True
@@ -314,6 +319,14 @@ def categories_compatible(previous: PageProfile, current: PageProfile) -> bool:
     if not previous.category or not current.category:
         return True
     return previous.category == current.category
+
+
+def categories_conflict(previous: PageProfile, current: PageProfile) -> bool:
+    return bool(previous.category and current.category and previous.category != current.category)
+
+
+def boundary_threshold(pages: list[PageText]) -> float:
+    return 2.75 if any(page.source == "raw_json" for page in pages) else 3.0
 
 
 def meaningful_lines(text: str) -> list[str]:

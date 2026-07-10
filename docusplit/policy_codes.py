@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from collections import Counter, defaultdict, deque
+from collections import defaultdict, deque
 from dataclasses import dataclass, field
 import json
 from pathlib import Path
 from typing import Any
 
+from .classifier import get_last_ai_error, get_last_ai_model, get_last_ai_split_metadata, split_documents_with_ai
 from .detector import detect_documents
 from .models import DocumentCandidate, PageText, Settings
 
@@ -53,12 +54,15 @@ class PolicyCodeMatcher:
     def find_matches(self, text: str) -> list[tuple[str, str]]:
         state = 0
         found: list[tuple[str, str]] = []
-        for char in normalize_text(text):
+        normalized_text, positions = normalize_text_with_positions(text)
+        for index, char in enumerate(normalized_text):
             while state and char not in self.nodes[state].children:
                 state = self.nodes[state].failure
             state = self.nodes[state].children.get(char, 0)
             for code in self.nodes[state].outputs:
-                found.append((code, self.codes[code]))
+                start = index - len(code) + 1
+                if exact_match_boundary(text, positions[start], positions[index]):
+                    found.append((code, self.codes[code]))
         return found
 
     def _insert(self, code: str) -> None:
@@ -94,6 +98,22 @@ def normalize_code(value: str) -> str:
 
 def normalize_text(value: str) -> str:
     return normalize_code(value)
+
+
+def normalize_text_with_positions(value: str) -> tuple[str, list[int]]:
+    chars: list[str] = []
+    positions: list[int] = []
+    for index, char in enumerate(value):
+        if char.isalnum():
+            chars.append(char.upper())
+            positions.append(index)
+    return "".join(chars), positions
+
+
+def exact_match_boundary(text: str, start: int, end: int) -> bool:
+    before = text[start - 1] if start > 0 else ""
+    after = text[end + 1] if end + 1 < len(text) else ""
+    return not before.isalnum() and not after.isalnum()
 
 
 def extract_raw_pages(path: Path) -> list[PageText]:
@@ -154,14 +174,16 @@ def split_with_policy_codes(
     raw_pages: list[PageText],
     matcher: PolicyCodeMatcher,
     settings: Settings,
+    use_ai: bool = True,
 ) -> tuple[list[DocumentCandidate], dict[str, object]] | None:
     matches_by_page = find_page_policy_matches(raw_pages, matcher)
     if not matches_by_page:
         return None
 
     raw_text_by_page = {page.page_number: page.text for page in raw_pages}
-    policy_pages = {page_number: best_page_category(matches) for page_number, matches in matches_by_page.items()}
+    policy_pages = {page_number: first_page_category(matches) for page_number, matches in matches_by_page.items()}
     candidates: list[DocumentCandidate] = []
+    ai_runs: list[dict[str, object]] = []
 
     index = 0
     while index < len(pages):
@@ -171,7 +193,7 @@ def split_with_policy_codes(
         if category is None:
             while index + 1 < len(pages) and policy_pages.get(pages[index + 1].page_number) is None:
                 index += 1
-            candidates.extend(split_uncoded_pages(pages[run_start : index + 1], settings))
+            candidates.extend(split_uncoded_pages(pages[run_start : index + 1], settings, use_ai=use_ai, ai_runs=ai_runs))
         else:
             while index + 1 < len(pages) and policy_pages.get(pages[index + 1].page_number) == category:
                 index += 1
@@ -195,31 +217,68 @@ def split_with_policy_codes(
     }
     if any(page.page_number not in raw_text_by_page for page in pages):
         metadata["policy_warning"] = "Some PDF pages were missing from the raw JSON."
+    if use_ai:
+        ai_model = get_last_ai_model()
+        ai_error = get_last_ai_error()
+        if ai_model:
+            metadata["ai_model"] = ai_model
+        if ai_runs:
+            metadata["ai_runs"] = ai_runs
+        if ai_error:
+            metadata["ai_error"] = ai_error
     return candidates, metadata
 
 
-def best_page_category(matches: list[PolicyCodeMatch]) -> str:
-    weighted: Counter[str] = Counter()
-    for match in matches:
-        weighted[match.category] += max(len(match.code), 1)
-    return weighted.most_common(1)[0][0]
+def first_page_category(matches: list[PolicyCodeMatch]) -> str:
+    return matches[0].category
 
 
-def split_uncoded_pages(pages: list[PageText], settings: Settings) -> list[DocumentCandidate]:
+def split_uncoded_pages(
+    pages: list[PageText],
+    settings: Settings,
+    use_ai: bool = True,
+    ai_runs: list[dict[str, object]] | None = None,
+) -> list[DocumentCandidate]:
     if not pages:
         return []
+
+    if use_ai:
+        ai_candidates = split_documents_with_ai(renumber_pages(pages))
+        if ai_candidates:
+            offset = pages[0].page_number - 1
+            adjusted = offset_candidates(ai_candidates, offset)
+            if ai_runs is not None:
+                ai_runs.append(
+                    {
+                        "input_page_range": [pages[0].page_number, pages[-1].page_number],
+                        "output_ranges": [[candidate.start_page, candidate.end_page] for candidate in adjusted],
+                        **get_last_ai_split_metadata(),
+                    }
+                )
+            return adjusted
+
     detected = detect_documents(pages, settings)
     if not detected:
         return [candidate_from_slice(pages)]
 
-    offset = pages[0].page_number - 1
+    return offset_candidates(detected, pages[0].page_number - 1)
+
+
+def renumber_pages(pages: list[PageText]) -> list[PageText]:
+    return [
+        PageText(page_number=index + 1, text=page.text, source=page.source)
+        for index, page in enumerate(pages)
+    ]
+
+
+def offset_candidates(candidates: list[DocumentCandidate], offset: int) -> list[DocumentCandidate]:
     return [
         DocumentCandidate(
             start_page=candidate.start_page + offset,
             end_page=candidate.end_page + offset,
             text=candidate.text,
         )
-        for candidate in detected
+        for candidate in candidates
     ]
 
 

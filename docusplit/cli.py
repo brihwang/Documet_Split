@@ -44,24 +44,47 @@ def init(
 
 
 @app.command()
-def process(
+def policy_ai(
     input_dir: Path = typer.Option(Path("inbox"), "--input", exists=True, file_okay=False),
     output_dir: Path = typer.Option(Path("organized"), "--output"),
     config: Path = typer.Option(Path("config.yaml"), "--config"),
     processed_dir: Path = typer.Option(Path("processed"), "--processed"),
     errors_dir: Path = typer.Option(Path("errors"), "--errors"),
-    raw_dir: Path | None = typer.Option(None, "--raw-dir", help="Folder containing Textract raw JSON files for policy-code splitting."),
     form_lookup: Path = typer.Option(Path("form_lookup.json"), "--form-lookup", help="Policy-code lookup JSON."),
-    rules_only: bool = typer.Option(False, "--rules-only", help="Skip AI splitting and use local page-pattern rules."),
 ) -> None:
-    """Process all files currently in the input folder."""
+    """Split with inbox raw JSON policy codes, then AI for uncoded pages."""
+    process_policy_first(input_dir, output_dir, config, processed_dir, errors_dir, form_lookup, use_ai=True)
+
+
+@app.command()
+def policy_rules(
+    input_dir: Path = typer.Option(Path("inbox"), "--input", exists=True, file_okay=False),
+    output_dir: Path = typer.Option(Path("organized"), "--output"),
+    config: Path = typer.Option(Path("config.yaml"), "--config"),
+    processed_dir: Path = typer.Option(Path("processed"), "--processed"),
+    errors_dir: Path = typer.Option(Path("errors"), "--errors"),
+    form_lookup: Path = typer.Option(Path("form_lookup.json"), "--form-lookup", help="Policy-code lookup JSON."),
+) -> None:
+    """Split with inbox raw JSON policy codes, then local rules for uncoded pages."""
+    process_policy_first(input_dir, output_dir, config, processed_dir, errors_dir, form_lookup, use_ai=False)
+
+
+def process_policy_first(
+    input_dir: Path,
+    output_dir: Path,
+    config: Path,
+    processed_dir: Path,
+    errors_dir: Path,
+    form_lookup: Path,
+    use_ai: bool,
+) -> None:
     load_env_file()
     settings = load_settings(config)
     output_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
     errors_dir.mkdir(parents=True, exist_ok=True)
-    if raw_dir is not None and not raw_dir.exists():
-        raise typer.BadParameter(f"Raw JSON folder does not exist: {raw_dir}")
+    if not form_lookup.exists():
+        raise typer.BadParameter(f"Policy-code lookup does not exist: {form_lookup}")
 
     files = [path for path in sorted(input_dir.iterdir()) if path.is_file() and path.name != ".gitkeep"]
     if not files:
@@ -76,8 +99,8 @@ def process(
                 output_dir,
                 settings,
                 errors_dir,
-                use_ai=not rules_only,
-                raw_dir=raw_dir,
+                use_ai=use_ai,
+                raw_dir=input_dir,
                 form_lookup=form_lookup,
             )
             all_outputs.extend(outputs)

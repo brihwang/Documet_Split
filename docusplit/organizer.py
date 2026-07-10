@@ -23,6 +23,9 @@ def process_file(
     raw_dir: Path | None = None,
     form_lookup: Path | None = None,
 ) -> list[OutputDocument]:
+    if path.suffix.lower() == ".json":
+        return process_raw_json(path, output_root, settings, use_ai=use_ai, form_lookup=form_lookup)
+
     if path.suffix.lower() != ".pdf":
         return route_non_pdf(path, output_root, settings, errors_root)
 
@@ -61,6 +64,41 @@ def process_file(
     return outputs
 
 
+def process_raw_json(
+    path: Path,
+    output_root: Path,
+    settings: Settings,
+    use_ai: bool = True,
+    form_lookup: Path | None = None,
+) -> list[OutputDocument]:
+    pages = extract_raw_pages(path)
+    if not pages:
+        raise ValueError(f"No pages could be read from {path}")
+
+    candidates, split_metadata = choose_document_candidates(
+        pages,
+        settings,
+        use_ai=use_ai,
+        raw_pages=pages,
+        form_lookup=form_lookup,
+    )
+    split_metadata["raw_json"] = str(path)
+    split_metadata["output_type"] = "split_plan"
+    plan_file = write_split_plan(path, candidates, split_metadata, output_root)
+
+    return [
+        OutputDocument(
+            source_file=path,
+            output_file=plan_file,
+            sidecar_file=plan_file,
+            start_page=candidate.start_page,
+            end_page=candidate.end_page,
+            routed_to_review=False,
+        )
+        for candidate in candidates
+    ]
+
+
 def choose_document_candidates(
     pages: list[PageText],
     settings: Settings,
@@ -72,7 +110,13 @@ def choose_document_candidates(
         return [candidate_from_pages(pages)], {"splitter": "single_page", "document_count": 1}
 
     if raw_pages and form_lookup and form_lookup.exists():
-        policy_result = split_with_policy_codes(pages, raw_pages, PolicyCodeMatcher.from_lookup_file(form_lookup), settings)
+        policy_result = split_with_policy_codes(
+            pages,
+            raw_pages,
+            PolicyCodeMatcher.from_lookup_file(form_lookup),
+            settings,
+            use_ai=use_ai,
+        )
         if policy_result is not None:
             return policy_result
 
@@ -159,6 +203,32 @@ def write_sidecar(
     }
     sidecar.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     return sidecar
+
+
+def write_split_plan(
+    source: Path,
+    candidates: list[DocumentCandidate],
+    metadata: dict[str, object],
+    output_root: Path,
+) -> Path:
+    output_root.mkdir(parents=True, exist_ok=True)
+    target = unique_path(output_root / f"{source.stem}.split_plan.json")
+    payload = {
+        "source_file": str(source),
+        "output_file": str(target),
+        "metadata": metadata,
+        "documents": [
+            {
+                "document_index": index,
+                "start_page": candidate.start_page,
+                "end_page": candidate.end_page,
+                "page_range": [candidate.start_page, candidate.end_page],
+            }
+            for index, candidate in enumerate(candidates, start=1)
+        ],
+    }
+    target.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    return target
 
 
 def move_to_processed(path: Path, processed_root: Path) -> Path:

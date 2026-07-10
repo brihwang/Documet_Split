@@ -296,12 +296,14 @@ def boundary_score(previous: PageProfile, current: PageProfile) -> float:
 def is_likely_continuation(previous: PageProfile, current: PageProfile) -> bool:
     if current.is_accessory and categories_compatible(previous, current):
         return True
-    if current.starts_like_document and previous.ends_like_document:
-        return False
     if current.starts_like_document and same_type_fresh_start(previous, current):
         return False
     if current.starts_like_document and categories_conflict(previous, current):
         if current.continuation and previous.first_line and previous.first_line == current.first_line:
+            return True
+        return False
+    if current.starts_like_document and previous.ends_like_document:
+        if categories_compatible(previous, current) and repeated_same_type_structure(previous, current):
             return True
         return False
     if content_continues(previous, current):
@@ -313,6 +315,16 @@ def is_likely_continuation(previous: PageProfile, current: PageProfile) -> bool:
     if previous.category and previous.category == current.category and jaccard(previous.title_tokens, current.title_tokens) > 0.35:
         return True
     return False
+
+
+def repeated_same_type_structure(previous: PageProfile, current: PageProfile) -> bool:
+    if not previous.category or previous.category != current.category:
+        return False
+    return (
+        formatting_similarity(previous, current) > 0.25
+        or jaccard(previous.labels, current.labels) > 0.45
+        or jaccard(previous.title_tokens, current.title_tokens) > 0.35
+    )
 
 
 def categories_compatible(previous: PageProfile, current: PageProfile) -> bool:
@@ -519,7 +531,11 @@ def same_type_fresh_start(previous: PageProfile, current: PageProfile) -> bool:
         return False
     if previous.identity_values and current.identity_values and previous.identity_values.isdisjoint(current.identity_values):
         return True
-    if previous.ends_like_document and formatting_similarity(previous, current) < 0.35:
+    if (
+        previous.ends_like_document
+        and formatting_similarity(previous, current) < 0.35
+        and not repeated_same_type_structure(previous, current)
+    ):
         return True
     if (
         previous.ends_like_document

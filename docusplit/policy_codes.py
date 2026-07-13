@@ -2,13 +2,15 @@ from __future__ import annotations
 
 from collections import defaultdict, deque
 from dataclasses import dataclass, field
+import hashlib
 import json
 from pathlib import Path
+import re
 from typing import Any
 
 from .classifier import get_last_ai_error, get_last_ai_model, get_last_ai_split_metadata, split_documents_with_ai
 from .detector import detect_documents
-from .models import DocumentCandidate, PageText, Settings
+from .models import DocumentCandidate, PageLayoutProfile, PageText, Settings
 
 
 @dataclass(frozen=True)
@@ -122,7 +124,7 @@ def extract_raw_pages(path: Path) -> list[PageText]:
     if not isinstance(blocks, list):
         raise ValueError(f"Raw JSON must contain a Blocks list: {path}")
 
-    line_blocks: dict[int, list[tuple[float, float, str]]] = defaultdict(list)
+    line_blocks: dict[int, list[tuple[float, float, float, float, str]]] = defaultdict(list)
     word_blocks: dict[int, list[tuple[float, float, str]]] = defaultdict(list)
     for block in blocks:
         if not isinstance(block, dict):
@@ -132,29 +134,89 @@ def extract_raw_pages(path: Path) -> list[PageText]:
         block_type = block.get("BlockType")
         if not isinstance(text, str) or not isinstance(page, int):
             continue
-        top, left = block_position(block)
-        target = line_blocks if block_type == "LINE" else word_blocks if block_type == "WORD" else None
-        if target is not None:
-            target[page].append((top, left, text))
+        top, left, width, height = block_geometry(block)
+        if block_type == "LINE":
+            line_blocks[page].append((top, left, width, height, text))
+        elif block_type == "WORD":
+            word_blocks[page].append((top, left, text))
 
     pages: list[PageText] = []
     for page_number in sorted(set(line_blocks) | set(word_blocks)):
-        blocks_for_page = line_blocks.get(page_number) or word_blocks.get(page_number, [])
-        text = "\n".join(text for _, _, text in sorted(blocks_for_page)).strip()
-        pages.append(PageText(page_number=page_number, text=text, source="raw_json"))
+        page_line_blocks = line_blocks.get(page_number)
+        if page_line_blocks:
+            text = "\n".join(text for _, _, _, _, text in sorted(page_line_blocks)).strip()
+            layout = build_page_layout_profile(page_line_blocks)
+        else:
+            page_word_blocks = word_blocks.get(page_number, [])
+            text = "\n".join(text for _, _, text in sorted(page_word_blocks)).strip()
+            layout = None
+        pages.append(PageText(page_number=page_number, text=text, source="raw_json", layout=layout))
     return pages
 
 
 def block_position(block: dict[str, Any]) -> tuple[float, float]:
+    top, left, _, _ = block_geometry(block)
+    return top, left
+
+
+def block_geometry(block: dict[str, Any]) -> tuple[float, float, float, float]:
     geometry = block.get("Geometry")
     if not isinstance(geometry, dict):
-        return (0.0, 0.0)
+        return (0.0, 0.0, 0.0, 0.0)
     box = geometry.get("BoundingBox")
     if not isinstance(box, dict):
-        return (0.0, 0.0)
+        return (0.0, 0.0, 0.0, 0.0)
     top = box.get("Top")
     left = box.get("Left")
-    return (float(top) if isinstance(top, int | float) else 0.0, float(left) if isinstance(left, int | float) else 0.0)
+    width = box.get("Width")
+    height = box.get("Height")
+    return (
+        float(top) if isinstance(top, int | float) else 0.0,
+        float(left) if isinstance(left, int | float) else 0.0,
+        float(width) if isinstance(width, int | float) else 0.0,
+        float(height) if isinstance(height, int | float) else 0.0,
+    )
+
+
+def build_page_layout_profile(lines: list[tuple[float, float, float, float, str]]) -> PageLayoutProfile:
+    ordered = sorted(lines)
+    vertical_bands = tuple((round(top, 3), round(height, 3)) for top, _, _, height, _ in ordered)
+    left_bands = tuple(round(left, 3) for _, left, _, _, _ in ordered)
+    label_sequence = tuple(normalize_layout_label(text) for _, _, _, _, text in ordered)
+    geometry_items = tuple((top, left) for top, left in zip(vertical_bands, left_bands, strict=False))
+    template_items = tuple((top, left, label) for top, left, label in zip(vertical_bands, left_bands, label_sequence, strict=False))
+
+    return PageLayoutProfile(
+        line_count=len(ordered),
+        vertical_bands=vertical_bands,
+        left_bands=left_bands,
+        label_sequence=label_sequence,
+        first_label=label_sequence[0] if label_sequence else "",
+        has_form_code_line=any("form code" in label for label in label_sequence),
+        geometry_signature=layout_signature(geometry_items),
+        template_signature=layout_signature(template_items),
+    )
+
+
+def normalize_layout_label(text: str) -> str:
+    value = text.strip()
+    if re.fullmatch(r"synthetic packet \d+ page \d+", value, flags=re.IGNORECASE):
+        return "<packet_page>"
+    if value.lower().startswith("no policy form code appears"):
+        return "<no_policy_notice>"
+    value = re.sub(r"\bpage\s+\d{1,3}(?:\s+of\s+\d{1,3})?\b", "page <n>", value, flags=re.IGNORECASE)
+    value = re.sub(r"\$\s?[\d,]+(?:\.\d{2})?", "<money>", value)
+    value = re.sub(r"\b\d{1,2}[-/]\d{1,2}[-/]\d{2,4}\b", "<date>", value)
+    value = re.sub(r"\b\d{4}[-/]\d{1,2}[-/]\d{1,2}\b", "<date>", value)
+    value = re.sub(r"\b[A-Z]{2,}\d[A-Z0-9-]{2,}\b", "<code>", value)
+    if ":" in value:
+        value = value.split(":", 1)[0].strip() + ": <value>"
+    value = re.sub(r"\s+", " ", value).strip().lower()
+    return value
+
+
+def layout_signature(items: object) -> str:
+    return hashlib.sha1(repr(items).encode("utf-8")).hexdigest()[:12]
 
 
 def find_page_policy_matches(pages: list[PageText], matcher: PolicyCodeMatcher) -> dict[int, list[PolicyCodeMatch]]:
@@ -266,7 +328,7 @@ def split_uncoded_pages(
 
 def renumber_pages(pages: list[PageText]) -> list[PageText]:
     return [
-        PageText(page_number=index + 1, text=page.text, source=page.source)
+        PageText(page_number=index + 1, text=page.text, source=page.source, layout=page.layout)
         for index, page in enumerate(pages)
     ]
 

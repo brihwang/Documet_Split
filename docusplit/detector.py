@@ -165,6 +165,11 @@ class PageProfile:
     is_accessory: bool
     continuation: bool
     page_number: int | None
+    layout_geometry_signature: str
+    layout_template_signature: str
+    layout_line_count: int
+    layout_first_label: str
+    layout_has_form_code_line: bool
 
 
 def detect_documents(pages: list[PageText], settings: Settings) -> list[DocumentCandidate]:
@@ -192,6 +197,7 @@ def detect_documents(pages: list[PageText], settings: Settings) -> list[Document
 def build_page_profile(page: PageText, settings: Settings) -> PageProfile:
     text = page.text.lower()
     lines = meaningful_lines(page.text)
+    layout = page.layout
     title_lines = lines[:8]
     labels = extract_labels(lines)
     identity_values = extract_identity_values(lines)
@@ -229,6 +235,11 @@ def build_page_profile(page: PageText, settings: Settings) -> PageProfile:
         is_accessory=is_accessory,
         continuation=looks_like_continuation(text, page_number),
         page_number=page_number,
+        layout_geometry_signature=layout.geometry_signature if layout else "",
+        layout_template_signature=layout.template_signature if layout else "",
+        layout_line_count=layout.line_count if layout else 0,
+        layout_first_label=layout.first_label if layout else "",
+        layout_has_form_code_line=layout.has_form_code_line if layout else False,
     )
 
 
@@ -281,6 +292,8 @@ def boundary_score(previous: PageProfile, current: PageProfile) -> float:
     if previous.markers and current.markers and previous.markers.isdisjoint(current.markers):
         score += 1.0
 
+    score += layout_boundary_score(previous, current) * dissimilarity_weight
+
     if formatting_similarity(previous, current) > 0.45:
         score -= 1.0
 
@@ -306,12 +319,14 @@ def is_likely_continuation(previous: PageProfile, current: PageProfile) -> bool:
         if categories_compatible(previous, current) and repeated_same_type_structure(previous, current):
             return True
         return False
+    if same_layout_template(previous, current) and not same_type_fresh_start(previous, current):
+        return True
     if content_continues(previous, current):
         return True
     if current.continuation and categories_compatible(previous, current):
-        return True
+        return layout_boundary_score(previous, current) < 1.2
     if previous.page_number is not None and current.page_number == previous.page_number + 1:
-        return True
+        return layout_boundary_score(previous, current) < 1.2
     if previous.category and previous.category == current.category and jaccard(previous.title_tokens, current.title_tokens) > 0.35:
         return True
     return False
@@ -324,6 +339,34 @@ def repeated_same_type_structure(previous: PageProfile, current: PageProfile) ->
         formatting_similarity(previous, current) > 0.25
         or jaccard(previous.labels, current.labels) > 0.45
         or jaccard(previous.title_tokens, current.title_tokens) > 0.35
+    )
+
+
+def layout_boundary_score(previous: PageProfile, current: PageProfile) -> float:
+    if not previous.layout_geometry_signature or not current.layout_geometry_signature:
+        return 0.0
+    if same_layout_template(previous, current):
+        return -1.0
+
+    same_geometry = previous.layout_geometry_signature == current.layout_geometry_signature
+    if same_geometry:
+        if previous.layout_first_label and current.layout_first_label and previous.layout_first_label != current.layout_first_label:
+            return 0.35
+        return 0.0
+
+    score = 0.9
+    if abs(previous.layout_line_count - current.layout_line_count) >= 2:
+        score += 0.45
+    if previous.layout_has_form_code_line != current.layout_has_form_code_line:
+        score += 0.6
+    return min(score, 1.75)
+
+
+def same_layout_template(previous: PageProfile, current: PageProfile) -> bool:
+    return bool(
+        previous.layout_template_signature
+        and current.layout_template_signature
+        and previous.layout_template_signature == current.layout_template_signature
     )
 
 

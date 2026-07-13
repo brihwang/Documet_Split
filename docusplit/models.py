@@ -19,10 +19,23 @@ class Settings:
 
 
 @dataclass(frozen=True)
+class PageLayoutProfile:
+    line_count: int
+    vertical_bands: tuple[tuple[float, float], ...]
+    left_bands: tuple[float, ...]
+    label_sequence: tuple[str, ...]
+    first_label: str
+    has_form_code_line: bool
+    geometry_signature: str
+    template_signature: str
+
+
+@dataclass(frozen=True)
 class PageText:
     page_number: int
     text: str
     source: str
+    layout: PageLayoutProfile | None = None
 
 
 @dataclass(frozen=True)

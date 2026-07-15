@@ -15,8 +15,8 @@ Hosted gateway:
 AI_PROVIDER=llmgateway
 LLM_GATEWAY_API_KEY=your_gateway_key
 LLM_GATEWAY_BASE_URL=https://api.llmgateway.io/v1
-LLM_GATEWAY_MODEL=gemini-2.5-flash-lite
-LLM_GATEWAY_FALLBACK_MODELS=llama-3.1-8b-instant
+LLM_GATEWAY_MODEL=claude-sonnet-4.6
+LLM_GATEWAY_FALLBACK_MODELS=
 ```
 
 Self-hosted gateway:
@@ -40,7 +40,7 @@ LLM_GATEWAY_MODEL=exact-primary-model-id
 LLM_GATEWAY_FALLBACK_MODELS=exact-fallback-model-id,another-fallback-id
 ```
 
-`LLM_GATEWAY_MODEL` is tried first. If that model is rate-limited, unavailable, returns invalid split JSON, or fails for any other reason, the splitter tries each comma-separated model in `LLM_GATEWAY_FALLBACK_MODELS`. If all AI models fail, the local page-pattern splitter is used.
+`LLM_GATEWAY_MODEL` is tried first. If that model is rate-limited, unavailable, returns invalid split JSON, or fails for any other reason, the splitter tries each comma-separated model in `LLM_GATEWAY_FALLBACK_MODELS`. If all AI models fail, the local page-pattern splitter is used. Leave `LLM_GATEWAY_FALLBACK_MODELS` empty when you want to verify that only Claude Sonnet 4.6 is being used.
 
 AI is used only for split detection in the normal processing path. The app does not classify split PDFs or spend API calls assigning document categories.
 

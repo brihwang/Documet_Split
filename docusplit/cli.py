@@ -7,7 +7,10 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
+from .classifier import get_llm_gateway_usage, reset_llm_gateway_usage
 from .config import load_settings
+from .evaluate_synthetic_splits import evaluate as evaluate_synthetic_splits
+from .evaluate_synthetic_splits import print_report as print_synthetic_accuracy_report
 from .organizer import move_to_processed, process_file
 
 
@@ -51,9 +54,21 @@ def policy_ai(
     processed_dir: Path = typer.Option(Path("processed"), "--processed"),
     errors_dir: Path = typer.Option(Path("errors"), "--errors"),
     form_lookup: Path = typer.Option(Path("form_lookup.json"), "--form-lookup", help="Policy-code lookup JSON."),
+    manifest: Path | None = typer.Option(None, "--manifest", help="Synthetic dataset manifest for accuracy reporting."),
+    manifest_case: str = typer.Option("mixed_coded_uncoded", "--manifest-case", help="Manifest case to evaluate."),
 ) -> None:
     """Split with inbox raw JSON policy codes, then AI for uncoded pages."""
-    process_policy_first(input_dir, output_dir, config, processed_dir, errors_dir, form_lookup, use_ai=True)
+    process_policy_first(
+        input_dir,
+        output_dir,
+        config,
+        processed_dir,
+        errors_dir,
+        form_lookup,
+        use_ai=True,
+        manifest=manifest,
+        manifest_case=manifest_case,
+    )
 
 
 @app.command()
@@ -64,9 +79,21 @@ def policy_rules(
     processed_dir: Path = typer.Option(Path("processed"), "--processed"),
     errors_dir: Path = typer.Option(Path("errors"), "--errors"),
     form_lookup: Path = typer.Option(Path("form_lookup.json"), "--form-lookup", help="Policy-code lookup JSON."),
+    manifest: Path | None = typer.Option(None, "--manifest", help="Synthetic dataset manifest for accuracy reporting."),
+    manifest_case: str = typer.Option("mixed_coded_uncoded", "--manifest-case", help="Manifest case to evaluate."),
 ) -> None:
     """Split with inbox raw JSON policy codes, then local rules for uncoded pages."""
-    process_policy_first(input_dir, output_dir, config, processed_dir, errors_dir, form_lookup, use_ai=False)
+    process_policy_first(
+        input_dir,
+        output_dir,
+        config,
+        processed_dir,
+        errors_dir,
+        form_lookup,
+        use_ai=False,
+        manifest=manifest,
+        manifest_case=manifest_case,
+    )
 
 
 def process_policy_first(
@@ -77,8 +104,11 @@ def process_policy_first(
     errors_dir: Path,
     form_lookup: Path,
     use_ai: bool,
+    manifest: Path | None = None,
+    manifest_case: str = "mixed_coded_uncoded",
 ) -> None:
     load_env_file()
+    reset_llm_gateway_usage()
     settings = load_settings(config)
     output_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
@@ -86,7 +116,11 @@ def process_policy_first(
     if not form_lookup.exists():
         raise typer.BadParameter(f"Policy-code lookup does not exist: {form_lookup}")
 
-    files = [path for path in sorted(input_dir.iterdir()) if path.is_file() and path.name != ".gitkeep"]
+    files = [
+        path
+        for path in sorted(input_dir.iterdir())
+        if path.is_file() and path.name not in (".gitkeep", "manifest.json")
+    ]
     if not files:
         console.print("No input files found.")
         return
@@ -113,6 +147,8 @@ def process_policy_first(
             console.print(f"[red]Failed:[/] {file_path} -> {target}: {exc}")
 
     print_outputs(all_outputs)
+    print_llm_gateway_usage()
+    print_manifest_accuracy(input_dir, output_dir, manifest, manifest_case)
 
 
 def print_outputs(outputs) -> None:
@@ -143,3 +179,64 @@ def read_sidecar_metadata(path: Path) -> dict:
         return metadata if isinstance(metadata, dict) else {}
     except Exception:
         return {}
+
+
+def print_llm_gateway_usage() -> None:
+    usage_by_model = get_llm_gateway_usage()
+    if not usage_by_model:
+        return
+
+    table = Table(title="LLM Gateway Usage This Run")
+    table.add_column("Model")
+    table.add_column("Requests", justify="right")
+    table.add_column("Prompt Tokens", justify="right")
+    table.add_column("Completion Tokens", justify="right")
+    table.add_column("Total Tokens", justify="right")
+
+    totals = {"requests": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+    for model, usage in sorted(usage_by_model.items()):
+        for field in totals:
+            totals[field] += usage.get(field, 0)
+        table.add_row(
+            model,
+            str(usage.get("requests", 0)),
+            str(usage.get("prompt_tokens", 0)),
+            str(usage.get("completion_tokens", 0)),
+            str(usage.get("total_tokens", 0)),
+        )
+
+    if len(usage_by_model) > 1:
+        table.add_row(
+            "Total",
+            str(totals["requests"]),
+            str(totals["prompt_tokens"]),
+            str(totals["completion_tokens"]),
+            str(totals["total_tokens"]),
+            style="bold",
+        )
+
+    console.print(table)
+
+
+def print_manifest_accuracy(
+    input_dir: Path,
+    output_dir: Path,
+    manifest: Path | None,
+    manifest_case: str,
+) -> None:
+    manifest_path = resolve_manifest_path(input_dir, manifest)
+    if manifest_path is None:
+        return
+    try:
+        report = evaluate_synthetic_splits(manifest_path, output_dir, manifest_case)
+    except Exception as exc:
+        console.print(f"[red]Accuracy report failed:[/] {exc}")
+        return
+    print_synthetic_accuracy_report(report)
+
+
+def resolve_manifest_path(input_dir: Path, manifest: Path | None) -> Path | None:
+    if manifest is not None:
+        return manifest if manifest.exists() else None
+    candidate = input_dir / "manifest.json"
+    return candidate if candidate.exists() else None

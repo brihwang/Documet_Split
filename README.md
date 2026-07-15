@@ -10,6 +10,12 @@ python -m docusplit policy-ai --input inbox --output organized --config config.y
 python -m docusplit policy-rules --input inbox --output organized --config config.yaml
 ```
 
+For the synthetic case 3 JSON dataset, put the raw JSON files and `manifest.json` in `inbox/`; metrics print by default from the normal command:
+
+```bash
+python -m docusplit policy-ai --input inbox --output organized --config config.yaml
+```
+
 To try it, put PDFs and/or Textract raw JSON files in `inbox/`, run one of the policy-first commands, then check `organized/`. PDF inputs produce split PDFs. Raw JSON inputs produce `*.split_plan.json` files that list the document page ranges, so you can compare the split points directly against a manifest. Successfully processed inputs are moved to `processed/`.
 
 The tool works without an API key using local rules. Multi-page PDFs are now treated as page-boundary problems, not just category-keyword problems: the local splitter compares page titles, field labels, visible page numbering, repeated document markers, content continuity, formatting consistency, logical end cues, and structural changes such as tables or key-value blocks. When AI is configured, `policy-ai` can decide split ranges for pages that do not have policy codes, with the local splitter as a fallback. Use `policy-rules` to bypass AI for uncoded pages.
@@ -22,6 +28,8 @@ For AI setup, see `AI_OPTIONS.md`. The short version:
 
 - `AI_PROVIDER=rules`: no AI.
 - `AI_PROVIDER=llmgateway`: one gateway integration for all AI providers/models.
+
+The default LLM Gateway model is `claude-sonnet-4.6`. To force only that model, set `LLM_GATEWAY_MODEL=claude-sonnet-4.6` and leave `LLM_GATEWAY_FALLBACK_MODELS` empty.
 
 ## Folder Flow
 

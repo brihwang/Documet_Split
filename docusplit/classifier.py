@@ -11,9 +11,11 @@ from .models import DocumentCandidate, PageText
 LAST_AI_ERROR: str | None = None
 LAST_AI_MODEL: str | None = None
 LAST_AI_SPLIT_METADATA: dict[str, object] = {}
+LLM_GATEWAY_USAGE: dict[str, dict[str, int]] = {}
 DEFAULT_MIN_AI_SPLIT_CONFIDENCE = 0.7
 DEFAULT_MAX_AI_OVER_SPLIT_RISK = 0.35
 DEFAULT_DENSE_SPLIT_MIN_CONFIDENCE = 0.98
+DEFAULT_LLM_GATEWAY_MODEL = "claude-sonnet-4.6"
 
 
 def set_last_ai_error(message: str | None) -> None:
@@ -41,6 +43,38 @@ def get_last_ai_model() -> str | None:
 
 def get_last_ai_split_metadata() -> dict[str, object]:
     return dict(LAST_AI_SPLIT_METADATA)
+
+
+def reset_llm_gateway_usage() -> None:
+    global LLM_GATEWAY_USAGE
+    LLM_GATEWAY_USAGE = {}
+
+
+def get_llm_gateway_usage() -> dict[str, dict[str, int]]:
+    return {model: dict(usage) for model, usage in LLM_GATEWAY_USAGE.items()}
+
+
+def llm_gateway_usage_stats(model: str) -> dict[str, int]:
+    return LLM_GATEWAY_USAGE.setdefault(
+        model,
+        {"requests": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+    )
+
+
+def record_llm_gateway_request(model: str) -> None:
+    llm_gateway_usage_stats(model)["requests"] += 1
+
+
+def record_llm_gateway_usage(model: str, response: Any) -> None:
+    usage = getattr(response, "usage", None)
+    stats = llm_gateway_usage_stats(model)
+    if usage is None:
+        return
+
+    for field in ("prompt_tokens", "completion_tokens", "total_tokens"):
+        value = getattr(usage, field, None)
+        if isinstance(value, int):
+            stats[field] += value
 
 
 def ai_split_is_configured() -> bool:
@@ -101,14 +135,16 @@ def complete_with_llm_gateway(prompt: str, model: str | None = None) -> str | No
         return None
 
     base_url = os.environ.get("LLM_GATEWAY_BASE_URL", "https://api.llmgateway.io/v1")
-    model = model or os.environ.get("LLM_GATEWAY_MODEL", "openai/gpt-4o-mini")
+    model = model
     try:
         client = OpenAI(api_key=api_key, base_url=base_url)
+        record_llm_gateway_request(model)
         response = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": prompt}],
             temperature=0,
         )
+        record_llm_gateway_usage(model, response)
         return response.choices[0].message.content or ""
     except Exception as exc:
         set_last_ai_error(f"{model}: LLM Gateway request failed: {exc}")
@@ -116,7 +152,7 @@ def complete_with_llm_gateway(prompt: str, model: str | None = None) -> str | No
 
 
 def llm_gateway_models() -> list[str]:
-    primary = os.environ.get("LLM_GATEWAY_MODEL", "openai/gpt-4o-mini")
+    primary = os.environ.get("LLM_GATEWAY_MODEL", DEFAULT_LLM_GATEWAY_MODEL)
     fallbacks = os.environ.get("LLM_GATEWAY_FALLBACK_MODELS", "")
     models = [primary, *fallbacks.split(",")]
     cleaned = []

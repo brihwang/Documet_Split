@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import copy
 import json
 import shutil
 from pathlib import Path
+from typing import Any
 
 from PyPDF2 import PdfReader, PdfWriter
 
@@ -210,7 +212,10 @@ def write_split_plan(
     candidates: list[DocumentCandidate],
     metadata: dict[str, object],
     output_root: Path,
+    document_outputs: list[Path] | None = None,
 ) -> Path:
+    if document_outputs is not None and len(document_outputs) != len(candidates):
+        raise ValueError("document_outputs must match the number of candidates")
     output_root.mkdir(parents=True, exist_ok=True)
     target = unique_path(output_root / f"{source.stem}.split_plan.json")
     payload = {
@@ -223,12 +228,123 @@ def write_split_plan(
                 "start_page": candidate.start_page,
                 "end_page": candidate.end_page,
                 "page_range": [candidate.start_page, candidate.end_page],
+                **(
+                    {"output_file": str(document_outputs[index - 1])}
+                    if document_outputs is not None
+                    else {}
+                ),
             }
             for index, candidate in enumerate(candidates, start=1)
         ],
     }
     target.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     return target
+
+
+def write_split_textract_json(
+    source: Path,
+    candidates: list[DocumentCandidate],
+    document_types: list[str],
+    output_root: Path,
+) -> list[Path]:
+    """Write one self-contained Textract-style JSON response per candidate."""
+    if len(document_types) != len(candidates):
+        raise ValueError("document_types must match the number of candidates")
+
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or not isinstance(payload.get("Blocks"), list):
+        raise ValueError(f"Raw JSON must contain a Blocks list: {source}")
+
+    packet_name = textract_packet_name(source)
+    packet_dir = output_root / packet_name
+    packet_dir.mkdir(parents=True, exist_ok=True)
+    outputs: list[Path] = []
+    for index, (candidate, document_type) in enumerate(
+        zip(candidates, document_types, strict=True), start=1
+    ):
+        split_payload = split_textract_payload(
+            payload, candidate.start_page, candidate.end_page
+        )
+        category = sanitize_part(document_type.lower(), "other")
+        filename = (
+            f"document_{index:03d}_{category}."
+            f"pages_{candidate.start_page}-{candidate.end_page}.json"
+        )
+        target = unique_path(packet_dir / filename)
+        target.write_text(
+            json.dumps(split_payload, indent=2, sort_keys=True), encoding="utf-8"
+        )
+        outputs.append(target)
+    return outputs
+
+
+def split_textract_payload(
+    payload: dict[str, Any], start_page: int, end_page: int
+) -> dict[str, Any]:
+    """Select and locally renumber a page range from a Textract response."""
+    if start_page < 1 or end_page < start_page:
+        raise ValueError("Invalid Textract page range")
+    blocks = payload.get("Blocks")
+    if not isinstance(blocks, list):
+        raise ValueError("Textract payload must contain a Blocks list")
+
+    selected: list[dict[str, Any]] = []
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        page = block.get("Page")
+        if isinstance(page, int) and start_page <= page <= end_page:
+            item = copy.deepcopy(block)
+            item["Page"] = page - start_page + 1
+            selected.append(item)
+
+    retained_ids = {
+        block["Id"]
+        for block in selected
+        if isinstance(block.get("Id"), str)
+    }
+    for block in selected:
+        relationships = block.get("Relationships")
+        if not isinstance(relationships, list):
+            continue
+        cleaned_relationships: list[dict[str, Any]] = []
+        for relationship in relationships:
+            if not isinstance(relationship, dict):
+                continue
+            item = copy.deepcopy(relationship)
+            ids = item.get("Ids")
+            if isinstance(ids, list):
+                item["Ids"] = [
+                    value
+                    for value in ids
+                    if isinstance(value, str) and value in retained_ids
+                ]
+                if not item["Ids"]:
+                    continue
+            cleaned_relationships.append(item)
+        if cleaned_relationships:
+            block["Relationships"] = cleaned_relationships
+        else:
+            block.pop("Relationships", None)
+
+    result = copy.deepcopy(payload)
+    result["Blocks"] = selected
+    metadata = result.get("DocumentMetadata")
+    if not isinstance(metadata, dict):
+        metadata = {}
+    metadata["Pages"] = end_page - start_page + 1
+    result["DocumentMetadata"] = metadata
+    result.pop("NextToken", None)
+    return result
+
+
+def textract_packet_name(source: Path) -> str:
+    name = source.name
+    for suffix in (".raw.json", "_raw.json", ".json"):
+        if name.lower().endswith(suffix):
+            name = name[: -len(suffix)]
+            break
+    return sanitize_part(name, "packet")
 
 
 def move_to_processed(path: Path, processed_root: Path) -> Path:

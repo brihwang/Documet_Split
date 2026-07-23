@@ -1,0 +1,89 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 2,
+      "output_file": "aws_test_results/packet_02/document_001_bank_statement.pages_1-2.json",
+      "page_range": [
+        1,
+        2
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 4,
+      "output_file": "aws_test_results/packet_02/document_002_bank_statement.pages_3-4.json",
+      "page_range": [
+        3,
+        4
+      ],
+      "start_page": 3
+    },
+    {
+      "document_index": 3,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_02/document_003_utility_bill.pages_5-6.json",
+      "page_range": [
+        5,
+        6
+      ],
+      "start_page": 5
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 4742,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 436,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical elements of a bank statement such as 'MONTHLY BANK STATEMENT', account number, statement period, beginning and ending balances, and page numbering, indicating the start of a new document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the transaction activity from the previous page and is part of the same account statement as indicated by the consistent account number and reference code."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "start",
+        "page": 3,
+        "reason": "The target page has a new account number (ending 2726 instead of 1726), a new statement period, and a new reference number (0202726 instead of 0201726), indicating the start of a new bank statement."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 4,
+        "reason": "The target page continues the transaction activity from the previous bank statement page, indicated by the same account number and the 'continued' notation."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Utility Bill",
+        "document_boundary": "start",
+        "page": 5,
+        "reason": "The target page contains a new utility bill with a different account number and billing details, indicating the start of a new document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Utility Bill",
+        "document_boundary": "continue",
+        "page": 6,
+        "reason": "The target page continues the utility bill from the previous page, indicated by the continued account number, reference, and page numbering."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_02.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_02.raw.json"
+}

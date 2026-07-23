@@ -1,0 +1,99 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 1,
+      "output_file": "aws_test_results/packet_09/document_001_receipt.pages_1-1.json",
+      "page_range": [
+        1,
+        1
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 2,
+      "output_file": "aws_test_results/packet_09/document_002_receipt.pages_2-2.json",
+      "page_range": [
+        2,
+        2
+      ],
+      "start_page": 2
+    },
+    {
+      "document_index": 3,
+      "end_page": 4,
+      "output_file": "aws_test_results/packet_09/document_003_invoice.pages_3-4.json",
+      "page_range": [
+        3,
+        4
+      ],
+      "start_page": 3
+    },
+    {
+      "document_index": 4,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_09/document_004_contract.pages_5-6.json",
+      "page_range": [
+        5,
+        6
+      ],
+      "start_page": 5
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 4,
+    "input_tokens": 4652,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 443,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Receipt",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical receipt elements such as 'PAYMENT RECEIPT', 'Transaction ID', 'Paid', 'Subtotal', 'Tax', 'Total', and 'Reference'. It also indicates 'Page 1 of 1', suggesting it is a standalone document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Receipt",
+        "document_boundary": "start",
+        "page": 2,
+        "reason": "The target page has a different Transaction ID and Reference number compared to the previous page, indicating it is a new receipt."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "start",
+        "page": 3,
+        "reason": "The target page introduces a new invoice with a distinct invoice number and details, separate from the preceding payment receipt."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "continue",
+        "page": 4,
+        "reason": "The target page continues the invoice with the same invoice number and includes details of the services provided, consistent with the context before."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "start",
+        "page": 5,
+        "reason": "The target page introduces a new 'SERVICES AGREEMENT' with a distinct contract number and effective date, indicating the start of a new logical document of type Contract."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "continue",
+        "page": 6,
+        "reason": "The target page continues the 'Services Agreement' with a consistent contract number (CTR-0904726), includes section details, and has the same reference number and page numbering (Page 2 of 2), indicating it is a continuation of the prior document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_09.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_09.raw.json"
+}

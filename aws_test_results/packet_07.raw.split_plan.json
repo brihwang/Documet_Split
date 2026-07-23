@@ -1,0 +1,96 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 3,
+      "output_file": "aws_test_results/packet_07/document_001_medical_record.pages_1-3.json",
+      "page_range": [
+        1,
+        3
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 5,
+      "output_file": "aws_test_results/packet_07/document_002_insurance_policy.pages_4-5.json",
+      "page_range": [
+        4,
+        5
+      ],
+      "start_page": 4
+    },
+    {
+      "document_index": 3,
+      "end_page": 7,
+      "output_file": "aws_test_results/packet_07/document_003_tax_form.pages_6-7.json",
+      "page_range": [
+        6,
+        7
+      ],
+      "start_page": 6
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 5445,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 575,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains a title 'MEDICAL VISIT SUMMARY', a medical record number, patient information, and visit details, which are indicative of the start of a new medical record document. Additionally, the presence of 'Page 1 of 3' suggests it is the beginning of a multi-page document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the medical record with consistent Medical Record Number, patient information, and reference number. It is marked as 'Page 2 of 3', indicating it is part of a multi-page document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "continue",
+        "page": 3,
+        "reason": "The target page continues the medical record with the same MRN and is marked as 'END OF DOCUMENT', indicating it is the final page of the current document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "start",
+        "page": 4,
+        "reason": "The target page introduces a new document type 'Insurance Policy' with a distinct policy number and details, separate from the previous 'Medical Record' document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "continue",
+        "page": 5,
+        "reason": "The target page continues the Homeowners Insurance Policy started on the previous page, as indicated by the continued policy number and the 'END OF DOCUMENT' notation."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "start",
+        "page": 6,
+        "reason": "The target page is a Form W-2, which is a distinct document type from the preceding Insurance Policy. It contains unique identifiers such as 'Employer Identification Number' and details specific to tax statements."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "continue",
+        "page": 7,
+        "reason": "The target page continues the Form W-2 with details such as state wages and state income tax, and it references the same Employer Identification Number (EIN) 31-0703726 as the previous page. Additionally, it is marked as Page 2 of 2, indicating it is a continuation of the same document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_07.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_07.raw.json"
+}

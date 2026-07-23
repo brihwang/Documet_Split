@@ -1,0 +1,89 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 3,
+      "output_file": "aws_test_results/packet_04/document_001_insurance_policy.pages_1-3.json",
+      "page_range": [
+        1,
+        3
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 5,
+      "output_file": "aws_test_results/packet_04/document_002_medical_record.pages_4-5.json",
+      "page_range": [
+        4,
+        5
+      ],
+      "start_page": 4
+    },
+    {
+      "document_index": 3,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_04/document_003_invoice.pages_6-6.json",
+      "page_range": [
+        6,
+        6
+      ],
+      "start_page": 6
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 4602,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 443,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains key elements of an insurance policy such as 'HOMEOWNERS INSURANCE POLICY DECLARATIONS', 'Policy Number', 'Named Insured', 'Policy Period', and 'Annual Premium'. These elements indicate the beginning of a new insurance policy document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the coverage details of the Homeowners Insurance Policy started on the previous page, indicated by 'Insurance Policy HOP-0401726 continued' and consistent policy reference number."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "continue",
+        "page": 3,
+        "reason": "The target page continues the coverage details from the previous page and is marked as 'END OF DOCUMENT', indicating it is the final page of the current insurance policy document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "start",
+        "page": 4,
+        "reason": "The target page introduces a new Medical Record with a different reference number and content type, distinct from the preceding Insurance Policy document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "continue",
+        "page": 5,
+        "reason": "The target page continues the medical record with physician notes and prescription details, indicated by the continued reference number and page numbering."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "start",
+        "page": 6,
+        "reason": "The target page contains a distinct invoice number, bill to information, invoice date, payment terms, and amount due, indicating the start of a new invoice document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_04.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_04.raw.json"
+}

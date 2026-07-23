@@ -1,0 +1,4401 @@
+{
+  "Blocks": [
+    {
+      "BlockType": "PAGE",
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 1.0,
+          "Left": 0.0,
+          "Top": 0.0,
+          "Width": 1.0
+        },
+        "Polygon": [
+          {
+            "X": 0.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 1.0
+          },
+          {
+            "X": 0.0,
+            "Y": 1.0
+          }
+        ]
+      },
+      "Id": "4ba43cb8-2049-57ff-9e17-6a14c566a7ac",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "01db6968-8515-5e0c-a6a8-1815b21bf101",
+            "8feef362-29d2-510b-922b-d418119fc99a",
+            "7c950988-93be-582e-b0ca-f42d70840bd3",
+            "f5789528-0303-5f61-bb73-29f694f56311",
+            "9f9e2e42-d1e1-5116-af1b-18293f8f30b5",
+            "fcfa3aaa-2bbc-5d99-b95b-e04e3891510c"
+          ],
+          "Type": "CHILD"
+        }
+      ]
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.06
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.086
+          },
+          {
+            "X": 0.06,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "9a283bee-d51a-58c3-985c-c405b4352eba",
+      "Page": 1,
+      "Text": "SERVICES",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.06,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.06
+          },
+          {
+            "X": 0.3,
+            "Y": 0.06
+          },
+          {
+            "X": 0.3,
+            "Y": 0.086
+          },
+          {
+            "X": 0.18,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "d73a4981-3afb-58af-8eca-a27b0124e681",
+      "Page": 1,
+      "Text": "AGREEMENT",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.092
+          },
+          {
+            "X": 0.06,
+            "Y": 0.092
+          }
+        ]
+      },
+      "Id": "01db6968-8515-5e0c-a6a8-1815b21bf101",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "9a283bee-d51a-58c3-985c-c405b4352eba",
+            "d73a4981-3afb-58af-8eca-a27b0124e681"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "SERVICES AGREEMENT"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.155
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.181
+          },
+          {
+            "X": 0.06,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "6bbfb82d-5bd5-5124-ae37-faedd4f20e0d",
+      "Page": 1,
+      "Text": "Contract",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.155,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.155
+          },
+          {
+            "X": 0.264,
+            "Y": 0.155
+          },
+          {
+            "X": 0.264,
+            "Y": 0.181
+          },
+          {
+            "X": 0.18,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "2ba62b1f-a49a-55e1-b117-1ffe7abfe575",
+      "Page": 1,
+      "Text": "Number",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.276,
+          "Top": 0.155,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.276,
+            "Y": 0.155
+          },
+          {
+            "X": 0.42000000000000004,
+            "Y": 0.155
+          },
+          {
+            "X": 0.42000000000000004,
+            "Y": 0.181
+          },
+          {
+            "X": 0.276,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "74d7f490-c7eb-52c5-9eac-cd1e26129bb9",
+      "Page": 1,
+      "Text": "CTR-1601726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.187
+          },
+          {
+            "X": 0.06,
+            "Y": 0.187
+          }
+        ]
+      },
+      "Id": "8feef362-29d2-510b-922b-d418119fc99a",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "6bbfb82d-5bd5-5124-ae37-faedd4f20e0d",
+            "2ba62b1f-a49a-55e1-b117-1ffe7abfe575",
+            "74d7f490-c7eb-52c5-9eac-cd1e26129bb9"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Contract Number CTR-1601726"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.18,
+            "Y": 0.25
+          },
+          {
+            "X": 0.18,
+            "Y": 0.276
+          },
+          {
+            "X": 0.06,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "96f164ae-a8b0-5aa1-a977-037afd04ef9a",
+      "Page": 1,
+      "Text": "Effective",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.192,
+          "Top": 0.25,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.192,
+            "Y": 0.25
+          },
+          {
+            "X": 0.264,
+            "Y": 0.25
+          },
+          {
+            "X": 0.264,
+            "Y": 0.276
+          },
+          {
+            "X": 0.192,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "5a6abd27-9bf2-5484-a9d2-0572af0998f8",
+      "Page": 1,
+      "Text": "Date:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.276,
+          "Top": 0.25,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.276,
+            "Y": 0.25
+          },
+          {
+            "X": 0.336,
+            "Y": 0.25
+          },
+          {
+            "X": 0.336,
+            "Y": 0.276
+          },
+          {
+            "X": 0.276,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "aa8b99a4-0ead-5c26-8d2f-eafab554e4eb",
+      "Page": 1,
+      "Text": "July",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.348,
+          "Top": 0.25,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.348,
+            "Y": 0.25
+          },
+          {
+            "X": 0.38399999999999995,
+            "Y": 0.25
+          },
+          {
+            "X": 0.38399999999999995,
+            "Y": 0.276
+          },
+          {
+            "X": 0.348,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "eb66536e-a0ee-5e93-8f78-80a469b54dbc",
+      "Page": 1,
+      "Text": "1,",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.396,
+          "Top": 0.25,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.396,
+            "Y": 0.25
+          },
+          {
+            "X": 0.456,
+            "Y": 0.25
+          },
+          {
+            "X": 0.456,
+            "Y": 0.276
+          },
+          {
+            "X": 0.396,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "d7d654da-b06b-50ec-b9c2-5ee45463b28a",
+      "Page": 1,
+      "Text": "2026",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.28200000000000003
+          },
+          {
+            "X": 0.06,
+            "Y": 0.28200000000000003
+          }
+        ]
+      },
+      "Id": "7c950988-93be-582e-b0ca-f42d70840bd3",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "96f164ae-a8b0-5aa1-a977-037afd04ef9a",
+            "5a6abd27-9bf2-5484-a9d2-0572af0998f8",
+            "aa8b99a4-0ead-5c26-8d2f-eafab554e4eb",
+            "eb66536e-a0ee-5e93-8f78-80a469b54dbc",
+            "d7d654da-b06b-50ec-b9c2-5ee45463b28a"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Effective Date: July 1, 2026"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.345
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.371
+          },
+          {
+            "X": 0.06,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "c4fcf179-3992-5861-a6bd-71ad68ee531e",
+      "Page": 1,
+      "Text": "Parties:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.345,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.345
+          },
+          {
+            "X": 0.3,
+            "Y": 0.345
+          },
+          {
+            "X": 0.3,
+            "Y": 0.371
+          },
+          {
+            "X": 0.18,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "011e3b73-4585-5949-8750-b25073351b26",
+      "Page": 1,
+      "Text": "Northwind",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.312,
+          "Top": 0.345,
+          "Width": 0.132
+        },
+        "Polygon": [
+          {
+            "X": 0.312,
+            "Y": 0.345
+          },
+          {
+            "X": 0.444,
+            "Y": 0.345
+          },
+          {
+            "X": 0.444,
+            "Y": 0.371
+          },
+          {
+            "X": 0.312,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "d751c359-f25f-5f33-a070-d16130d6d44b",
+      "Page": 1,
+      "Text": "Operations",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.456,
+          "Top": 0.345,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.456,
+            "Y": 0.345
+          },
+          {
+            "X": 0.504,
+            "Y": 0.345
+          },
+          {
+            "X": 0.504,
+            "Y": 0.371
+          },
+          {
+            "X": 0.456,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "48393741-8689-5927-b36b-b68a92d50dee",
+      "Page": 1,
+      "Text": "and",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.516,
+          "Top": 0.345,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.516,
+            "Y": 0.345
+          },
+          {
+            "X": 0.588,
+            "Y": 0.345
+          },
+          {
+            "X": 0.588,
+            "Y": 0.371
+          },
+          {
+            "X": 0.516,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "bab0bc22-207f-5d7d-877a-0788016c96be",
+      "Page": 1,
+      "Text": "Cedar",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.6,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.6,
+            "Y": 0.345
+          },
+          {
+            "X": 0.6839999999999999,
+            "Y": 0.345
+          },
+          {
+            "X": 0.6839999999999999,
+            "Y": 0.371
+          },
+          {
+            "X": 0.6,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "7d9ff85f-aaee-516e-a275-c31546b16619",
+      "Page": 1,
+      "Text": "Valley",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.696,
+          "Top": 0.345,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.696,
+            "Y": 0.345
+          },
+          {
+            "X": 0.8039999999999999,
+            "Y": 0.345
+          },
+          {
+            "X": 0.8039999999999999,
+            "Y": 0.371
+          },
+          {
+            "X": 0.696,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "5382a9f2-71c4-5e93-ab79-25b2ac12db21",
+      "Page": 1,
+      "Text": "Services",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.377
+          },
+          {
+            "X": 0.06,
+            "Y": 0.377
+          }
+        ]
+      },
+      "Id": "f5789528-0303-5f61-bb73-29f694f56311",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "c4fcf179-3992-5861-a6bd-71ad68ee531e",
+            "011e3b73-4585-5949-8750-b25073351b26",
+            "d751c359-f25f-5f33-a070-d16130d6d44b",
+            "48393741-8689-5927-b36b-b68a92d50dee",
+            "bab0bc22-207f-5d7d-877a-0788016c96be",
+            "7d9ff85f-aaee-516e-a275-c31546b16619",
+            "5382a9f2-71c4-5e93-ab79-25b2ac12db21"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Parties: Northwind Operations and Cedar Valley Services"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.132,
+            "Y": 0.44
+          },
+          {
+            "X": 0.132,
+            "Y": 0.466
+          },
+          {
+            "X": 0.06,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "f4f67744-4270-579d-8d87-5042e5ca5553",
+      "Page": 1,
+      "Text": "Terms",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.144,
+          "Top": 0.44,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.144,
+            "Y": 0.44
+          },
+          {
+            "X": 0.192,
+            "Y": 0.44
+          },
+          {
+            "X": 0.192,
+            "Y": 0.466
+          },
+          {
+            "X": 0.144,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "e8c77145-4f4c-53c6-8da2-a3aefc8e512f",
+      "Page": 1,
+      "Text": "and",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.204,
+          "Top": 0.44,
+          "Width": 0.132
+        },
+        "Polygon": [
+          {
+            "X": 0.204,
+            "Y": 0.44
+          },
+          {
+            "X": 0.33599999999999997,
+            "Y": 0.44
+          },
+          {
+            "X": 0.33599999999999997,
+            "Y": 0.466
+          },
+          {
+            "X": 0.204,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "e4e55bbe-48e3-5763-a089-e2d9fc550a8e",
+      "Page": 1,
+      "Text": "Conditions",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.472
+          },
+          {
+            "X": 0.06,
+            "Y": 0.472
+          }
+        ]
+      },
+      "Id": "9f9e2e42-d1e1-5116-af1b-18293f8f30b5",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "f4f67744-4270-579d-8d87-5042e5ca5553",
+            "e8c77145-4f4c-53c6-8da2-a3aefc8e512f",
+            "e4e55bbe-48e3-5763-a089-e2d9fc550a8e"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Terms and Conditions"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.18,
+            "Y": 0.535
+          },
+          {
+            "X": 0.18,
+            "Y": 0.561
+          },
+          {
+            "X": 0.06,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "b2e6405f-edcc-5ee2-8eca-c3bb78855ad0",
+      "Page": 1,
+      "Text": "Reference",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.192,
+          "Top": 0.535,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.192,
+            "Y": 0.535
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.535
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.561
+          },
+          {
+            "X": 0.192,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "22674356-ab83-519d-8cd3-06767dcfbb19",
+      "Page": 1,
+      "Text": "1601726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.535,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.535
+          },
+          {
+            "X": 0.324,
+            "Y": 0.535
+          },
+          {
+            "X": 0.324,
+            "Y": 0.561
+          },
+          {
+            "X": 0.3,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "423990e1-5fb1-5669-bad7-60869bb0a8b2",
+      "Page": 1,
+      "Text": "|",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.336,
+          "Top": 0.535,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.336,
+            "Y": 0.535
+          },
+          {
+            "X": 0.396,
+            "Y": 0.535
+          },
+          {
+            "X": 0.396,
+            "Y": 0.561
+          },
+          {
+            "X": 0.336,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "77928dbc-15d0-5270-afb0-e672d7044f41",
+      "Page": 1,
+      "Text": "Page",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.535,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.535
+          },
+          {
+            "X": 0.432,
+            "Y": 0.535
+          },
+          {
+            "X": 0.432,
+            "Y": 0.561
+          },
+          {
+            "X": 0.408,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "4e4bace2-de65-5512-871a-eccd6be5456f",
+      "Page": 1,
+      "Text": "1",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.444,
+          "Top": 0.535,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.444,
+            "Y": 0.535
+          },
+          {
+            "X": 0.48,
+            "Y": 0.535
+          },
+          {
+            "X": 0.48,
+            "Y": 0.561
+          },
+          {
+            "X": 0.444,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "65a8544c-cba0-54de-8811-415af98173a5",
+      "Page": 1,
+      "Text": "of",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.492,
+          "Top": 0.535,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.492,
+            "Y": 0.535
+          },
+          {
+            "X": 0.516,
+            "Y": 0.535
+          },
+          {
+            "X": 0.516,
+            "Y": 0.561
+          },
+          {
+            "X": 0.492,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "f874b67c-1c51-5fa9-84ec-fde4803d339c",
+      "Page": 1,
+      "Text": "3",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.5670000000000001
+          },
+          {
+            "X": 0.06,
+            "Y": 0.5670000000000001
+          }
+        ]
+      },
+      "Id": "fcfa3aaa-2bbc-5d99-b95b-e04e3891510c",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "b2e6405f-edcc-5ee2-8eca-c3bb78855ad0",
+            "22674356-ab83-519d-8cd3-06767dcfbb19",
+            "423990e1-5fb1-5669-bad7-60869bb0a8b2",
+            "77928dbc-15d0-5270-afb0-e672d7044f41",
+            "4e4bace2-de65-5512-871a-eccd6be5456f",
+            "65a8544c-cba0-54de-8811-415af98173a5",
+            "f874b67c-1c51-5fa9-84ec-fde4803d339c"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Reference 1601726 | Page 1 of 3"
+    },
+    {
+      "BlockType": "PAGE",
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 1.0,
+          "Left": 0.0,
+          "Top": 0.0,
+          "Width": 1.0
+        },
+        "Polygon": [
+          {
+            "X": 0.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 1.0
+          },
+          {
+            "X": 0.0,
+            "Y": 1.0
+          }
+        ]
+      },
+      "Id": "7c81d501-bca8-548d-90c8-53b61a76a7da",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "402b7a8e-1de7-5401-bc3b-853db6a7ac76",
+            "2ddee920-7dd2-5827-8ca8-0c3243eef6af",
+            "3c425b78-2f0d-57c0-bfb9-2d537b2b9d84",
+            "b85c2431-2117-5e65-9ffa-74c6d5168ec2",
+            "e8b414ed-2e2e-5c65-ae3c-d9d6849cee8b",
+            "d9ed4c5a-b1ed-5dbf-8da9-6f6eecd769a1"
+          ],
+          "Type": "CHILD"
+        }
+      ]
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.06
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.086
+          },
+          {
+            "X": 0.06,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "aa087ba5-256e-5052-aa90-d12d9e1bde52",
+      "Page": 2,
+      "Text": "Services",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.06,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.06
+          },
+          {
+            "X": 0.3,
+            "Y": 0.06
+          },
+          {
+            "X": 0.3,
+            "Y": 0.086
+          },
+          {
+            "X": 0.18,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "3920a9be-6333-5fec-bab1-8bc5a9873dea",
+      "Page": 2,
+      "Text": "Agreement",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.312,
+          "Top": 0.06,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.312,
+            "Y": 0.06
+          },
+          {
+            "X": 0.45599999999999996,
+            "Y": 0.06
+          },
+          {
+            "X": 0.45599999999999996,
+            "Y": 0.086
+          },
+          {
+            "X": 0.312,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "d05ac914-68a7-5c62-8c07-e6e32ed68213",
+      "Page": 2,
+      "Text": "CTR-1601726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.468,
+          "Top": 0.06,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.468,
+            "Y": 0.06
+          },
+          {
+            "X": 0.5880000000000001,
+            "Y": 0.06
+          },
+          {
+            "X": 0.5880000000000001,
+            "Y": 0.086
+          },
+          {
+            "X": 0.468,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "ba65da56-a114-5ae1-9db3-21b8a9b9b6c7",
+      "Page": 2,
+      "Text": "continued",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.092
+          },
+          {
+            "X": 0.06,
+            "Y": 0.092
+          }
+        ]
+      },
+      "Id": "402b7a8e-1de7-5401-bc3b-853db6a7ac76",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "aa087ba5-256e-5052-aa90-d12d9e1bde52",
+            "3920a9be-6333-5fec-bab1-8bc5a9873dea",
+            "d05ac914-68a7-5c62-8c07-e6e32ed68213",
+            "ba65da56-a114-5ae1-9db3-21b8a9b9b6c7"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Services Agreement CTR-1601726 continued"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.156,
+            "Y": 0.155
+          },
+          {
+            "X": 0.156,
+            "Y": 0.181
+          },
+          {
+            "X": 0.06,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "dd24fa06-4020-50bf-bf74-e308f16e4ac5",
+      "Page": 2,
+      "Text": "Section",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.168,
+          "Top": 0.155,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.168,
+            "Y": 0.155
+          },
+          {
+            "X": 0.20400000000000001,
+            "Y": 0.155
+          },
+          {
+            "X": 0.20400000000000001,
+            "Y": 0.181
+          },
+          {
+            "X": 0.168,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "aefc31e3-dec9-512e-ac82-fc110e7776f7",
+      "Page": 2,
+      "Text": "2.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.216,
+          "Top": 0.155,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.216,
+            "Y": 0.155
+          },
+          {
+            "X": 0.3,
+            "Y": 0.155
+          },
+          {
+            "X": 0.3,
+            "Y": 0.181
+          },
+          {
+            "X": 0.216,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "b28053c6-ded7-55a6-8e57-d946cdc1f557",
+      "Page": 2,
+      "Text": "Scope,",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.312,
+          "Top": 0.155,
+          "Width": 0.2
+        },
+        "Polygon": [
+          {
+            "X": 0.312,
+            "Y": 0.155
+          },
+          {
+            "X": 0.512,
+            "Y": 0.155
+          },
+          {
+            "X": 0.512,
+            "Y": 0.181
+          },
+          {
+            "X": 0.312,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "4f82b81a-9aea-55ec-8f14-555e9e9f4b7d",
+      "Page": 2,
+      "Text": "responsibilities,",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.524,
+          "Top": 0.155,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.524,
+            "Y": 0.155
+          },
+          {
+            "X": 0.5720000000000001,
+            "Y": 0.155
+          },
+          {
+            "X": 0.5720000000000001,
+            "Y": 0.181
+          },
+          {
+            "X": 0.524,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "b57d975f-43dc-5a7c-a666-6d260cf4b306",
+      "Page": 2,
+      "Text": "and",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.584,
+          "Top": 0.155,
+          "Width": 0.156
+        },
+        "Polygon": [
+          {
+            "X": 0.584,
+            "Y": 0.155
+          },
+          {
+            "X": 0.74,
+            "Y": 0.155
+          },
+          {
+            "X": 0.74,
+            "Y": 0.181
+          },
+          {
+            "X": 0.584,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "e2e5bbc9-382a-5bac-a54f-63a517ca6f86",
+      "Page": 2,
+      "Text": "deliverables",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.187
+          },
+          {
+            "X": 0.06,
+            "Y": 0.187
+          }
+        ]
+      },
+      "Id": "2ddee920-7dd2-5827-8ca8-0c3243eef6af",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "dd24fa06-4020-50bf-bf74-e308f16e4ac5",
+            "aefc31e3-dec9-512e-ac82-fc110e7776f7",
+            "b28053c6-ded7-55a6-8e57-d946cdc1f557",
+            "4f82b81a-9aea-55ec-8f14-555e9e9f4b7d",
+            "b57d975f-43dc-5a7c-a666-6d260cf4b306",
+            "e2e5bbc9-382a-5bac-a54f-63a517ca6f86"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Section 2. Scope, responsibilities, and deliverables"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.192
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.252,
+            "Y": 0.25
+          },
+          {
+            "X": 0.252,
+            "Y": 0.276
+          },
+          {
+            "X": 0.06,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "b4d7855c-b390-5fc5-92d3-2a545151437f",
+      "Page": 2,
+      "Text": "Confidentiality",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.264,
+          "Top": 0.25,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.264,
+            "Y": 0.25
+          },
+          {
+            "X": 0.40800000000000003,
+            "Y": 0.25
+          },
+          {
+            "X": 0.40800000000000003,
+            "Y": 0.276
+          },
+          {
+            "X": 0.264,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "658138b2-265b-505e-8986-77a6d70af262",
+      "Page": 2,
+      "Text": "obligations",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.42,
+          "Top": 0.25,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.42,
+            "Y": 0.25
+          },
+          {
+            "X": 0.516,
+            "Y": 0.25
+          },
+          {
+            "X": 0.516,
+            "Y": 0.276
+          },
+          {
+            "X": 0.42,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "307cbfb0-2020-589f-8860-6036236f6d8d",
+      "Page": 2,
+      "Text": "survive",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.528,
+          "Top": 0.25,
+          "Width": 0.156
+        },
+        "Polygon": [
+          {
+            "X": 0.528,
+            "Y": 0.25
+          },
+          {
+            "X": 0.684,
+            "Y": 0.25
+          },
+          {
+            "X": 0.684,
+            "Y": 0.276
+          },
+          {
+            "X": 0.528,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "fede3455-da78-5825-b89e-b68e1b1c3665",
+      "Page": 2,
+      "Text": "termination.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.28200000000000003
+          },
+          {
+            "X": 0.06,
+            "Y": 0.28200000000000003
+          }
+        ]
+      },
+      "Id": "3c425b78-2f0d-57c0-bfb9-2d537b2b9d84",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "b4d7855c-b390-5fc5-92d3-2a545151437f",
+            "658138b2-265b-505e-8986-77a6d70af262",
+            "307cbfb0-2020-589f-8860-6036236f6d8d",
+            "fede3455-da78-5825-b89e-b68e1b1c3665"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Confidentiality obligations survive termination."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.14400000000000002,
+            "Y": 0.345
+          },
+          {
+            "X": 0.14400000000000002,
+            "Y": 0.371
+          },
+          {
+            "X": 0.06,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "8f80ff1d-c3b8-5811-80b5-d1380d484807",
+      "Page": 2,
+      "Text": "Either",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.156,
+          "Top": 0.345,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.156,
+            "Y": 0.345
+          },
+          {
+            "X": 0.22799999999999998,
+            "Y": 0.345
+          },
+          {
+            "X": 0.22799999999999998,
+            "Y": 0.371
+          },
+          {
+            "X": 0.156,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "369cf9ce-af23-5d4a-93db-a9b84550e5e4",
+      "Page": 2,
+      "Text": "party",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.24,
+          "Top": 0.345,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.24,
+            "Y": 0.345
+          },
+          {
+            "X": 0.288,
+            "Y": 0.345
+          },
+          {
+            "X": 0.288,
+            "Y": 0.371
+          },
+          {
+            "X": 0.24,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "69a94a71-e0df-529c-a6e4-7323fb9c7a81",
+      "Page": 2,
+      "Text": "may",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.345,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.345
+          },
+          {
+            "X": 0.42,
+            "Y": 0.345
+          },
+          {
+            "X": 0.42,
+            "Y": 0.371
+          },
+          {
+            "X": 0.3,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "3ed7fcde-6f5b-53c3-92c2-c147435cee6f",
+      "Page": 2,
+      "Text": "terminate",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.432,
+          "Top": 0.345,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.432,
+            "Y": 0.345
+          },
+          {
+            "X": 0.492,
+            "Y": 0.345
+          },
+          {
+            "X": 0.492,
+            "Y": 0.371
+          },
+          {
+            "X": 0.432,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "39b13c26-5c15-5384-86b7-0b921a917518",
+      "Page": 2,
+      "Text": "with",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.504,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.504,
+            "Y": 0.345
+          },
+          {
+            "X": 0.588,
+            "Y": 0.345
+          },
+          {
+            "X": 0.588,
+            "Y": 0.371
+          },
+          {
+            "X": 0.504,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "af6f9868-deb0-56c1-a55e-624425f27480",
+      "Page": 2,
+      "Text": "thirty",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.6,
+          "Top": 0.345,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.6,
+            "Y": 0.345
+          },
+          {
+            "X": 0.6599999999999999,
+            "Y": 0.345
+          },
+          {
+            "X": 0.6599999999999999,
+            "Y": 0.371
+          },
+          {
+            "X": 0.6,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "b2cd5764-3935-5403-bcf4-a2f20e92704f",
+      "Page": 2,
+      "Text": "days",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.672,
+          "Top": 0.345,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.672,
+            "Y": 0.345
+          },
+          {
+            "X": 0.768,
+            "Y": 0.345
+          },
+          {
+            "X": 0.768,
+            "Y": 0.371
+          },
+          {
+            "X": 0.672,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "8cd11a8c-c85d-5566-8e96-a8dbab3966d2",
+      "Page": 2,
+      "Text": "written",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.78,
+          "Top": 0.345,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.78,
+            "Y": 0.345
+          },
+          {
+            "X": 0.876,
+            "Y": 0.345
+          },
+          {
+            "X": 0.876,
+            "Y": 0.371
+          },
+          {
+            "X": 0.78,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "e5c74c57-d482-5e09-b2c6-0b4e8c7e9808",
+      "Page": 2,
+      "Text": "notice.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.377
+          },
+          {
+            "X": 0.06,
+            "Y": 0.377
+          }
+        ]
+      },
+      "Id": "b85c2431-2117-5e65-9ffa-74c6d5168ec2",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "8f80ff1d-c3b8-5811-80b5-d1380d484807",
+            "369cf9ce-af23-5d4a-93db-a9b84550e5e4",
+            "69a94a71-e0df-529c-a6e4-7323fb9c7a81",
+            "3ed7fcde-6f5b-53c3-92c2-c147435cee6f",
+            "39b13c26-5c15-5384-86b7-0b921a917518",
+            "af6f9868-deb0-56c1-a55e-624425f27480",
+            "b2cd5764-3935-5403-bcf4-a2f20e92704f",
+            "8cd11a8c-c85d-5566-8e96-a8dbab3966d2",
+            "e5c74c57-d482-5e09-b2c6-0b4e8c7e9808"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Either party may terminate with thirty days written notice."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.132
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.192,
+            "Y": 0.44
+          },
+          {
+            "X": 0.192,
+            "Y": 0.466
+          },
+          {
+            "X": 0.06,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "2ab6348c-3fda-5eee-970f-d7b4170975a7",
+      "Page": 2,
+      "Text": "Authorized",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.204,
+          "Top": 0.44,
+          "Width": 0.192
+        },
+        "Polygon": [
+          {
+            "X": 0.204,
+            "Y": 0.44
+          },
+          {
+            "X": 0.396,
+            "Y": 0.44
+          },
+          {
+            "X": 0.396,
+            "Y": 0.466
+          },
+          {
+            "X": 0.204,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "0ae15de6-0945-5aad-9968-141c78bf2996",
+      "Page": 2,
+      "Text": "representatives",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.44,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.44
+          },
+          {
+            "X": 0.5519999999999999,
+            "Y": 0.44
+          },
+          {
+            "X": 0.5519999999999999,
+            "Y": 0.466
+          },
+          {
+            "X": 0.408,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "d7b25d41-c475-5793-9ab6-ea15f0c8b761",
+      "Page": 2,
+      "Text": "acknowledge",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.564,
+          "Top": 0.44,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.564,
+            "Y": 0.44
+          },
+          {
+            "X": 0.6359999999999999,
+            "Y": 0.44
+          },
+          {
+            "X": 0.6359999999999999,
+            "Y": 0.466
+          },
+          {
+            "X": 0.564,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "1b19ce94-f960-53b0-ac63-9da1078de0a4",
+      "Page": 2,
+      "Text": "these",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.648,
+          "Top": 0.44,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.648,
+            "Y": 0.44
+          },
+          {
+            "X": 0.732,
+            "Y": 0.44
+          },
+          {
+            "X": 0.732,
+            "Y": 0.466
+          },
+          {
+            "X": 0.648,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "e0bbe122-f54e-5fe8-94b6-210dc12ebb0d",
+      "Page": 2,
+      "Text": "terms.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.472
+          },
+          {
+            "X": 0.06,
+            "Y": 0.472
+          }
+        ]
+      },
+      "Id": "e8b414ed-2e2e-5c65-ae3c-d9d6849cee8b",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "2ab6348c-3fda-5eee-970f-d7b4170975a7",
+            "0ae15de6-0945-5aad-9968-141c78bf2996",
+            "d7b25d41-c475-5793-9ab6-ea15f0c8b761",
+            "1b19ce94-f960-53b0-ac63-9da1078de0a4",
+            "e0bbe122-f54e-5fe8-94b6-210dc12ebb0d"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Authorized representatives acknowledge these terms."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.18,
+            "Y": 0.535
+          },
+          {
+            "X": 0.18,
+            "Y": 0.561
+          },
+          {
+            "X": 0.06,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "dce2110c-d775-5e2e-9241-ffa609dbb1c4",
+      "Page": 2,
+      "Text": "Reference",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.192,
+          "Top": 0.535,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.192,
+            "Y": 0.535
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.535
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.561
+          },
+          {
+            "X": 0.192,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "254f0961-242a-538b-b389-a4b97c25cef4",
+      "Page": 2,
+      "Text": "1601726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.535,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.535
+          },
+          {
+            "X": 0.324,
+            "Y": 0.535
+          },
+          {
+            "X": 0.324,
+            "Y": 0.561
+          },
+          {
+            "X": 0.3,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "8ccc5d07-d772-55b5-9c61-16b5fc576ba4",
+      "Page": 2,
+      "Text": "|",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.336,
+          "Top": 0.535,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.336,
+            "Y": 0.535
+          },
+          {
+            "X": 0.396,
+            "Y": 0.535
+          },
+          {
+            "X": 0.396,
+            "Y": 0.561
+          },
+          {
+            "X": 0.336,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "52392468-972a-5099-9186-d1a827672658",
+      "Page": 2,
+      "Text": "Page",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.535,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.535
+          },
+          {
+            "X": 0.432,
+            "Y": 0.535
+          },
+          {
+            "X": 0.432,
+            "Y": 0.561
+          },
+          {
+            "X": 0.408,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "0cb0dead-14ab-50e7-b256-6216fc234083",
+      "Page": 2,
+      "Text": "2",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.444,
+          "Top": 0.535,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.444,
+            "Y": 0.535
+          },
+          {
+            "X": 0.48,
+            "Y": 0.535
+          },
+          {
+            "X": 0.48,
+            "Y": 0.561
+          },
+          {
+            "X": 0.444,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "60871752-16c1-52ab-90de-914c723fdd84",
+      "Page": 2,
+      "Text": "of",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.492,
+          "Top": 0.535,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.492,
+            "Y": 0.535
+          },
+          {
+            "X": 0.516,
+            "Y": 0.535
+          },
+          {
+            "X": 0.516,
+            "Y": 0.561
+          },
+          {
+            "X": 0.492,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "1ed48081-eb04-54b8-b3fc-926ed41c8b99",
+      "Page": 2,
+      "Text": "3",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.5670000000000001
+          },
+          {
+            "X": 0.06,
+            "Y": 0.5670000000000001
+          }
+        ]
+      },
+      "Id": "d9ed4c5a-b1ed-5dbf-8da9-6f6eecd769a1",
+      "Page": 2,
+      "Relationships": [
+        {
+          "Ids": [
+            "dce2110c-d775-5e2e-9241-ffa609dbb1c4",
+            "254f0961-242a-538b-b389-a4b97c25cef4",
+            "8ccc5d07-d772-55b5-9c61-16b5fc576ba4",
+            "52392468-972a-5099-9186-d1a827672658",
+            "0cb0dead-14ab-50e7-b256-6216fc234083",
+            "60871752-16c1-52ab-90de-914c723fdd84",
+            "1ed48081-eb04-54b8-b3fc-926ed41c8b99"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Reference 1601726 | Page 2 of 3"
+    },
+    {
+      "BlockType": "PAGE",
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 1.0,
+          "Left": 0.0,
+          "Top": 0.0,
+          "Width": 1.0
+        },
+        "Polygon": [
+          {
+            "X": 0.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 1.0
+          },
+          {
+            "X": 0.0,
+            "Y": 1.0
+          }
+        ]
+      },
+      "Id": "52a73a38-eeeb-504f-977a-9c1c2184e9c8",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "ce9da9d8-a226-5f48-9ef0-ad39f050ee40",
+            "7d0db36c-1c4c-55e1-a1d0-0ad19e258a30",
+            "9b40ebde-d2ad-581c-afe7-7d960af3291d",
+            "5c7544e2-9b23-55b7-b946-05c3dc24a6d2",
+            "490a5013-bdf6-580c-a7df-d4bc7a2632b5",
+            "185913d4-1df3-56db-9eb8-bcd1f914e219",
+            "46563b27-7c87-5366-997b-1fb0a7d90d25"
+          ],
+          "Type": "CHILD"
+        }
+      ]
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.06
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.086
+          },
+          {
+            "X": 0.06,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "a9917781-5116-5b0c-a56a-eedb8cd5230a",
+      "Page": 3,
+      "Text": "Services",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.06,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.06
+          },
+          {
+            "X": 0.3,
+            "Y": 0.06
+          },
+          {
+            "X": 0.3,
+            "Y": 0.086
+          },
+          {
+            "X": 0.18,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "fb1d04c0-1f66-51f3-9da8-53f32ea9a3c6",
+      "Page": 3,
+      "Text": "Agreement",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.312,
+          "Top": 0.06,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.312,
+            "Y": 0.06
+          },
+          {
+            "X": 0.45599999999999996,
+            "Y": 0.06
+          },
+          {
+            "X": 0.45599999999999996,
+            "Y": 0.086
+          },
+          {
+            "X": 0.312,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "aa8fdea7-5691-55aa-b6f6-42e850b8a720",
+      "Page": 3,
+      "Text": "CTR-1601726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.468,
+          "Top": 0.06,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.468,
+            "Y": 0.06
+          },
+          {
+            "X": 0.5880000000000001,
+            "Y": 0.06
+          },
+          {
+            "X": 0.5880000000000001,
+            "Y": 0.086
+          },
+          {
+            "X": 0.468,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "7659dada-356c-513d-a2d2-0d9d5ff8f672",
+      "Page": 3,
+      "Text": "continued",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.092
+          },
+          {
+            "X": 0.06,
+            "Y": 0.092
+          }
+        ]
+      },
+      "Id": "ce9da9d8-a226-5f48-9ef0-ad39f050ee40",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "a9917781-5116-5b0c-a56a-eedb8cd5230a",
+            "fb1d04c0-1f66-51f3-9da8-53f32ea9a3c6",
+            "aa8fdea7-5691-55aa-b6f6-42e850b8a720",
+            "7659dada-356c-513d-a2d2-0d9d5ff8f672"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Services Agreement CTR-1601726 continued"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.156,
+            "Y": 0.155
+          },
+          {
+            "X": 0.156,
+            "Y": 0.181
+          },
+          {
+            "X": 0.06,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "32dcf3cd-ee84-501a-a4a5-a0a606098659",
+      "Page": 3,
+      "Text": "Section",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.168,
+          "Top": 0.155,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.168,
+            "Y": 0.155
+          },
+          {
+            "X": 0.20400000000000001,
+            "Y": 0.155
+          },
+          {
+            "X": 0.20400000000000001,
+            "Y": 0.181
+          },
+          {
+            "X": 0.168,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "1a7bdeac-947e-502c-b11b-f50e2a2fb61b",
+      "Page": 3,
+      "Text": "3.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.216,
+          "Top": 0.155,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.216,
+            "Y": 0.155
+          },
+          {
+            "X": 0.3,
+            "Y": 0.155
+          },
+          {
+            "X": 0.3,
+            "Y": 0.181
+          },
+          {
+            "X": 0.216,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "60332b4f-f9bf-535e-8997-02f5bde6a5e7",
+      "Page": 3,
+      "Text": "Scope,",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.312,
+          "Top": 0.155,
+          "Width": 0.2
+        },
+        "Polygon": [
+          {
+            "X": 0.312,
+            "Y": 0.155
+          },
+          {
+            "X": 0.512,
+            "Y": 0.155
+          },
+          {
+            "X": 0.512,
+            "Y": 0.181
+          },
+          {
+            "X": 0.312,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "3a85232d-3abd-5427-8095-179e6550939e",
+      "Page": 3,
+      "Text": "responsibilities,",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.524,
+          "Top": 0.155,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.524,
+            "Y": 0.155
+          },
+          {
+            "X": 0.5720000000000001,
+            "Y": 0.155
+          },
+          {
+            "X": 0.5720000000000001,
+            "Y": 0.181
+          },
+          {
+            "X": 0.524,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "53109456-3d56-56a5-85ec-6361153a9b4a",
+      "Page": 3,
+      "Text": "and",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.584,
+          "Top": 0.155,
+          "Width": 0.156
+        },
+        "Polygon": [
+          {
+            "X": 0.584,
+            "Y": 0.155
+          },
+          {
+            "X": 0.74,
+            "Y": 0.155
+          },
+          {
+            "X": 0.74,
+            "Y": 0.181
+          },
+          {
+            "X": 0.584,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "46e57e28-4b1a-514d-8326-63e510fefeeb",
+      "Page": 3,
+      "Text": "deliverables",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.187
+          },
+          {
+            "X": 0.06,
+            "Y": 0.187
+          }
+        ]
+      },
+      "Id": "7d0db36c-1c4c-55e1-a1d0-0ad19e258a30",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "32dcf3cd-ee84-501a-a4a5-a0a606098659",
+            "1a7bdeac-947e-502c-b11b-f50e2a2fb61b",
+            "60332b4f-f9bf-535e-8997-02f5bde6a5e7",
+            "3a85232d-3abd-5427-8095-179e6550939e",
+            "53109456-3d56-56a5-85ec-6361153a9b4a",
+            "46e57e28-4b1a-514d-8326-63e510fefeeb"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Section 3. Scope, responsibilities, and deliverables"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.192
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.252,
+            "Y": 0.25
+          },
+          {
+            "X": 0.252,
+            "Y": 0.276
+          },
+          {
+            "X": 0.06,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "b4b97eae-c9ce-5bf2-9cab-2882ebdfd37c",
+      "Page": 3,
+      "Text": "Confidentiality",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.264,
+          "Top": 0.25,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.264,
+            "Y": 0.25
+          },
+          {
+            "X": 0.40800000000000003,
+            "Y": 0.25
+          },
+          {
+            "X": 0.40800000000000003,
+            "Y": 0.276
+          },
+          {
+            "X": 0.264,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "17a51a6f-1676-5731-87a0-ea3bf8330bb3",
+      "Page": 3,
+      "Text": "obligations",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.42,
+          "Top": 0.25,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.42,
+            "Y": 0.25
+          },
+          {
+            "X": 0.516,
+            "Y": 0.25
+          },
+          {
+            "X": 0.516,
+            "Y": 0.276
+          },
+          {
+            "X": 0.42,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "fd7a155d-f030-5e4d-a6d9-026e409b9d8b",
+      "Page": 3,
+      "Text": "survive",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.528,
+          "Top": 0.25,
+          "Width": 0.156
+        },
+        "Polygon": [
+          {
+            "X": 0.528,
+            "Y": 0.25
+          },
+          {
+            "X": 0.684,
+            "Y": 0.25
+          },
+          {
+            "X": 0.684,
+            "Y": 0.276
+          },
+          {
+            "X": 0.528,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "c742c47a-cfe4-51cc-8d05-34456ddb1b08",
+      "Page": 3,
+      "Text": "termination.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.28200000000000003
+          },
+          {
+            "X": 0.06,
+            "Y": 0.28200000000000003
+          }
+        ]
+      },
+      "Id": "9b40ebde-d2ad-581c-afe7-7d960af3291d",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "b4b97eae-c9ce-5bf2-9cab-2882ebdfd37c",
+            "17a51a6f-1676-5731-87a0-ea3bf8330bb3",
+            "fd7a155d-f030-5e4d-a6d9-026e409b9d8b",
+            "c742c47a-cfe4-51cc-8d05-34456ddb1b08"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Confidentiality obligations survive termination."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.14400000000000002,
+            "Y": 0.345
+          },
+          {
+            "X": 0.14400000000000002,
+            "Y": 0.371
+          },
+          {
+            "X": 0.06,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "7e405ffc-52a6-5dcb-9878-8919c5e5b157",
+      "Page": 3,
+      "Text": "Either",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.156,
+          "Top": 0.345,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.156,
+            "Y": 0.345
+          },
+          {
+            "X": 0.22799999999999998,
+            "Y": 0.345
+          },
+          {
+            "X": 0.22799999999999998,
+            "Y": 0.371
+          },
+          {
+            "X": 0.156,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "e61c2332-5c5a-5c48-b978-be7ba3405ca9",
+      "Page": 3,
+      "Text": "party",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.24,
+          "Top": 0.345,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.24,
+            "Y": 0.345
+          },
+          {
+            "X": 0.288,
+            "Y": 0.345
+          },
+          {
+            "X": 0.288,
+            "Y": 0.371
+          },
+          {
+            "X": 0.24,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "a725a358-b912-582c-bb1a-2ae2b3ffab57",
+      "Page": 3,
+      "Text": "may",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.345,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.345
+          },
+          {
+            "X": 0.42,
+            "Y": 0.345
+          },
+          {
+            "X": 0.42,
+            "Y": 0.371
+          },
+          {
+            "X": 0.3,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "754c1deb-7034-5454-9ce7-007f6a21fe66",
+      "Page": 3,
+      "Text": "terminate",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.432,
+          "Top": 0.345,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.432,
+            "Y": 0.345
+          },
+          {
+            "X": 0.492,
+            "Y": 0.345
+          },
+          {
+            "X": 0.492,
+            "Y": 0.371
+          },
+          {
+            "X": 0.432,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "8886f785-ac63-59db-b996-ce5841069dc2",
+      "Page": 3,
+      "Text": "with",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.504,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.504,
+            "Y": 0.345
+          },
+          {
+            "X": 0.588,
+            "Y": 0.345
+          },
+          {
+            "X": 0.588,
+            "Y": 0.371
+          },
+          {
+            "X": 0.504,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "c09a78f4-f107-55e3-a3b4-29fd102bff17",
+      "Page": 3,
+      "Text": "thirty",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.6,
+          "Top": 0.345,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.6,
+            "Y": 0.345
+          },
+          {
+            "X": 0.6599999999999999,
+            "Y": 0.345
+          },
+          {
+            "X": 0.6599999999999999,
+            "Y": 0.371
+          },
+          {
+            "X": 0.6,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "3d77de3b-823b-5927-92a9-9fdc6ca5a097",
+      "Page": 3,
+      "Text": "days",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.672,
+          "Top": 0.345,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.672,
+            "Y": 0.345
+          },
+          {
+            "X": 0.768,
+            "Y": 0.345
+          },
+          {
+            "X": 0.768,
+            "Y": 0.371
+          },
+          {
+            "X": 0.672,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "35197b04-be40-5451-bbca-6180cdfd31f8",
+      "Page": 3,
+      "Text": "written",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.78,
+          "Top": 0.345,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.78,
+            "Y": 0.345
+          },
+          {
+            "X": 0.876,
+            "Y": 0.345
+          },
+          {
+            "X": 0.876,
+            "Y": 0.371
+          },
+          {
+            "X": 0.78,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "b46daf2f-d97e-5bc7-9cf9-1fe50c4d95a7",
+      "Page": 3,
+      "Text": "notice.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.377
+          },
+          {
+            "X": 0.06,
+            "Y": 0.377
+          }
+        ]
+      },
+      "Id": "5c7544e2-9b23-55b7-b946-05c3dc24a6d2",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "7e405ffc-52a6-5dcb-9878-8919c5e5b157",
+            "e61c2332-5c5a-5c48-b978-be7ba3405ca9",
+            "a725a358-b912-582c-bb1a-2ae2b3ffab57",
+            "754c1deb-7034-5454-9ce7-007f6a21fe66",
+            "8886f785-ac63-59db-b996-ce5841069dc2",
+            "c09a78f4-f107-55e3-a3b4-29fd102bff17",
+            "3d77de3b-823b-5927-92a9-9fdc6ca5a097",
+            "35197b04-be40-5451-bbca-6180cdfd31f8",
+            "b46daf2f-d97e-5bc7-9cf9-1fe50c4d95a7"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Either party may terminate with thirty days written notice."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.132
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.192,
+            "Y": 0.44
+          },
+          {
+            "X": 0.192,
+            "Y": 0.466
+          },
+          {
+            "X": 0.06,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "f1277bee-451b-530b-8a66-ee1e0bb9ad53",
+      "Page": 3,
+      "Text": "Authorized",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.204,
+          "Top": 0.44,
+          "Width": 0.192
+        },
+        "Polygon": [
+          {
+            "X": 0.204,
+            "Y": 0.44
+          },
+          {
+            "X": 0.396,
+            "Y": 0.44
+          },
+          {
+            "X": 0.396,
+            "Y": 0.466
+          },
+          {
+            "X": 0.204,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "59bf383c-d54b-5712-a6ba-764aa3111b82",
+      "Page": 3,
+      "Text": "representatives",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.44,
+          "Width": 0.144
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.44
+          },
+          {
+            "X": 0.5519999999999999,
+            "Y": 0.44
+          },
+          {
+            "X": 0.5519999999999999,
+            "Y": 0.466
+          },
+          {
+            "X": 0.408,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "261eca2e-06a8-5e92-9ddf-e3194563d8ce",
+      "Page": 3,
+      "Text": "acknowledge",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.564,
+          "Top": 0.44,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.564,
+            "Y": 0.44
+          },
+          {
+            "X": 0.6359999999999999,
+            "Y": 0.44
+          },
+          {
+            "X": 0.6359999999999999,
+            "Y": 0.466
+          },
+          {
+            "X": 0.564,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "be501474-9752-5a91-a268-fb8dae8fdd09",
+      "Page": 3,
+      "Text": "these",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.648,
+          "Top": 0.44,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.648,
+            "Y": 0.44
+          },
+          {
+            "X": 0.732,
+            "Y": 0.44
+          },
+          {
+            "X": 0.732,
+            "Y": 0.466
+          },
+          {
+            "X": 0.648,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "5d67f2d4-87af-5576-9318-b962bf2dafcd",
+      "Page": 3,
+      "Text": "terms.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.472
+          },
+          {
+            "X": 0.06,
+            "Y": 0.472
+          }
+        ]
+      },
+      "Id": "490a5013-bdf6-580c-a7df-d4bc7a2632b5",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "f1277bee-451b-530b-8a66-ee1e0bb9ad53",
+            "59bf383c-d54b-5712-a6ba-764aa3111b82",
+            "261eca2e-06a8-5e92-9ddf-e3194563d8ce",
+            "be501474-9752-5a91-a268-fb8dae8fdd09",
+            "5d67f2d4-87af-5576-9318-b962bf2dafcd"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Authorized representatives acknowledge these terms."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.108,
+            "Y": 0.535
+          },
+          {
+            "X": 0.108,
+            "Y": 0.561
+          },
+          {
+            "X": 0.06,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "7fc91431-76f5-517a-aa8a-fa6cd6cdcfbd",
+      "Page": 3,
+      "Text": "END",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.12,
+          "Top": 0.535,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.12,
+            "Y": 0.535
+          },
+          {
+            "X": 0.156,
+            "Y": 0.535
+          },
+          {
+            "X": 0.156,
+            "Y": 0.561
+          },
+          {
+            "X": 0.12,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "d6f0430c-c9e4-542b-9cdd-d97375d2da2a",
+      "Page": 3,
+      "Text": "OF",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.168,
+          "Top": 0.535,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.168,
+            "Y": 0.535
+          },
+          {
+            "X": 0.276,
+            "Y": 0.535
+          },
+          {
+            "X": 0.276,
+            "Y": 0.561
+          },
+          {
+            "X": 0.168,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "432bfead-6051-5f06-b0c8-f46d13b74974",
+      "Page": 3,
+      "Text": "DOCUMENT",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.5670000000000001
+          },
+          {
+            "X": 0.06,
+            "Y": 0.5670000000000001
+          }
+        ]
+      },
+      "Id": "185913d4-1df3-56db-9eb8-bcd1f914e219",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "7fc91431-76f5-517a-aa8a-fa6cd6cdcfbd",
+            "d6f0430c-c9e4-542b-9cdd-d97375d2da2a",
+            "432bfead-6051-5f06-b0c8-f46d13b74974"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "END OF DOCUMENT"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.63,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.63
+          },
+          {
+            "X": 0.18,
+            "Y": 0.63
+          },
+          {
+            "X": 0.18,
+            "Y": 0.656
+          },
+          {
+            "X": 0.06,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "edcfdbc7-87fd-5136-a4ca-25b3bedbff6b",
+      "Page": 3,
+      "Text": "Reference",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.192,
+          "Top": 0.63,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.192,
+            "Y": 0.63
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.63
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.656
+          },
+          {
+            "X": 0.192,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "dff3b26c-19b3-522e-9519-77fac9073afc",
+      "Page": 3,
+      "Text": "1601726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.63,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.63
+          },
+          {
+            "X": 0.324,
+            "Y": 0.63
+          },
+          {
+            "X": 0.324,
+            "Y": 0.656
+          },
+          {
+            "X": 0.3,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "082e3eba-3c47-5d13-89e5-1ddf4a2649f2",
+      "Page": 3,
+      "Text": "|",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.336,
+          "Top": 0.63,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.336,
+            "Y": 0.63
+          },
+          {
+            "X": 0.396,
+            "Y": 0.63
+          },
+          {
+            "X": 0.396,
+            "Y": 0.656
+          },
+          {
+            "X": 0.336,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "6e3a1d81-7cec-58e2-b7f7-78bde776b183",
+      "Page": 3,
+      "Text": "Page",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.63,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.63
+          },
+          {
+            "X": 0.432,
+            "Y": 0.63
+          },
+          {
+            "X": 0.432,
+            "Y": 0.656
+          },
+          {
+            "X": 0.408,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "fa3279ee-74f6-5b5d-b3ea-b2ee480e6f2a",
+      "Page": 3,
+      "Text": "3",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.444,
+          "Top": 0.63,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.444,
+            "Y": 0.63
+          },
+          {
+            "X": 0.48,
+            "Y": 0.63
+          },
+          {
+            "X": 0.48,
+            "Y": 0.656
+          },
+          {
+            "X": 0.444,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "d7be5f98-50e0-5cae-8a98-5ee253fa3918",
+      "Page": 3,
+      "Text": "of",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.492,
+          "Top": 0.63,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.492,
+            "Y": 0.63
+          },
+          {
+            "X": 0.516,
+            "Y": 0.63
+          },
+          {
+            "X": 0.516,
+            "Y": 0.656
+          },
+          {
+            "X": 0.492,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "3a8680c5-b58b-51d9-ad0e-79f2b5da6c66",
+      "Page": 3,
+      "Text": "3",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.63,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.63
+          },
+          {
+            "X": 0.94,
+            "Y": 0.63
+          },
+          {
+            "X": 0.94,
+            "Y": 0.662
+          },
+          {
+            "X": 0.06,
+            "Y": 0.662
+          }
+        ]
+      },
+      "Id": "46563b27-7c87-5366-997b-1fb0a7d90d25",
+      "Page": 3,
+      "Relationships": [
+        {
+          "Ids": [
+            "edcfdbc7-87fd-5136-a4ca-25b3bedbff6b",
+            "dff3b26c-19b3-522e-9519-77fac9073afc",
+            "082e3eba-3c47-5d13-89e5-1ddf4a2649f2",
+            "6e3a1d81-7cec-58e2-b7f7-78bde776b183",
+            "fa3279ee-74f6-5b5d-b3ea-b2ee480e6f2a",
+            "d7be5f98-50e0-5cae-8a98-5ee253fa3918",
+            "3a8680c5-b58b-51d9-ad0e-79f2b5da6c66"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Reference 1601726 | Page 3 of 3"
+    }
+  ],
+  "DetectDocumentTextModelVersion": "1.0",
+  "DocumentMetadata": {
+    "Pages": 3
+  }
+}

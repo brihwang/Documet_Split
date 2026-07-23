@@ -1,0 +1,75 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 1,
+      "output_file": "aws_test_results/packet_03/document_001_drivers_license.pages_1-1.json",
+      "page_range": [
+        1,
+        1
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 2,
+      "output_file": "aws_test_results/packet_03/document_002_passport.pages_2-2.json",
+      "page_range": [
+        2,
+        2
+      ],
+      "start_page": 2
+    },
+    {
+      "document_index": 3,
+      "end_page": 4,
+      "output_file": "aws_test_results/packet_03/document_003_tax_form.pages_3-4.json",
+      "page_range": [
+        3,
+        4
+      ],
+      "start_page": 3
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 3086,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 359,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Drivers License",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical elements of a driver's license such as 'STATE DRIVER LICENSE', 'License Number', 'Name', 'Date of Birth', 'Class', and 'Restrictions'. It also includes a unique reference number and page numbering, indicating it is a standalone document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Passport",
+        "document_boundary": "start",
+        "page": 2,
+        "reason": "The target page contains distinct passport information such as 'UNITED STATES OF AMERICA PASSPORT', 'Passport Number', and other passport-specific details, indicating the start of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "start",
+        "page": 3,
+        "reason": "The target page begins a new 'Tax Form' document, as indicated by the presence of a new document type (Form W-2), different reference number, and new content unrelated to the previous passport document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "continue",
+        "page": 4,
+        "reason": "The target page continues the Form W-2 with details such as state wages and state income tax, and it references the same Employer Identification Number (EIN) as the previous page. Additionally, it is marked as 'Page 2 of 2', indicating it is a continuation of the same document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_03.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_03.raw.json"
+}

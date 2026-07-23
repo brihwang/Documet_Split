@@ -1,0 +1,89 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 1,
+      "output_file": "aws_test_results/packet_18/document_001_receipt.pages_1-1.json",
+      "page_range": [
+        1,
+        1
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 4,
+      "output_file": "aws_test_results/packet_18/document_002_bank_statement.pages_2-4.json",
+      "page_range": [
+        2,
+        4
+      ],
+      "start_page": 2
+    },
+    {
+      "document_index": 3,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_18/document_003_contract.pages_5-6.json",
+      "page_range": [
+        5,
+        6
+      ],
+      "start_page": 5
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 4625,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 441,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Receipt",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical receipt elements such as 'PAYMENT RECEIPT', 'Transaction ID', payment details, and a total amount, indicating it is a standalone receipt document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "start",
+        "page": 2,
+        "reason": "The target page introduces a new document type, 'Bank Statement', with distinct content and headers compared to the previous 'Receipt'. The presence of account summary and transaction activity further confirms it as a new document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 3,
+        "reason": "The target page continues the transaction activity from the previous page, with consistent account number, reference, and page numbering."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 4,
+        "reason": "The target page is part of the continued account statement with consistent headers, footers, and transaction activity. It concludes with 'END OF DOCUMENT', indicating the end of this specific bank statement."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "start",
+        "page": 5,
+        "reason": "The target page introduces a new 'SERVICES AGREEMENT' with a distinct contract number and effective date, indicating the start of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "continue",
+        "page": 6,
+        "reason": "The target page continues the 'Services Agreement' with details on scope, responsibilities, and terms, indicated by 'Services Agreement CTR-1803726 continued' and consistent reference number and page numbering."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_18.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_18.raw.json"
+}

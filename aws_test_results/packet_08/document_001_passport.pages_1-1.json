@@ -1,0 +1,1599 @@
+{
+  "Blocks": [
+    {
+      "BlockType": "PAGE",
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 1.0,
+          "Left": 0.0,
+          "Top": 0.0,
+          "Width": 1.0
+        },
+        "Polygon": [
+          {
+            "X": 0.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 0.0
+          },
+          {
+            "X": 1.0,
+            "Y": 1.0
+          },
+          {
+            "X": 0.0,
+            "Y": 1.0
+          }
+        ]
+      },
+      "Id": "42c09068-6067-5d99-9635-f2d0698c743b",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "b1f64fff-c590-5dee-ac90-e42c06d06812",
+            "b815ca02-6da5-5b06-8b79-57bca75758ee",
+            "30b332d0-f248-5e99-9b8d-5c3055e5a520",
+            "09d7c5dd-f3ed-5993-aeb3-76615f6dde53",
+            "90d1f4a8-712d-573b-915b-e2d03f7994ab",
+            "3329cab1-b178-5738-988b-217f2bb90486",
+            "f9faf15a-abd7-535e-b76f-978fb15a9c69",
+            "bfab6e20-f910-5883-9b3a-003484bdaaea"
+          ],
+          "Type": "CHILD"
+        }
+      ]
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.14400000000000002,
+            "Y": 0.06
+          },
+          {
+            "X": 0.14400000000000002,
+            "Y": 0.086
+          },
+          {
+            "X": 0.06,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "fdd556c4-7105-550b-8b38-a7443da678ba",
+      "Page": 1,
+      "Text": "UNITED",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.156,
+          "Top": 0.06,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.156,
+            "Y": 0.06
+          },
+          {
+            "X": 0.24,
+            "Y": 0.06
+          },
+          {
+            "X": 0.24,
+            "Y": 0.086
+          },
+          {
+            "X": 0.156,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "9316baf3-d5bb-587a-b203-31133489caa3",
+      "Page": 1,
+      "Text": "STATES",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.252,
+          "Top": 0.06,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.252,
+            "Y": 0.06
+          },
+          {
+            "X": 0.288,
+            "Y": 0.06
+          },
+          {
+            "X": 0.288,
+            "Y": 0.086
+          },
+          {
+            "X": 0.252,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "d5958a2a-abd7-5411-9b06-7dfe212f3019",
+      "Page": 1,
+      "Text": "OF",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.06,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.06
+          },
+          {
+            "X": 0.396,
+            "Y": 0.06
+          },
+          {
+            "X": 0.396,
+            "Y": 0.086
+          },
+          {
+            "X": 0.3,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "00bb51e6-e0c2-52ee-8c71-de09ebf913a9",
+      "Page": 1,
+      "Text": "AMERICA",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.06,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.06
+          },
+          {
+            "X": 0.516,
+            "Y": 0.06
+          },
+          {
+            "X": 0.516,
+            "Y": 0.086
+          },
+          {
+            "X": 0.408,
+            "Y": 0.086
+          }
+        ]
+      },
+      "Id": "1eff6177-fcc4-538e-b936-97f960782d39",
+      "Page": 1,
+      "Text": "PASSPORT",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.06,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.06
+          },
+          {
+            "X": 0.94,
+            "Y": 0.092
+          },
+          {
+            "X": 0.06,
+            "Y": 0.092
+          }
+        ]
+      },
+      "Id": "b1f64fff-c590-5dee-ac90-e42c06d06812",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "fdd556c4-7105-550b-8b38-a7443da678ba",
+            "9316baf3-d5bb-587a-b203-31133489caa3",
+            "d5958a2a-abd7-5411-9b06-7dfe212f3019",
+            "00bb51e6-e0c2-52ee-8c71-de09ebf913a9",
+            "1eff6177-fcc4-538e-b936-97f960782d39"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "UNITED STATES OF AMERICA PASSPORT"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.155
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.181
+          },
+          {
+            "X": 0.06,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "c9559678-cd40-537c-8da2-8716852132c7",
+      "Page": 1,
+      "Text": "Passport",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.155,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.155
+          },
+          {
+            "X": 0.264,
+            "Y": 0.155
+          },
+          {
+            "X": 0.264,
+            "Y": 0.181
+          },
+          {
+            "X": 0.18,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "1650c9c2-bc2f-5db4-9e7c-447ac4bbb6f7",
+      "Page": 1,
+      "Text": "Number",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.276,
+          "Top": 0.155,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.276,
+            "Y": 0.155
+          },
+          {
+            "X": 0.384,
+            "Y": 0.155
+          },
+          {
+            "X": 0.384,
+            "Y": 0.181
+          },
+          {
+            "X": 0.276,
+            "Y": 0.181
+          }
+        ]
+      },
+      "Id": "0386f97e-3a77-53d1-bbd8-7384eb335b55",
+      "Page": 1,
+      "Text": "P0801726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.155,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.155
+          },
+          {
+            "X": 0.94,
+            "Y": 0.187
+          },
+          {
+            "X": 0.06,
+            "Y": 0.187
+          }
+        ]
+      },
+      "Id": "b815ca02-6da5-5b06-8b79-57bca75758ee",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "c9559678-cd40-537c-8da2-8716852132c7",
+            "1650c9c2-bc2f-5db4-9e7c-447ac4bbb6f7",
+            "0386f97e-3a77-53d1-bbd8-7384eb335b55"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Passport Number P0801726"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.108
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.25
+          },
+          {
+            "X": 0.16799999999999998,
+            "Y": 0.276
+          },
+          {
+            "X": 0.06,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "f12c6f14-fb4d-5b6a-8cf3-ab393efcc2e3",
+      "Page": 1,
+      "Text": "Surname:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.18,
+          "Top": 0.25,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.18,
+            "Y": 0.25
+          },
+          {
+            "X": 0.252,
+            "Y": 0.25
+          },
+          {
+            "X": 0.252,
+            "Y": 0.276
+          },
+          {
+            "X": 0.18,
+            "Y": 0.276
+          }
+        ]
+      },
+      "Id": "b577621a-0cf6-59e8-8774-a3abf7494625",
+      "Page": 1,
+      "Text": "AVERY",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.25,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.25
+          },
+          {
+            "X": 0.94,
+            "Y": 0.28200000000000003
+          },
+          {
+            "X": 0.06,
+            "Y": 0.28200000000000003
+          }
+        ]
+      },
+      "Id": "30b332d0-f248-5e99-9b8d-5c3055e5a520",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "f12c6f14-fb4d-5b6a-8cf3-ab393efcc2e3",
+            "b577621a-0cf6-59e8-8774-a3abf7494625"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Surname: AVERY"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.132,
+            "Y": 0.345
+          },
+          {
+            "X": 0.132,
+            "Y": 0.371
+          },
+          {
+            "X": 0.06,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "81cecf19-b806-5657-b999-0ca8787915f3",
+      "Page": 1,
+      "Text": "Given",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.144,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.144,
+            "Y": 0.345
+          },
+          {
+            "X": 0.22799999999999998,
+            "Y": 0.345
+          },
+          {
+            "X": 0.22799999999999998,
+            "Y": 0.371
+          },
+          {
+            "X": 0.144,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "b2e963f1-3686-584a-b4ec-f239d7519140",
+      "Page": 1,
+      "Text": "Names:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.24,
+          "Top": 0.345,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.24,
+            "Y": 0.345
+          },
+          {
+            "X": 0.324,
+            "Y": 0.345
+          },
+          {
+            "X": 0.324,
+            "Y": 0.371
+          },
+          {
+            "X": 0.24,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "957efa97-4056-5c3b-8e75-bff5619e1229",
+      "Page": 1,
+      "Text": "MORGAN",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.336,
+          "Top": 0.345,
+          "Width": 0.048
+        },
+        "Polygon": [
+          {
+            "X": 0.336,
+            "Y": 0.345
+          },
+          {
+            "X": 0.384,
+            "Y": 0.345
+          },
+          {
+            "X": 0.384,
+            "Y": 0.371
+          },
+          {
+            "X": 0.336,
+            "Y": 0.371
+          }
+        ]
+      },
+      "Id": "8ebcc9d6-c8a6-58aa-b402-52db5e1564fb",
+      "Page": 1,
+      "Text": "LEE",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.345,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.345
+          },
+          {
+            "X": 0.94,
+            "Y": 0.377
+          },
+          {
+            "X": 0.06,
+            "Y": 0.377
+          }
+        ]
+      },
+      "Id": "09d7c5dd-f3ed-5993-aeb3-76615f6dde53",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "81cecf19-b806-5657-b999-0ca8787915f3",
+            "b2e963f1-3686-584a-b4ec-f239d7519140",
+            "957efa97-4056-5c3b-8e75-bff5619e1229",
+            "8ebcc9d6-c8a6-58aa-b402-52db5e1564fb"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Given Names: MORGAN LEE"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.156
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.216,
+            "Y": 0.44
+          },
+          {
+            "X": 0.216,
+            "Y": 0.466
+          },
+          {
+            "X": 0.06,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "63f5f399-8741-570c-af0e-1e84e5c6b253",
+      "Page": 1,
+      "Text": "Nationality:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.228,
+          "Top": 0.44,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.228,
+            "Y": 0.44
+          },
+          {
+            "X": 0.312,
+            "Y": 0.44
+          },
+          {
+            "X": 0.312,
+            "Y": 0.466
+          },
+          {
+            "X": 0.228,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "28f831ca-b615-5986-b861-330e4b98db63",
+      "Page": 1,
+      "Text": "UNITED",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.324,
+          "Top": 0.44,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.324,
+            "Y": 0.44
+          },
+          {
+            "X": 0.40800000000000003,
+            "Y": 0.44
+          },
+          {
+            "X": 0.40800000000000003,
+            "Y": 0.466
+          },
+          {
+            "X": 0.324,
+            "Y": 0.466
+          }
+        ]
+      },
+      "Id": "9788bb44-0755-5ada-853f-59fd44365daa",
+      "Page": 1,
+      "Text": "STATES",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.44,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.44
+          },
+          {
+            "X": 0.94,
+            "Y": 0.472
+          },
+          {
+            "X": 0.06,
+            "Y": 0.472
+          }
+        ]
+      },
+      "Id": "90d1f4a8-712d-573b-915b-e2d03f7994ab",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "63f5f399-8741-570c-af0e-1e84e5c6b253",
+            "28f831ca-b615-5986-b861-330e4b98db63",
+            "9788bb44-0755-5ada-853f-59fd44365daa"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Nationality: UNITED STATES"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.132,
+            "Y": 0.535
+          },
+          {
+            "X": 0.132,
+            "Y": 0.561
+          },
+          {
+            "X": 0.06,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "c928ecd1-25b8-5c51-966a-e4caf135a97c",
+      "Page": 1,
+      "Text": "Place",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.144,
+          "Top": 0.535,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.144,
+            "Y": 0.535
+          },
+          {
+            "X": 0.18,
+            "Y": 0.535
+          },
+          {
+            "X": 0.18,
+            "Y": 0.561
+          },
+          {
+            "X": 0.144,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "7f5ca26d-146c-5275-83eb-ea5e81827b2a",
+      "Page": 1,
+      "Text": "of",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.192,
+          "Top": 0.535,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.192,
+            "Y": 0.535
+          },
+          {
+            "X": 0.276,
+            "Y": 0.535
+          },
+          {
+            "X": 0.276,
+            "Y": 0.561
+          },
+          {
+            "X": 0.192,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "d0684265-c026-55da-9dc4-6d941db5ead3",
+      "Page": 1,
+      "Text": "Birth:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.288,
+          "Top": 0.535,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.288,
+            "Y": 0.535
+          },
+          {
+            "X": 0.36,
+            "Y": 0.535
+          },
+          {
+            "X": 0.36,
+            "Y": 0.561
+          },
+          {
+            "X": 0.288,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "3b6850f6-9e94-5dd1-a1bc-dcae984f754d",
+      "Page": 1,
+      "Text": "OHIO,",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.372,
+          "Top": 0.535,
+          "Width": 0.084
+        },
+        "Polygon": [
+          {
+            "X": 0.372,
+            "Y": 0.535
+          },
+          {
+            "X": 0.456,
+            "Y": 0.535
+          },
+          {
+            "X": 0.456,
+            "Y": 0.561
+          },
+          {
+            "X": 0.372,
+            "Y": 0.561
+          }
+        ]
+      },
+      "Id": "1315e5d4-2daf-58a5-8f68-5921241c7dcc",
+      "Page": 1,
+      "Text": "U.S.A.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.535,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.535
+          },
+          {
+            "X": 0.94,
+            "Y": 0.5670000000000001
+          },
+          {
+            "X": 0.06,
+            "Y": 0.5670000000000001
+          }
+        ]
+      },
+      "Id": "3329cab1-b178-5738-988b-217f2bb90486",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "c928ecd1-25b8-5c51-966a-e4caf135a97c",
+            "7f5ca26d-146c-5275-83eb-ea5e81827b2a",
+            "d0684265-c026-55da-9dc4-6d941db5ead3",
+            "3b6850f6-9e94-5dd1-a1bc-dcae984f754d",
+            "1315e5d4-2daf-58a5-8f68-5921241c7dcc"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Place of Birth: OHIO, U.S.A."
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.63,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.63
+          },
+          {
+            "X": 0.156,
+            "Y": 0.63
+          },
+          {
+            "X": 0.156,
+            "Y": 0.656
+          },
+          {
+            "X": 0.06,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "a6391d84-c848-5d3c-ae70-9fb4c68ddb65",
+      "Page": 1,
+      "Text": "Issuing",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.168,
+          "Top": 0.63,
+          "Width": 0.132
+        },
+        "Polygon": [
+          {
+            "X": 0.168,
+            "Y": 0.63
+          },
+          {
+            "X": 0.30000000000000004,
+            "Y": 0.63
+          },
+          {
+            "X": 0.30000000000000004,
+            "Y": 0.656
+          },
+          {
+            "X": 0.168,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "792a2d86-9b42-59c1-8144-9459a536c2ff",
+      "Page": 1,
+      "Text": "Authority:",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.312,
+          "Top": 0.63,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.312,
+            "Y": 0.63
+          },
+          {
+            "X": 0.372,
+            "Y": 0.63
+          },
+          {
+            "X": 0.372,
+            "Y": 0.656
+          },
+          {
+            "X": 0.312,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "c8c6df1c-3f6b-5973-8f14-cb3f50497a4b",
+      "Page": 1,
+      "Text": "U.S.",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.384,
+          "Top": 0.63,
+          "Width": 0.132
+        },
+        "Polygon": [
+          {
+            "X": 0.384,
+            "Y": 0.63
+          },
+          {
+            "X": 0.516,
+            "Y": 0.63
+          },
+          {
+            "X": 0.516,
+            "Y": 0.656
+          },
+          {
+            "X": 0.384,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "9ba89a37-c68d-5cce-ab5c-077476fb276e",
+      "Page": 1,
+      "Text": "Department",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.528,
+          "Top": 0.63,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.528,
+            "Y": 0.63
+          },
+          {
+            "X": 0.5640000000000001,
+            "Y": 0.63
+          },
+          {
+            "X": 0.5640000000000001,
+            "Y": 0.656
+          },
+          {
+            "X": 0.528,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "759b259b-c380-50ab-bd1e-a273270d655d",
+      "Page": 1,
+      "Text": "of",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.576,
+          "Top": 0.63,
+          "Width": 0.072
+        },
+        "Polygon": [
+          {
+            "X": 0.576,
+            "Y": 0.63
+          },
+          {
+            "X": 0.6479999999999999,
+            "Y": 0.63
+          },
+          {
+            "X": 0.6479999999999999,
+            "Y": 0.656
+          },
+          {
+            "X": 0.576,
+            "Y": 0.656
+          }
+        ]
+      },
+      "Id": "63a270b6-70e5-57a7-8091-3631dcc4ea69",
+      "Page": 1,
+      "Text": "State",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.63,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.63
+          },
+          {
+            "X": 0.94,
+            "Y": 0.63
+          },
+          {
+            "X": 0.94,
+            "Y": 0.662
+          },
+          {
+            "X": 0.06,
+            "Y": 0.662
+          }
+        ]
+      },
+      "Id": "f9faf15a-abd7-535e-b76f-978fb15a9c69",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "a6391d84-c848-5d3c-ae70-9fb4c68ddb65",
+            "792a2d86-9b42-59c1-8144-9459a536c2ff",
+            "c8c6df1c-3f6b-5973-8f14-cb3f50497a4b",
+            "9ba89a37-c68d-5cce-ab5c-077476fb276e",
+            "759b259b-c380-50ab-bd1e-a273270d655d",
+            "63a270b6-70e5-57a7-8091-3631dcc4ea69"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Issuing Authority: U.S. Department of State"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.06,
+          "Top": 0.725,
+          "Width": 0.12
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.725
+          },
+          {
+            "X": 0.18,
+            "Y": 0.725
+          },
+          {
+            "X": 0.18,
+            "Y": 0.751
+          },
+          {
+            "X": 0.06,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "ab1283b0-ed53-5a44-8fb4-617adff5756b",
+      "Page": 1,
+      "Text": "Reference",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.192,
+          "Top": 0.725,
+          "Width": 0.096
+        },
+        "Polygon": [
+          {
+            "X": 0.192,
+            "Y": 0.725
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.725
+          },
+          {
+            "X": 0.28800000000000003,
+            "Y": 0.751
+          },
+          {
+            "X": 0.192,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "d049485d-ee59-526b-a65a-619f5e8634c2",
+      "Page": 1,
+      "Text": "0801726",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.3,
+          "Top": 0.725,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.3,
+            "Y": 0.725
+          },
+          {
+            "X": 0.324,
+            "Y": 0.725
+          },
+          {
+            "X": 0.324,
+            "Y": 0.751
+          },
+          {
+            "X": 0.3,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "d40238c7-e1f0-58f7-8c5d-3cff49a3f375",
+      "Page": 1,
+      "Text": "|",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.336,
+          "Top": 0.725,
+          "Width": 0.06
+        },
+        "Polygon": [
+          {
+            "X": 0.336,
+            "Y": 0.725
+          },
+          {
+            "X": 0.396,
+            "Y": 0.725
+          },
+          {
+            "X": 0.396,
+            "Y": 0.751
+          },
+          {
+            "X": 0.336,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "e9b19968-66c6-5da3-b099-fdde2dae0b57",
+      "Page": 1,
+      "Text": "Page",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.408,
+          "Top": 0.725,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.408,
+            "Y": 0.725
+          },
+          {
+            "X": 0.432,
+            "Y": 0.725
+          },
+          {
+            "X": 0.432,
+            "Y": 0.751
+          },
+          {
+            "X": 0.408,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "e768f3cd-51a6-56ad-9e83-946de28eb741",
+      "Page": 1,
+      "Text": "1",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.444,
+          "Top": 0.725,
+          "Width": 0.036
+        },
+        "Polygon": [
+          {
+            "X": 0.444,
+            "Y": 0.725
+          },
+          {
+            "X": 0.48,
+            "Y": 0.725
+          },
+          {
+            "X": 0.48,
+            "Y": 0.751
+          },
+          {
+            "X": 0.444,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "69d1baac-e5b2-5e7e-9f71-ec9089dc86c4",
+      "Page": 1,
+      "Text": "of",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "WORD",
+      "Confidence": 99.1,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.026,
+          "Left": 0.492,
+          "Top": 0.725,
+          "Width": 0.024
+        },
+        "Polygon": [
+          {
+            "X": 0.492,
+            "Y": 0.725
+          },
+          {
+            "X": 0.516,
+            "Y": 0.725
+          },
+          {
+            "X": 0.516,
+            "Y": 0.751
+          },
+          {
+            "X": 0.492,
+            "Y": 0.751
+          }
+        ]
+      },
+      "Id": "b0e24da7-e796-5c51-9181-06e7f52fea7e",
+      "Page": 1,
+      "Text": "1",
+      "TextType": "PRINTED"
+    },
+    {
+      "BlockType": "LINE",
+      "Confidence": 98.8,
+      "Geometry": {
+        "BoundingBox": {
+          "Height": 0.032,
+          "Left": 0.06,
+          "Top": 0.725,
+          "Width": 0.88
+        },
+        "Polygon": [
+          {
+            "X": 0.06,
+            "Y": 0.725
+          },
+          {
+            "X": 0.94,
+            "Y": 0.725
+          },
+          {
+            "X": 0.94,
+            "Y": 0.757
+          },
+          {
+            "X": 0.06,
+            "Y": 0.757
+          }
+        ]
+      },
+      "Id": "bfab6e20-f910-5883-9b3a-003484bdaaea",
+      "Page": 1,
+      "Relationships": [
+        {
+          "Ids": [
+            "ab1283b0-ed53-5a44-8fb4-617adff5756b",
+            "d049485d-ee59-526b-a65a-619f5e8634c2",
+            "d40238c7-e1f0-58f7-8c5d-3cff49a3f375",
+            "e9b19968-66c6-5da3-b099-fdde2dae0b57",
+            "e768f3cd-51a6-56ad-9e83-946de28eb741",
+            "69d1baac-e5b2-5e7e-9f71-ec9089dc86c4",
+            "b0e24da7-e796-5c51-9181-06e7f52fea7e"
+          ],
+          "Type": "CHILD"
+        }
+      ],
+      "Text": "Reference 0801726 | Page 1 of 1"
+    }
+  ],
+  "DetectDocumentTextModelVersion": "1.0",
+  "DocumentMetadata": {
+    "Pages": 1
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 3,
+      "output_file": "aws_test_results/packet_13/document_001_bank_statement.pages_1-3.json",
+      "page_range": [
+        1,
+        3
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 5,
+      "output_file": "aws_test_results/packet_13/document_002_tax_form.pages_4-5.json",
+      "page_range": [
+        4,
+        5
+      ],
+      "start_page": 4
+    },
+    {
+      "document_index": 3,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_13/document_003_drivers_license.pages_6-6.json",
+      "page_range": [
+        6,
+        6
+      ],
+      "start_page": 6
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 4701,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 516,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical elements of a bank statement such as 'MONTHLY BANK STATEMENT', account number, statement period, beginning and ending balances, and page numbering, indicating the start of a new document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the transaction activity listed in the bank statement, with consistent account number and reference details."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 3,
+        "reason": "The target page continues the 'Account statement' with consistent headers, footers, and transaction activity, indicating it is part of the same document. The 'END OF DOCUMENT' notation suggests it is the final page of this statement."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "start",
+        "page": 4,
+        "reason": "The target page begins with 'FORM W-2 WAGE AND TAX STATEMENT 2025', indicating a new document type (Tax Form) different from the previous Bank Statement. Additionally, it has a new reference number (1302726) and is labeled as Page 1 of 2, suggesting the start of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "continue",
+        "page": 5,
+        "reason": "The target page continues the Form W-2 with details such as state wages and state income tax, and it references the same Employer Identification Number (EIN) 31-1302726 as the previous page."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Drivers License",
+        "document_boundary": "start",
+        "page": 6,
+        "reason": "The target page contains typical elements of a driver's license such as 'License Number', 'Name', 'Date of Birth', and 'Class'. It also has a distinct reference number and page numbering that differs from the previous document, indicating a new logical document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_13.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_13.raw.json"
+}

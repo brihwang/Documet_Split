@@ -1,0 +1,96 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 2,
+      "output_file": "aws_test_results/packet_19/document_001_utility_bill.pages_1-2.json",
+      "page_range": [
+        1,
+        2
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 4,
+      "output_file": "aws_test_results/packet_19/document_002_utility_bill.pages_3-4.json",
+      "page_range": [
+        3,
+        4
+      ],
+      "start_page": 3
+    },
+    {
+      "document_index": 3,
+      "end_page": 7,
+      "output_file": "aws_test_results/packet_19/document_003_medical_record.pages_5-7.json",
+      "page_range": [
+        5,
+        7
+      ],
+      "start_page": 5
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 5404,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 551,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Utility Bill",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical elements of a utility bill such as account number, service address, billing date, previous balance, current charges, and amount due. It also indicates 'Page 1 of 2', suggesting it is the beginning of a multi-page document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Utility Bill",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page has a continuation note 'Utility Bill UT-1901726 continued' and maintains the same account number and reference as the previous page, indicating it is part of the same document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Utility Bill",
+        "document_boundary": "start",
+        "page": 3,
+        "reason": "The target page has a new account number (UT-1902726) and is labeled as 'Page 1 of 2', indicating the start of a new utility bill document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Utility Bill",
+        "document_boundary": "continue",
+        "page": 4,
+        "reason": "The target page continues the utility bill with usage details and ends with 'END OF DOCUMENT', indicating it is a continuation of the prior page."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "start",
+        "page": 5,
+        "reason": "The target page contains a new Medical Record Number (MRN-1903726) and details specific to a medical visit, indicating the start of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "continue",
+        "page": 6,
+        "reason": "The target page continues the medical record with consistent Medical Record Number, patient information, and reference number. It also includes continued physician notes and prescription details, indicating it is part of the ongoing document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "continue",
+        "page": 7,
+        "reason": "The target page continues the medical record with consistent MRN, physician notes, prescription details, and follow-up recommendations. It also indicates 'END OF DOCUMENT', suggesting it is the final page of the current document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_19.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_19.raw.json"
+}

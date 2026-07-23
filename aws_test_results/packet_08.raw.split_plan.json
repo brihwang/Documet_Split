@@ -1,0 +1,92 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 1,
+      "output_file": "aws_test_results/packet_08/document_001_passport.pages_1-1.json",
+      "page_range": [
+        1,
+        1
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 2,
+      "output_file": "aws_test_results/packet_08/document_002_drivers_license.pages_2-2.json",
+      "page_range": [
+        2,
+        2
+      ],
+      "start_page": 2
+    },
+    {
+      "document_index": 3,
+      "end_page": 3,
+      "output_file": "aws_test_results/packet_08/document_003_passport.pages_3-3.json",
+      "page_range": [
+        3,
+        3
+      ],
+      "start_page": 3
+    },
+    {
+      "document_index": 4,
+      "end_page": 5,
+      "output_file": "aws_test_results/packet_08/document_004_other.pages_4-5.json",
+      "page_range": [
+        4,
+        5
+      ],
+      "start_page": 4
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 4,
+    "input_tokens": 3740,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 383,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Passport",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical passport information such as 'UNITED STATES OF AMERICA PASSPORT', 'Passport Number', 'Surname', 'Given Names', 'Nationality', 'Place of Birth', and 'Issuing Authority'. It also includes a unique reference number and page numbering, indicating it is a standalone document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Drivers License",
+        "document_boundary": "start",
+        "page": 2,
+        "reason": "The target page contains distinct identifiers and content specific to a driver's license, indicating the start of a new logical document."
+      },
+      {
+        "confidence": 1.0,
+        "doc_type": "Passport",
+        "document_boundary": "start",
+        "page": 3,
+        "reason": "The target page contains a distinct passport number, personal information, and is titled 'UNITED STATES OF AMERICA PASSPORT', indicating a new document of the Passport type."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Other",
+        "document_boundary": "start",
+        "page": 4,
+        "reason": "The target page begins with 'PROJECT CORRESPONDENCE' and contains a memo reference, indicating a new logical document unrelated to the passport details from the previous page."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Other",
+        "document_boundary": "continue",
+        "page": 5,
+        "reason": "The target page continues the memo referenced in the context pages, indicated by 'Memo MEM-0804726 continued' and the consistent reference number and page numbering."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_08.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_08.raw.json"
+}

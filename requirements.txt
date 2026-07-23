@@ -6,3 +6,4 @@ rich
 openai
 pytesseract
 PyMuPDF
+boto3

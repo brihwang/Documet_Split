@@ -1,0 +1,113 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 2,
+      "output_file": "aws_test_results/packet_20/document_001_tax_form.pages_1-2.json",
+      "page_range": [
+        1,
+        2
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 4,
+      "output_file": "aws_test_results/packet_20/document_002_invoice.pages_3-4.json",
+      "page_range": [
+        3,
+        4
+      ],
+      "start_page": 3
+    },
+    {
+      "document_index": 3,
+      "end_page": 7,
+      "output_file": "aws_test_results/packet_20/document_003_insurance_policy.pages_5-7.json",
+      "page_range": [
+        5,
+        7
+      ],
+      "start_page": 5
+    },
+    {
+      "document_index": 4,
+      "end_page": 8,
+      "output_file": "aws_test_results/packet_20/document_004_other.pages_8-8.json",
+      "page_range": [
+        8,
+        8
+      ],
+      "start_page": 8
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 4,
+    "input_tokens": 6339,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 639,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page is the first page of a Form W-2, indicated by the presence of 'FORM W-2 WAGE AND TAX STATEMENT' and the Employer Identification Number. It also includes details such as wages, federal income tax withheld, and is marked as 'Page 1 of 2', suggesting it is the beginning of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Tax Form",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the Form W-2 with consistent Employer Identification Number and page numbering, indicating it is part of the same document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "start",
+        "page": 3,
+        "reason": "The target page begins with 'INVOICE' and introduces a new invoice number 'INV-2002726', distinct from the prior W-2 form. It contains typical invoice elements such as 'Invoice Number', 'Bill To', 'Invoice Date', 'Payment Terms', and 'Amount Due', indicating the start of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "continue",
+        "page": 4,
+        "reason": "The target page continues the invoice with the same invoice number and includes details of the services provided, consistent with an ongoing invoice document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "start",
+        "page": 5,
+        "reason": "The target page introduces a new policy number (HOP-2003726) and contains declarations and summary information typical of the start of an insurance policy document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "continue",
+        "page": 6,
+        "reason": "The target page continues the coverage details of the Homeowners Insurance Policy started on the previous page, indicated by 'Insurance Policy HOP-2003726 continued' and consistent policy number and page numbering."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Insurance Policy",
+        "document_boundary": "continue",
+        "page": 7,
+        "reason": "The target page continues the coverage details of the insurance policy with the same policy number and is marked as 'END OF DOCUMENT', indicating it is the final page of the current document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Other",
+        "document_boundary": "start",
+        "page": 8,
+        "reason": "The target page is a memo with different content, reference number, and purpose compared to the previous insurance policy document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_20.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_20.raw.json"
+}

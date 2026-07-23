@@ -1,0 +1,113 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 3,
+      "output_file": "aws_test_results/packet_16/document_001_contract.pages_1-3.json",
+      "page_range": [
+        1,
+        3
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 5,
+      "output_file": "aws_test_results/packet_16/document_002_invoice.pages_4-5.json",
+      "page_range": [
+        4,
+        5
+      ],
+      "start_page": 4
+    },
+    {
+      "document_index": 3,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_16/document_003_receipt.pages_6-6.json",
+      "page_range": [
+        6,
+        6
+      ],
+      "start_page": 6
+    },
+    {
+      "document_index": 4,
+      "end_page": 8,
+      "output_file": "aws_test_results/packet_16/document_004_bank_statement.pages_7-8.json",
+      "page_range": [
+        7,
+        8
+      ],
+      "start_page": 7
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 4,
+    "input_tokens": 6273,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 583,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains a title 'SERVICES AGREEMENT', a contract number, effective date, parties involved, and terms and conditions, which are typical elements of a contract. Additionally, the presence of 'Page 1 of 3' indicates it is the beginning of a multi-page document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the 'Services Agreement' with consistent headers, footers, and content related to terms and conditions."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Contract",
+        "document_boundary": "continue",
+        "page": 3,
+        "reason": "The target page continues the 'Services Agreement' with a consistent reference number (1601726) and page numbering, indicating it is part of the same document. The content also follows the structure established in the previous pages."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "start",
+        "page": 4,
+        "reason": "The target page introduces a new invoice with a distinct invoice number and details, separate from the preceding Services Agreement."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "continue",
+        "page": 5,
+        "reason": "The target page continues the invoice with the same invoice number and includes details of the services provided, consistent with the context before."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Receipt",
+        "document_boundary": "start",
+        "page": 6,
+        "reason": "The target page contains a 'PAYMENT RECEIPT' with details such as transaction ID, payment method, subtotal, tax, and total, which aligns with the description of a receipt. It also has a distinct reference number and page numbering, indicating it is a separate document from the preceding invoice."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "start",
+        "page": 7,
+        "reason": "The target page introduces a new document type, 'Bank Statement', with distinct content and headers compared to the previous 'Receipt' document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Bank Statement",
+        "document_boundary": "continue",
+        "page": 8,
+        "reason": "The target page continues the transaction activity from the previous page, indicated by the same account number and the 'continued' notation."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_16.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_16.raw.json"
+}

@@ -1,0 +1,89 @@
+{
+  "documents": [
+    {
+      "document_index": 1,
+      "end_page": 3,
+      "output_file": "aws_test_results/packet_11/document_001_invoice.pages_1-3.json",
+      "page_range": [
+        1,
+        3
+      ],
+      "start_page": 1
+    },
+    {
+      "document_index": 2,
+      "end_page": 5,
+      "output_file": "aws_test_results/packet_11/document_002_medical_record.pages_4-5.json",
+      "page_range": [
+        4,
+        5
+      ],
+      "start_page": 4
+    },
+    {
+      "document_index": 3,
+      "end_page": 6,
+      "output_file": "aws_test_results/packet_11/document_003_receipt.pages_6-6.json",
+      "page_range": [
+        6,
+        6
+      ],
+      "start_page": 6
+    }
+  ],
+  "metadata": {
+    "classification_method": "textPageLevelClassification",
+    "document_count": 3,
+    "input_tokens": 4714,
+    "model": "us.amazon.nova-pro-v1:0",
+    "output_tokens": 492,
+    "page_classifications": [
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "start",
+        "page": 1,
+        "reason": "The target page contains typical invoice elements such as 'Invoice Number', 'Bill To', 'Invoice Date', 'Payment Terms', and 'Amount Due'. It also includes a reference number and page numbering, indicating it is the beginning of a multi-page invoice."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "continue",
+        "page": 2,
+        "reason": "The target page continues the invoice with consistent invoice number, reference, and page numbering."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Invoice",
+        "document_boundary": "continue",
+        "page": 3,
+        "reason": "The target page continues the invoice with the same invoice number and includes the 'END OF DOCUMENT' notation, indicating it is the final page of the current invoice."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "start",
+        "page": 4,
+        "reason": "The target page introduces a new Medical Record with a distinct Medical Record Number (MRN-1102726) and contains patient information, visit details, and diagnosis, indicating the start of a new logical document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Medical Record",
+        "document_boundary": "continue",
+        "page": 5,
+        "reason": "The target page continues the medical record with the same Medical Record Number (MRN-1102726) and includes additional physician notes and prescriptions, indicating it is a continuation of the prior document."
+      },
+      {
+        "confidence": 0.95,
+        "doc_type": "Receipt",
+        "document_boundary": "start",
+        "page": 6,
+        "reason": "The target page contains elements typical of a receipt, such as 'PAYMENT RECEIPT', 'Transaction ID', 'Paid', 'Subtotal', 'Tax', and 'Total'. It also has a different reference number (1103726) compared to the previous document (1102726), indicating a new document."
+      }
+    ],
+    "section_splitting": "llm_determined",
+    "splitter": "aws_bedrock_page_boundary"
+  },
+  "output_file": "aws_test_results/packet_11.raw.split_plan.json",
+  "source_file": "aws_test_json/packet_11.raw.json"
+}
